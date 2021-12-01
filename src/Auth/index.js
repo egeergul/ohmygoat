@@ -1,3 +1,4 @@
 import Login from "./Login/Login"
+import SignUp from "./SignUp/SignUp"
 
-export {Login}
+export {Login, SignUp}

@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Login.css"
 import Logo from "../../Assets/bilkent_logo.png"
+import { BrowserRouter as Link} from "react-router-dom";
 
 const Login = () => {
     return (
@@ -26,7 +27,12 @@ const Login = () => {
                 </div>
                 <div className="text-center intro"> 
                     <span className="d-block account">Don't have account yet?</span> 
-                    <a href="#" className="to-sign-up">Click here to Sign Up</a> 
+                        <a href = "/sign-up" className="to-sign-up">
+                            <Link to="/sign-up">
+                                Click here to sign up 
+                            </Link>
+                        </a>
+               
                 </div>
             </div>
         </div>
