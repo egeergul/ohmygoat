@@ -3,7 +3,7 @@
 }
 .st-body-flex{
     display: flex;
-   
+    background-color: #eee;
     flex-direction: column;
 
 }
@@ -29,17 +29,21 @@
     display: flex;
     flex-direction: column;
 }
-
+.body-right{
+    background-color: #eee;
+   
+}
 @media only screen and (min-width: 768px) {
     .st-body-grid{
-        background-color: #eee;
+       
         height: 100vh;
 
     }
     .body-right{
+        background-color: #eee;
         margin-top: 50px;
         height: 80vh;
-        overflow: scroll;
+        overflow-y: scroll;
     }
 }
 
