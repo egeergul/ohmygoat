@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {Login, SignUp, Profile} from "./Auth"
+import {Login, SignUp} from "./Auth"
+import {Profile} from "./Pages/Student"
 import {StHome} from "./Pages/Student"
 import {StNav} from "./Components"
 

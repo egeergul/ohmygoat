@@ -1,10 +1,8 @@
 import React from 'react'
 import "./Profile.css"
-import Logo from "../../Assets/bilkent_logo.png"
-import { BrowserRouter as Link} from "react-router-dom";
-import {StNav, Calendar, Event, Clubs} from "../../Components"
+import {StNav, Calendar, Event, Clubs} from "../../../Components"
 import {useHistory} from  "react-router-dom";
-import Club from '../../Components/Clubs/Clubs';
+import Club from '../../../Components/Clubs/Clubs';
 
 
 const Profile = () => {
