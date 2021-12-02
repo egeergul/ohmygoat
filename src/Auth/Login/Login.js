@@ -32,9 +32,7 @@ const Login = () => {
                 </div>
                 <div className="text-center intro"> 
                     <span className="d-block account">Don't have account yet?</span> 
-                        <p onClick={() => {history.push("/signup")}} type="button">
-                            Click here to sign up 
-                        </p>   
+                        <p onClick={() => {history.push("/signup")}} type="button"> Click here to sign up </p>   
                 </div>
             </div>
         </div>

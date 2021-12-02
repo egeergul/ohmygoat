@@ -33,7 +33,7 @@
     flex-grow: 1;
 }
 
-.event-body > img {
+.event-img {
     max-width: 300px;
     width: 100%;
     object-fit: contain;

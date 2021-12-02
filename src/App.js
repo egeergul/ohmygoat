@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {Login, SignUp} from "./Auth"
 import {StHome} from "./Pages/Student"
 import {StNav} from "./Components"
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import UserRegistration from "./UserRegistration"
 
 function App() {
