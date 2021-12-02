@@ -2,8 +2,12 @@ import React from 'react'
 import "./Login.css"
 import Logo from "../../Assets/bilkent_logo.png"
 import { BrowserRouter as Link} from "react-router-dom";
+import {useHistory} from  "react-router-dom";
+
 
 const Login = () => {
+
+    let history =   useHistory()
     return (
         <div className="login_body">
             <div className="card text-center">
@@ -23,16 +27,14 @@ const Login = () => {
                     <a href="#" className="forgot">Forgot Password?</a> 
                 </div>
                 <div className="mt-2"> 
-                    <button className="btn btn-primary btn-block">Log In</button> 
+                    <button onClick={()=>{history.push("/home")}} 
+                    className="btn btn-primary btn-block">Log In</button> 
                 </div>
                 <div className="text-center intro"> 
                     <span className="d-block account">Don't have account yet?</span> 
-                        <a href = "/sign-up" className="to-sign-up">
-                            <Link to="/sign-up">
-                                Click here to sign up 
-                            </Link>
-                        </a>
-               
+                        <p onClick={() => {history.push("/signup")}} type="button">
+                            Click here to sign up 
+                        </p>   
                 </div>
             </div>
         </div>
