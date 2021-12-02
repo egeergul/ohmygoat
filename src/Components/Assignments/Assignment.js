@@ -4,14 +4,14 @@ import "./Assignment.css"
 const Assignment = () => {
     return (
         <div>
-            <div className="event-container">
-                <div className="event-header">
+            <div className="evenassignment-container">
+                <div className="assignment-header">
                    <p>ACM</p>
                    <p>OR</p>
                    <p>IEEE</p>
                 </div>
-                <div className="event-body">
-                    <div className="event-body-right">
+                <div className="assignment-body">
+                    <div className="assignment-body-right">
 
                         <p> check your new Assignments
                             Assignment details...

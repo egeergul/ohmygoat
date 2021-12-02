@@ -1,4 +1,4 @@
-.event-container{
+.assignment-container{
     margin: 30px;
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
     max-width: 70vw;
 
 }
-.event-header{
+.assignment-header{
     color: azure;
     border-radius: 25px 25px 0px 0px;
     padding: 10px 25px;
@@ -17,14 +17,14 @@
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75 ) ;
     background: #C70039;
 }
-.event-body{
+.assignment-body{
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75 )  ;
     padding: 25px;
     display: flex;
     background: #dad8d8;
     border-radius: 0px 0px 25px 25px;
 }
-.event-body-right{
+.assignment-body-right{
     padding: 15px;
     display: flex;
     flex-direction: column;
