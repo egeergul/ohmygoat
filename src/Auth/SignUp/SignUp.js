@@ -2,8 +2,10 @@ import React from 'react'
 import "./SignUp.css"
 import Logo from "../../Assets/bilkent_logo.png"
 import { BrowserRouter as Link} from "react-router-dom";
+import {useHistory} from  "react-router-dom";
 
 const SignUp = () => {
+    let history =   useHistory()
     return (
         <div>
             <div className="signup_body">
@@ -26,15 +28,14 @@ const SignUp = () => {
                         </div>
                     </div>
                     <div className="mt-2">
-                        <button className="btn btn-primary btn-block">Register</button>
+                        <button onClick={()=>{history.push("/home")}}
+                        className="btn btn-primary btn-block">Register</button>
                     </div>
                     <div className="text-center intro">
                         <span className="d-block account">Already have account yet?</span>
-                        <a href = "/" className="to-login">
-                            <Link to="/sign-up">
+                        <p onClick={()=>{history.push("/login")}}>
                                 Click here to login
-                            </Link>
-                        </a>
+                        </p>
                     </div>
                 </div>
             </div>
