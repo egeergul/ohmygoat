@@ -1,0 +1,34 @@
+.st-body-grid{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background-color: #eee;
+}
+.st-body-flex{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+
+}
+.st-home-container{
+
+    display: flex;
+
+    flex-grow: 1;
+  
+   
+}
+
+
+.st-home-container-events2{
+   
+    overflow: scroll;
+    flex-grow: 7;
+    display: flex;
+    flex-direction: column;
+}
+
+.st-home-container-clubs2{
+    flex-direction: column;
+}
