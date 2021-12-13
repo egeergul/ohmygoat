@@ -70,7 +70,7 @@ const Profile = (props) => {
                 <StNav/>
             </div>
             <div className="flex_cont">
-                <button className='del_my_acc'>
+                <button className="btn btn-primary btn-block del_my_acc">
                     Delete My Account
                 </button>
 
@@ -96,7 +96,7 @@ const Profile = (props) => {
                                     {
                                     props.bio
                                 }</p>
-                                <button>Edit Profile</button>
+                                <button className="btn btn-primary btn-block">Edit Profile</button>
                             </div>
                         </div>
                     </div>

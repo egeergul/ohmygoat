@@ -14,7 +14,7 @@ const StNav = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto" >
                             <Nav.Link><p onClick={()=>{history.push("/home")}}>Home</p></Nav.Link>
-                            <Nav.Link><p onClick={()=>{history.push("/assignment")}}>Assignment</p></Nav.Link>
+                            <Nav.Link><p onClick={()=>{history.push("/assignments")}}>Assignment</p></Nav.Link>
                             <Nav.Link><p onClick={()=>{history.push("/clubs")}}>Clubs</p></Nav.Link>
                             <Nav.Link><p onClick={()=>{history.push("/notifications")}}>Notification</p></Nav.Link>
                             <Nav.Link><p onClick={()=>{history.push("/myprofile")}}>My Profile</p></Nav.Link>

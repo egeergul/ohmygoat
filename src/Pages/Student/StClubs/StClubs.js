@@ -68,14 +68,14 @@ return (
             <StNav/>
 
             <div className="dflex m-3 d-flex justify-content-center">
-                <button onClick={
+                <button className="btn btn-primary btn-block mx-3" onClick={
                         () => {
                             setMyClubs(true)
                         }
                     }
-                    className="mx-3">My Clubs</button>
+                    >My Clubs</button>
 
-                <button onClick={
+                <button className="btn btn-primary btn-block"  onClick={
                     () => {
                         setMyClubs(false)
                     }

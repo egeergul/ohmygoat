@@ -23,9 +23,9 @@ const StNotifications = () => {
         <div className="stm-body-grid">
             <StNav/>
             <div className="dflex m-3 d-flex justify-content-center">
-                <button onClick={()=>{setViewReq(false)}} className="mx-3">Notifications</button>
+                <button className="btn btn-primary btn-block mx-3" onClick={()=>{setViewReq(false)}} >Notifications</button>
                 
-                <button onClick={()=>{setViewReq( true)}}>Requests</button>
+                <button className="btn btn-primary btn-block" onClick={()=>{setViewReq( true)}}>Requests</button>
             </div>
             <div className="bb">
                 {

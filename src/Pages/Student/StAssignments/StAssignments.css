@@ -1,0 +1,12 @@
+.stm-body-grid{
+    width: 100vw;
+    height: 100vh;
+    background-color: #eee;
+}
+.bbbb{
+    display: grid;
+    align-items: center;
+    height: 85vh;
+    overflow-y: scroll;
+    justify-content: center;
+}

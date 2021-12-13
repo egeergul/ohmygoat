@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {Login, SignUp} from "./Auth"
 
 import {Profile} from "./Pages/Student"
-import {StHome, StNotifications, StClubs} from "./Pages/Student"
-import {StNav, Notification} from "./Components"
+import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
+import {StNav, Assignment} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -29,13 +29,15 @@ function App() {
                     <Route exact path="/notifications"
                         component={StNotifications}/>
                     <Route exact path="/myprofile">
-                        <Profile pp={"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/66/669b47d15b87c16c9cd429a4e29a064dac892e01_full.jpg"}
+                        <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
                             name={"can"}
                             ge250_251={"taken"}
                             bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
                     </Route>
                     <Route exact path="/clubs"
                         component={StClubs}/>
+                    <Route exact path="/assignments"
+                        component={StAssignments}/>
                 </Switch>
 
             </div>
