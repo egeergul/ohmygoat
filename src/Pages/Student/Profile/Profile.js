@@ -1,8 +1,8 @@
 import React from 'react'
 import "./Profile.css"
-import {StNav, Calendar, Event, Clubs} from "../../../Components"
+import {StNav, Calendar, Event, Club} from "../../../Components"
 import {useHistory} from  "react-router-dom";
-import Club from '../../../Components/Clubs/Clubs';
+
 
 
 const Profile = () => {
@@ -14,10 +14,10 @@ const Profile = () => {
                 <StNav/>
                 <div className="st-home-container">
                     <div className="st-home-container-clubs2"> 
-                        <Clubs/>
-                        <Clubs/>
-                        <Clubs/>
-                        <Clubs/>
+                        <Club/>
+                        <Club/>
+                        <Club/>
+                        <Club/>
                     </div>
                     <div className="st-home-container-events2"> 
                         <Event/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {StNav, Calendar, Event} from "../../../Components"
+import {StNav, Event} from "../../../Components"
 import "./StHome.css"
 
 const StHome = () => {
@@ -29,7 +29,7 @@ const StHome = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <Calendar/>
+                          
                         </div>
                         <div className="col-md-8 body-right">
                             {

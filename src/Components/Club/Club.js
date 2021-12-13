@@ -1,7 +1,7 @@
 import React from 'react'
-import "./Clubs.css"
+import "./Club.css"
 
-const Clubs = () => {
+const Club = () => {
     return (
         <div>
             <div className="club-container">
@@ -28,4 +28,4 @@ This club consists of the chess lovers and, here we organize chess tournements a
     )
 }
 
-export default Clubs
+export default Club

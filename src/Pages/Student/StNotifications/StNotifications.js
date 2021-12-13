@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StNav, Calendar, Event, Notification} from "../../../Components"
+import {StNav, Event, Notification} from "../../../Components"
 import "./StNotifications.css"
 
 const StNotifications = () => {
@@ -20,7 +20,7 @@ const StNotifications = () => {
     const [viewReq, setViewReq] = useState(false);
     return (
         
-        <div className="st-body-grid">
+        <div className="stm-body-grid">
             <StNav/>
             <div className="dflex m-3 d-flex justify-content-center">
                 <button onClick={()=>{setViewReq(false)}} className="mx-3">Notifications</button>
