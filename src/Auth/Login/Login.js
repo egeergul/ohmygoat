@@ -1,42 +1,61 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./Login.css"
+import PropTypes from 'prop-types';
 import Logo from "../../Assets/bilkent_logo.png"
-import { BrowserRouter as Link} from "react-router-dom";
-import {useHistory} from  "react-router-dom";
+import {BrowserRouter as Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 
-const Login = () => {
+async function loginUser(credentials) {
+    return fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    }).then(data => data.json())
+}
 
-    let history =   useHistory()
+
+const Login = ({setToken}) => {
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const token = await loginUser({username, password});
+        setToken(token);
+    }
+
+    let history = useHistory()
     return (
-        <div className="login_body">
-            <div className="card text-center">
-                <div className="intro"> 
-                    <img src={Logo} width="160"/>
-                </div>
-                <div className="mt-4 text-center">
-                    <h4>Welcome back to ohmygoat.com</h4> 
-                    <div className="mt-3 inputbox"> 
-                        <input type="text" className="form-control" name="" placeholder="Email"/> 
-                    </div>
-                    <div className="inputbox"> 
-                        <input type="password" className="form-control" name="" placeholder="Password"/>
-                    </div>
-                </div>
+        <div className="login-wrapper">
+            <h1>Please Log In</h1>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <p>Username</p>
+                    <input type="text"
+                        onChange={
+                            e => setUserName(e.target.value)
+                        }/>
+                </label>
+                <label>
+                    <p>Password</p>
+                    <input type="password"
+                        onChange={
+                            e => setPassword(e.target.value)
+                        }/>
+                </label>
                 <div>
-                    <a href="#" className="forgot">Forgot Password?</a> 
+                    <button type="submit">Submit</button>
                 </div>
-                <div className="mt-2"> 
-                    <button onClick={()=>{history.push("/home")}} 
-                    className="btn btn-primary btn-block">Log In</button> 
-                </div>
-                <div className="text-center intro"> 
-                    <span className="d-block account">Don't have account yet?</span> 
-                        <p onClick={() => {history.push("/signup")}} type="button"> Click here to sign up </p>   
-                </div>
-            </div>
+            </form>
         </div>
     )
+} 
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
 }
 
 export default Login

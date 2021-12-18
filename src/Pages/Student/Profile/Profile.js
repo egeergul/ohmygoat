@@ -66,9 +66,7 @@ const Profile = (props) => {
 
     return (
         <div className="st-body-grid">
-            <div className="nav_cont">
-                <StNav/>
-            </div>
+            
             <div className="flex_cont">
                 <button className="btn btn-primary btn-block del_my_acc">
                     Delete My Account

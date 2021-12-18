@@ -25,7 +25,7 @@ const StHome = () => {
 
         <div className="st-body-grid">
             <div className="st-body-flex">
-                <StNav/>
+                
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">

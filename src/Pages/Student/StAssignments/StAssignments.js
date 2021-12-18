@@ -31,7 +31,7 @@ const StAssignments = () => {
     return (
         <div>
             <div className="stm-body-grid">
-            <StNav/>
+          
 
            
 
