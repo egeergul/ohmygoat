@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
 import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
-import {StNav, AdvNav, Assignment, StudentPreview} from "./Components"
+import {StNav, AdvNav, Assignment, ClubProfile} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
@@ -65,6 +65,8 @@ function App() {
                         component={AdvNotifications}/>
                     <Route path="/club-members"
                         component={AdvClubMembers}/>
+                    <Route path="/view-club"
+                        component={ClubProfile}/>
 
 
                   

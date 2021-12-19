@@ -2,20 +2,21 @@ import React from 'react'
 import "./StudentPreview.css"
 
 const StudentPreview = (props) => {
-    var stutentPos;
-    if(StudentPreview.position == 1)
-        stutentPos = "Regular Member"
-    else if(StudentPreview.position == 2)
-        stutentPos = "Active Member"
-    else if(StudentPreview.position == 3)
-        stutentPos = "Director Board Member"
-    else if(StudentPreview.position == 4)
-        stutentPos = "The President"
+    var studentPos;
+
+    if(props.position == 1)
+        studentPos = "Regular Member"
+    else if(props.position == 2)
+        studentPos = "Active Member"
+    else if(props.position == 3)
+        studentPos = "Director Board Member"
+    else if(props.position == 4)
+        studentPos = "The President"
     else    
-        stutentPos = "Something went wrong!"
+        studentPos = "Something went wrong!"
     return (
         <div className="st-prev-container">
-            <p>{props.name} - {props.id} - {props.department} - {props.position}</p>
+            <p>{props.name} - {props.id} - {props.department} - {studentPos}</p>
             <button className="btn btn-primary btn-block">Edit Role</button>
         </div>
     )
