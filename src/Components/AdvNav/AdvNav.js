@@ -26,10 +26,6 @@ const AdvNav = () => {
                                     Club Members
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/club-events">
-                                    Club Events
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider/>
                                 <NavDropdown.Item as={Link} to="/documents">
                                     Documents
                                 </NavDropdown.Item>
@@ -48,8 +44,6 @@ const AdvNav = () => {
                                     () => {
                                         sessionStorage.clear()
                                         window.location.reload();
-
-
                                     }
                             }>Logout</NavLink>
                         </Nav>

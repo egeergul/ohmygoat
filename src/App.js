@@ -5,8 +5,8 @@ import {Login, SignUp} from "./Auth"
 import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
-import {AdvHome, AdvNotifications} from "./Pages/Advisor"
-import {StNav, AdvNav, Assignment} from "./Components"
+import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
+import {StNav, AdvNav, Assignment, StudentPreview} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
@@ -63,6 +63,11 @@ function App() {
                         component={AdvHome}/>
                     <Route path="/notifications"
                         component={AdvNotifications}/>
+                    <Route path="/club-members"
+                        component={AdvClubMembers}/>
+
+
+                  
 
 
                 </BrowserRouter>
