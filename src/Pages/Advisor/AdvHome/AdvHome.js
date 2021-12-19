@@ -1,8 +1,9 @@
 import React from 'react'
-import {StNav, Event} from "../../../Components"
-import "./StHome.css"
+import {Event} from "../../../Components"
+import "./AdvHome.css"
 
-const StHome = () => {
+const AdvHome = () => {
+
     const feed = [
         {club:"ACM", name:"Tech Summit", mode: "Only Club Members",
          description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.",
@@ -20,46 +21,31 @@ const StHome = () => {
        
     ]
 
-
     return (
-
-    
-        <div className="st-body-grid">
-
-
-{
-            console.log("in home ")
-        }
-
-            <div className="st-body-flex">
-                
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-4">
-                          
-                        </div>
-                        <div className="col-md-8 body-right">
-                            {
-                                feed.map((event)=>(<Event 
-                                    club={event.club}
-                                    name={event.name}
-                                    mode={event.mode}
-                                    description={event.description}
-                                    img={event.img}
-                                    />))
-                            }
-                        </div>
-                        
-                    </div>
-                </div>
+        <div> 
+            <div className="adv-home">
+            {
+            feed.map((event) => (
+                <Event club={
+                        event.club
+                    }
+                    name={
+                        event.name
+                    }
+                    mode={
+                        event.mode
+                    }
+                    description={
+                        event.description
+                    }
+                    img={
+                        event.img
+                    }/>
+            ))
+            } 
             </div>
         </div>
-
     )
 }
 
-
-
-
-
-export default StHome
+export default AdvHome

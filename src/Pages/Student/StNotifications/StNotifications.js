@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StNav,  Notification} from "../../../Components"
+import {  Notification} from "../../../Components"
 import "./StNotifications.css"
 
 const StNotifications = () => {

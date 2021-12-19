@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Login.css"
 import PropTypes from 'prop-types';
 import Logo from "../../Assets/bilkent_logo.png"
 import {BrowserRouter as Link} from "react-router-dom";
 import {useHistory} from "react-router-dom";
+
 
 
 async function loginUser(credentials) {
@@ -26,6 +27,8 @@ const Login = ({setToken}) => {
         const token = await loginUser({username, password});
         setToken(token);
     }
+
+
 
     let history = useHistory()
     return (
