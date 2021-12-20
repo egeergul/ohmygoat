@@ -42,7 +42,7 @@ const AdvNav = () => {
                                 to="/"
                                 onClick={
                                     () => {
-                                        sessionStorage.clear()
+                                        localStorage.clear()
                                         window.location.reload();
                                     }
                             }>Logout</NavLink>

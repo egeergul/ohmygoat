@@ -28,7 +28,7 @@ const StNav = () => {
                                 to="/"
                                 onClick={
                                     () => {
-                                        sessionStorage.clear()
+                                        localStorage.clear()
                                         window.location.reload();
                                        
                                         

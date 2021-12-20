@@ -17,19 +17,20 @@ import useToken from './Auth/useToken';
 
 function App() {
 
-    let userType = 2;
+    let userType = 1;
+    
     const {token, setToken} = useToken();
     let history = useHistory();
 
-    if (!token) {
+    if (!localStorage.getItem('token')) {
+        console.log('fsdfdshfj');
         return (
             <div>
                 <Login setToken={setToken}/>
             </div>
-
-
         )
     } else if (userType == 1) {
+        console.log('djfhdsjjhd');
         return (
             <div className="">
                 <BrowserRouter>

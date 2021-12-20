@@ -7,30 +7,49 @@ import {useHistory} from "react-router-dom";
 
 
 
-async function loginUser(credentials) {
-    return fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    }).then(data => data.json())
-}
-
-
 const Login = ({setToken}) => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
 
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const token = await loginUser({username, password});
-        setToken(token);
-    }
+
+    let history = useHistory();
 
 
+    const handleSubmit = (event) =>{
+      event.preventDefault();
 
-    let history = useHistory()
+      fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify({  username,password }),
+  })
+    .then((r) => {
+        console.log(r);
+      if (r.ok) {
+        return r;
+      }
+      if (r.status === 401 || r.status === 403 || r.status === 500) {
+        return Promise.reject(new Error("hata oluştu"));
+      }
+      return Promise.reject(new Error("bilinmeyen hata"));
+    })
+    .then((r) => r.json())
+    .then((response) => {
+      console.log(response);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem('email', response.email);
+      localStorage.setItem("role", response.roles[0]);
+      history.replace('/home');
+    })
+    .catch((e) => {
+      console.log("here");
+    });
+
+  };
+
     return (
         <div className="login-wrapper">
             <h1>Please Log In</h1>
