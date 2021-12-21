@@ -5,6 +5,7 @@ import {Login, SignUp} from "./Auth"
 
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
+import {HomePage,CreateClub} from "./Pages/Admin"
 import {StNav, Assignment} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -38,6 +39,10 @@ function App() {
                         component={StClubs}/>
                     <Route exact path="/assignments"
                         component={StAssignments}/>
+                    <Route exact path="/homepage"
+                        component={HomePage}/>
+                    <Route exact path ="/createclub"
+                        component = {CreateClub}/>
                 </Switch>
 
             </div>
