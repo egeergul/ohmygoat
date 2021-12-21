@@ -56,7 +56,7 @@ function App() {
             </div>
         );
 
-    } else if (localStorage.role == "ROLE_ADMIN") {
+    } else if (localStorage.role == "ROLE_ADVISOR") {
     //} else if (localStorage.role == "ROLE_STUDENT") {
         return (
             <div className="">
@@ -75,7 +75,6 @@ function App() {
         )
 
     }
-
 
 }
 
