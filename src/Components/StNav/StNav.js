@@ -7,7 +7,7 @@ const StNav = () => {
     let history = useHistory()
     return (
         <div>
-            
+
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
                 <Container>
                     <Navbar.Brand>ohmygoat.com</Navbar.Brand>
@@ -28,10 +28,8 @@ const StNav = () => {
                                 to="/"
                                 onClick={
                                     () => {
-                                        sessionStorage.clear()
+                                        localStorage.clear()
                                         window.location.reload();
-                                       
-                                        
                                     }
                             }>Logout</NavLink>
                         </Nav>
@@ -43,11 +41,3 @@ const StNav = () => {
 }
 
 export default StNav
-
-
-/*<Nav.Link><p onClick={()=>{history.push("/home")}}>Home</p></Nav.Link>
-<Nav.Link><p onClick={()=>{history.push("/assignments")}}>Assignment</p></Nav.Link>
-<Nav.Link><p onClick={()=>{history.push("/clubs")}}>Clubs</p></Nav.Link>
-<Nav.Link><p onClick={()=>{history.push("/notifications")}}>Notification</p></Nav.Link>
-<Nav.Link><p onClick={()=>{history.push("/myprofile")}}>My Profile</p></Nav.Link>
-<Nav.Link><p onClick={()=>{history.push("/login")}}>Logout</p></Nav.Link> * */

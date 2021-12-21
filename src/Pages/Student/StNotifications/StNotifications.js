@@ -1,58 +1,112 @@
-import React, { useState } from 'react';
-import {  Notification} from "../../../Components"
+import React, {useState} from 'react';
+import {Notification} from "../../../Components"
 import "./StNotifications.css"
 
 const StNotifications = () => {
-
-    const notifications= [
-        {club: "ACM", date:"10/10/2021", isReq:true, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "YES", date:"3/9/2021", isReq:false, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "OR", date:"7/12/2021", isReq:false, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "TDP", date:"1/14/2021", isReq:true, pending:"approved", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "Chess", date:"9/7/2021", isReq:false, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "ACM", date:"2/7/2021", isReq:true, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "YES", date:"23/6/2021", isReq:true, pending:"approved", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "Chess", date:"9/7/2021", isReq:false, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "OR", date:"9/7/2021", isReq:false, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."},
-        {club: "ACM", date:"12/11/2021", isReq:true, pending:"pending", notification:"Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."}
+    const notifications = [
+        {
+            club: "ACM",
+            date: "10/10/2021",
+            isReq: true,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        },
+        {
+            club: "YES",
+            date: "3/9/2021",
+            isReq: false,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        },
+        {
+            club: "OR",
+            date: "7/12/2021",
+            isReq: false,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        },
+        {
+            club: "TDP",
+            date: "1/14/2021",
+            isReq: true,
+            pending: "approved",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "Chess",
+            date: "9/7/2021",
+            isReq: false,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "ACM",
+            date: "2/7/2021",
+            isReq: true,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "YES",
+            date: "23/6/2021",
+            isReq: true,
+            pending: "approved",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "Chess",
+            date: "9/7/2021",
+            isReq: false,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "OR",
+            date: "9/7/2021",
+            isReq: false,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }, {
+            club: "ACM",
+            date: "12/11/2021",
+            isReq: true,
+            pending: "pending",
+            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
+        }
     ]
 
     const [viewReq, setViewReq] = useState(false);
     return (
-        
-        <div className="stm-body-grid">
-         
+
+        <div >
             <div className="dflex m-3 d-flex justify-content-center">
-                <button className="btn btn-primary btn-block mx-3" onClick={()=>{setViewReq(false)}} >Notifications</button>
-                
-                <button className="btn btn-primary btn-block" onClick={()=>{setViewReq( true)}}>Requests</button>
+                <button className="btn btn-primary btn-block mx-3"
+                    onClick={
+                        () => {
+                            setViewReq(false)
+                        }
+                }>Notifications</button>
+                <button className="btn btn-primary btn-block"
+                    onClick={
+                        () => {
+                            setViewReq(true)
+                        }
+                }>Requests</button>
             </div>
-            <div className="bb">
+            <div className="st-notifications">
                 {
-                notifications.map((notification) => (
-                    notification.isReq == viewReq ?
-                     <Notification club={
-                            notification.club
-                        }
-                        date={
-                            notification.date
-                        }
-                        isReq={
-                            notification.isReq
-                        }
-                        pending={
-                            notification.pending
-                        }
-                        notification={
-                            notification.notification
-                        }/>
-                    :  <></> 
-                ))
+                notifications.map((notification) => (notification.isReq == viewReq ? <Notification club={
+                        notification.club
+                    }
+                    date={
+                        notification.date
+                    }
+                    isReq={
+                        notification.isReq
+                    }
+                    pending={
+                        notification.pending
+                    }
+                    notification={
+                        notification.notification
+                    }/> : <></>))
             } </div>
-
-
         </div>
-
     )
 }
 

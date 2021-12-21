@@ -16,20 +16,24 @@ import useToken from './Auth/useToken';
 
 
 function App() {
-
-    let userType = 2;
-    const {token, setToken} = useToken();
+    
+    //const {token, setToken} = useToken();
     let history = useHistory();
 
-    if (!token) {
+    if (!localStorage.getItem('token')) {
         return (
             <div>
-                <Login setToken={setToken}/>
+                <BrowserRouter>
+                    <Route path="/signup"
+                        component={SignUp}/>
+                    <Route exact path="/"
+                        component={Login}/>
+                </BrowserRouter>
+           
             </div>
-
-
         )
-    } else if (userType == 1) {
+    } else if (localStorage.role == "ROLE_STUDENT") {
+    //} else if (localStorage.role == "ROLE_") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -50,11 +54,10 @@ function App() {
                         component={StAssignments}/>
                 </BrowserRouter>
             </div>
-
-
         );
 
-    } else if (userType == 2) {
+    } else if (localStorage.role == "ROLE_ADMIN") {
+    //} else if (localStorage.role == "ROLE_STUDENT") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -67,15 +70,8 @@ function App() {
                         component={AdvClubMembers}/>
                     <Route path="/view-club"
                         component={ClubProfile}/>
-
-
-                  
-
-
                 </BrowserRouter>
             </div>
-
-
         )
 
     }
@@ -85,22 +81,3 @@ function App() {
 
 
 export default App;
-/* <Switch>
-                    
-                    <Route exact path="/home"
-                        component={StHome}/>
-                    
-                    <Route exact path="/notifications"
-                        component={StNotifications}/>
-                    <Route exact path="/myprofile">
-                        <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
-                            name={"can"}
-                            ge250_251={"taken"}
-                            bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
-                    </Route>
-                    <Route exact path="/clubs"
-                        component={StClubs}/>
-                    <Route exact path="/assignments"
-                        component={StAssignments}/>
-                </Switch>
-* */

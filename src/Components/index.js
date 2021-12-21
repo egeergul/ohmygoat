@@ -7,6 +7,6 @@ import Notification from "./Notification/Notification"
 import ClubProfile from "./ClubProfile/ClubProfile"
 import StudentPreview from "./StudentPreview/StudentPreview"
 
-export {StNav, AdvNav,  Event, Notification, Club, Assignment,
+export {StNav, AdvNav, Event, Notification, Club, Assignment,
         StudentPreview, ClubProfile}
 

@@ -4,6 +4,8 @@ import Logo from "../../Assets/bilkent_logo.png"
 import { BrowserRouter as Link} from "react-router-dom";
 import {useHistory} from  "react-router-dom";
 
+
+//TODO
 const SignUp = () => {
     let history =   useHistory()
     return (
@@ -32,9 +34,8 @@ const SignUp = () => {
                         className="btn btn-primary btn-block">Register</button>
                     </div>
                     <div className="text-center intro">
-                        <span className="d-block account">Already have account yet?</span>
-                        <p onClick={()=>{history.push("/login")}}>
-                                Click here to login
+                        <p className="form-check" onClick={()=>{history.push("/")}}>
+                            Already have account yet? Click here to login
                         </p>
                     </div>
                 </div>
