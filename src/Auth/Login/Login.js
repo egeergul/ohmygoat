@@ -11,9 +11,7 @@ const Login = () => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
 
-
     let history = useHistory();
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -71,7 +69,7 @@ const Login = () => {
                             }/>
                     </label>
                     <div>
-                        <button className="mt-3 btn btn-primary btn-block" type="submit">Submit</button>
+                        <button className="mt-3 btn btn-primary btn-block" type="submit">Login</button>
                     </div>
                 </form>
                 <p className="text-center form-check" onClick={()=>history.push("/signup")} >Already have an account? Click here to register</p>

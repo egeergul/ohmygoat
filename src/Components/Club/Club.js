@@ -29,9 +29,8 @@ const Club = (props) => {
                                     props.description
                                 } </p>
                             </div>
-
                             <div className="col-md-2 club-body-right">
-                                <button className="btn btn-primary btn-block">Exit</button>
+                                <button className="btn btn-primary btn-block">Join</button>  
                                 <button className="btn btn-primary btn-block">Visit Club</button>
                             </div>
                         </div>

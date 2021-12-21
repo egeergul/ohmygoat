@@ -33,8 +33,8 @@ function App() {
            
             </div>
         )
-    //} else if (localStorage.role == "ROLE_STUDENT") {
-    } else if (localStorage.role == "ROLE_") {
+    } else if (localStorage.role == "ROLE_STUDENT") {
+    //} else if (localStorage.role == "ROLE_") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -57,8 +57,8 @@ function App() {
             </div>
         );
 
-    //} else if (localStorage.role == "ROLE_ADVISOR") {
-    } else if (localStorage.role == "ROLE_ST") {
+    } else if (localStorage.role == "ROLE_ADVISOR") {
+    //} else if (localStorage.role == "ROLE_ST") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -75,8 +75,8 @@ function App() {
             </div>
         )
 
-    //} else if (localStorage.role == "ROLE_ADMIN") {
-        } else {
+    } else if (localStorage.role == "ROLE_ADMIN") {
+    //    } else {
             return (
                 <div className="">
                     <BrowserRouter>
