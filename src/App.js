@@ -5,6 +5,7 @@ import {Login, SignUp} from "./Auth"
 import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
+import {HomePage,CreateClub} from "./Pages/Admin"
 import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
 import {StNav, AdvNav, Assignment, ClubProfile} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,8 +33,8 @@ function App() {
            
             </div>
         )
-    } else if (localStorage.role == "ROLE_STUDENT") {
-    //} else if (localStorage.role == "ROLE_") {
+    //} else if (localStorage.role == "ROLE_STUDENT") {
+    } else if (localStorage.role == "ROLE_") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -56,8 +57,8 @@ function App() {
             </div>
         );
 
-    } else if (localStorage.role == "ROLE_ADVISOR") {
-    //} else if (localStorage.role == "ROLE_STUDENT") {
+    //} else if (localStorage.role == "ROLE_ADVISOR") {
+    } else if (localStorage.role == "ROLE_ST") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -74,8 +75,21 @@ function App() {
             </div>
         )
 
-    }
+    //} else if (localStorage.role == "ROLE_ADMIN") {
+        } else {
+            return (
+                <div className="">
+                    <BrowserRouter>
+                        <Route path="/home"
+                            component={HomePage}/>
+                        <Route path="/createclub"
+                            component={CreateClub}/>
+                    </BrowserRouter>
+                </div>
+            )
 
+
+    }
 }
 
 
