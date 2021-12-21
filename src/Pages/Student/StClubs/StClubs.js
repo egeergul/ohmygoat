@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./StClubs.css"
-import {StNav, Club} from "../../../Components"
+import {Club} from "../../../Components"
 
+//TODO 
 const clubs = [
     {
         name: "all club",
@@ -28,9 +29,7 @@ const clubs = [
         description: "Yürüyüş yapalım spor spor!",
         pp: "https://productimages.hepsiburada.net/s/50/375/11037982130226.jpg"
     }
-];
-
-const my_clubs = [
+];const my_clubs = [
 {
     name: "my club",
     upcoming_events: 3,
@@ -59,54 +58,102 @@ const my_clubs = [
     pp: "https://productimages.hepsiburada.net/s/50/375/11037982130226.jpg"
 }];
 
-const StClubs = () => {
-const [isMyClubs, setMyClubs] = useState(true);
-var mapped = isMyClubs ? my_clubs : clubs;
-return (
-    <div>
-        <div className="stm-body-grid">
-            <StNav/>
+const StClubs = () => { 
+    const [clubs, setClubs] = useState(null);
+    useEffect(() => {
+        /*fetch("http://localhost:8080/clubs/allClubs")
+        .then(res => {
+            return res.json()
+        })
+        .then((data) => {
+            console.log(data);
+            setClubs(data)
+        })*/
 
-            <div className="dflex m-3 d-flex justify-content-center">
-                <button className="btn btn-primary btn-block mx-3" onClick={
-                        () => {
-                            setMyClubs(true)
-                        }
-                    }
-                    >My Clubs</button>
+        console.log(localStorage.token)
+        fetch(
+            "http://localhost:8080/club/allClubs",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`,
+              },
+              credentials: "include",
+            }
+          )
+            .then((r) => {
+              if (r.ok) {
+                return r;
+              }
+              if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status ));
+              }
+              return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            })
+            .then((r) => r.json())
+            .then((response) => {
+              console.log(response);
+              setClubs(response)
+              
+            })
+            .catch((e) => {
+                console.log(e.message);
+            });
 
-                <button className="btn btn-primary btn-block"  onClick={
-                    () => {
-                        setMyClubs(false)
-                    }
-                }>All Clubs</button>
+
+
+    }, []);
+
+
+    const [isMyClubs, setMyClubs] = useState(true);
+    var mapped = isMyClubs ? my_clubs : clubs;
+    return (
+        <div>
+            <div>
+
+                <div className="dflex m-3 d-flex justify-content-center">
+                    <button className="btn btn-primary btn-block mx-3"
+                        onClick={
+                            () => {
+                                setMyClubs(true)
+                            }
+                    }>My Clubs</button>
+
+                    <button className="btn btn-primary btn-block"
+                        onClick={
+                            () => {
+                                setMyClubs(false)
+                            }
+                    }>All Clubs</button>
+                </div>
+
+                <div className="st-clubs">
+                    {
+                        clubs && 
+
+                    mapped.map((club) => (
+                        <Club name={
+                                club.name
+                            }
+                            upcoming_events={
+                                club.upcoming_events
+                            }
+                            total_events={
+                                club.total_events
+                            }
+                            description={
+                                club.description
+                            }
+                            pp={
+                                club.pp
+                            }/>
+                    ))
+                } </div>
+
+
             </div>
-
-            <div className="bbb">
-                {
-
-                mapped.map((club) => (
-                    <Club name={
-                            club.name
-                        }
-                        upcoming_events={
-                            club.upcoming_events
-                        }
-                        total_events={
-                            club.total_events
-                        }
-                        description={
-                            club.description
-                        }
-                        pp={
-                            club.pp
-                        }/>
-                ))
-            } </div>
-
-
         </div>
-    </div>
-)}
-
+    )}
+    
 export default StClubs

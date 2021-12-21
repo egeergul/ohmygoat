@@ -1,7 +1,8 @@
-.st-clubs{
+.adv-notifications{
     display: grid;
+    height: 90vh;
     align-items: center;
-    height: 75vh;
-    overflow-y: scroll;
     justify-content: center;
+    overflow-y: scroll;
+
 }

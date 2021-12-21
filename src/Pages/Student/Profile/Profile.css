@@ -3,10 +3,6 @@
     height: max-content;
     background-color: #eee;
 }
-.nav_cont{
-    position: sticky;
-    top: 0;
-}
 .flex_cont{
     display: flex;
     flex-direction: column;
@@ -14,7 +10,6 @@
     align-items: center;
 }
 .del_my_acc{
-    
     align-self: flex-end;
     margin-right: 20px;
     width: max-content;
@@ -49,7 +44,6 @@
     max-width: 175px;
     width: auto;
 }
-
 
 @media only screen and (min-width: 768px) {
     .header_right{

@@ -1,53 +1,97 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import React, {useState} from "react";
+import {BrowserRouter, Route, useHistory} from "react-router-dom";
 import {Login, SignUp} from "./Auth"
-
+import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
 import {HomePage,CreateClub} from "./Pages/Admin"
-import {StNav, Assignment} from "./Components"
+import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
+import {StNav, AdvNav, Assignment, ClubProfile} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./App.css"
 
 import UserRegistration from "./UserRegistration"
+import {Navbar} from "react-bootstrap";
+import useToken from './Auth/useToken';
+
 
 function App() {
+    
+    //const {token, setToken} = useToken();
+    let history = useHistory();
 
-
-    return (
-        <Router>
+    if (!localStorage.getItem('token')) {
+        return (
             <div>
-                <Switch>
-                    <Route exact path="/login"
-                        component={Login}/>
+                <BrowserRouter>
+                    <Route path="/signup"
+                        component={SignUp}/>
                     <Route exact path="/"
                         component={Login}/>
-                    <Route exact path="/home"
+                </BrowserRouter>
+           
+            </div>
+        )
+    } else if (localStorage.role == "ROLE_STUDENT") {
+    //} else if (localStorage.role == "ROLE_") {
+        return (
+            <div className="">
+                <BrowserRouter>
+                    <StNav/>
+                    <Route path="/home"
                         component={StHome}/>
-                    <Route exact path="/signup"
-                        component={SignUp}/>
-                    <Route exact path="/notifications"
-                        component={StNotifications}/>
-                    <Route exact path="/myprofile">
+                    <Route path="/myProfile">
                         <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
                             name={"can"}
                             ge250_251={"taken"}
                             bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
                     </Route>
-                    <Route exact path="/clubs"
+                    <Route path="/notifications"
+                        component={StNotifications}/>
+                    <Route path="/clubs"
                         component={StClubs}/>
-                    <Route exact path="/assignments"
+                    <Route path="/assignments"
                         component={StAssignments}/>
-                    <Route exact path="/homepage"
-                        component={HomePage}/>
-                    <Route exact path ="/createclub"
-                        component = {CreateClub}/>
-                </Switch>
-
+                </BrowserRouter>
             </div>
-        </Router>
-    );
+        );
+
+    } else if (localStorage.role == "ROLE_ADVISOR") {
+    //} else if (localStorage.role == "ROLE_STUDENT") {
+        return (
+            <div className="">
+                <BrowserRouter>
+                    <AdvNav/>
+                    <Route path="/home"
+                        component={AdvHome}/>
+                    <Route path="/notifications"
+                        component={AdvNotifications}/>
+                    <Route path="/club-members"
+                        component={AdvClubMembers}/>
+                    <Route path="/view-club"
+                        component={ClubProfile}/>
+                </BrowserRouter>
+            </div>
+        )
+
+    } else if (localStorage.role == "ROLE_ADMIN") {
+        //} else if (localStorage.role == "ROLE_STUDENT") {
+            return (
+                <div className="">
+                    <BrowserRouter>
+                        <AdvNav/>
+                        <Route path="/home"
+                            component={HomePage}/>
+                        <Route path="/createclub"
+                            component={CreateClub}/>
+                    </BrowserRouter>
+                </div>
+            )
+
+
+    }
 }
+
 
 export default App;

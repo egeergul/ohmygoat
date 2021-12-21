@@ -66,14 +66,10 @@ const Profile = (props) => {
 
     return (
         <div className="st-body-grid">
-            <div className="nav_cont">
-                <StNav/>
-            </div>
             <div className="flex_cont">
                 <button className="btn btn-primary btn-block del_my_acc">
                     Delete My Account
                 </button>
-
                 <div className="container">
                     <div className="row header_bio">
                         <div className="col-md-4 header_left">
@@ -108,6 +104,10 @@ const Profile = (props) => {
                     <div className="profile_clubs col-lg-6">
                         {
                         clubs.map((club) => (
+                            //TODO
+                            //if (club.description.length() > 15)
+                            //    club.description = club.description[0:15] + "...";
+
                             <Club name={
                                     club.name
                                 }
@@ -147,10 +147,7 @@ const Profile = (props) => {
                     } </div>
                 </div>
             </div>
-
         </div>
-
-
     )
 }
 
