@@ -7,7 +7,7 @@ import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
 import {CreateClub, AdmHome} from "./Pages/Admin"
 import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
-import {StNav, AdvNav, Assignment, ClubProfile, AdmNav} from "./Components"
+import {StNav, AdvNav, ClNav, Assignment, ClubProfile, AdmNav} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
@@ -20,6 +20,7 @@ function App() {
     
     //const {token, setToken} = useToken();
     let history = useHistory();
+  
 
     if (!localStorage.getItem('token')) {
         return (
@@ -35,7 +36,7 @@ function App() {
         )
     }
     
-    else if (true ||localStorage.role == "ROLE_ADMIN") {
+    else if (localStorage.role == "ROLE_ADMIN") {
         return (
             <div className="">
                 <BrowserRouter>
@@ -47,33 +48,50 @@ function App() {
                 </BrowserRouter>
             </div>
         )
-}
-    
-    
+}    
     else if (localStorage.role == "ROLE_STUDENT") {
-        return (
-            <div className="">
-                <BrowserRouter>
-                    <StNav/>
-                    <Route path="/home"
-                        component={StHome}/>
-                    <Route path="/myProfile">
-                        <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
-                            name={"can"}
-                            ge250_251={"taken"}
-                            bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
-                    </Route>
-                    <Route path="/notifications"
-                        component={StNotifications}/>
-                    <Route path="/clubs"
-                        component={StClubs}/>
-                    <Route path="/assignments"
-                        component={StAssignments}/>
-                </BrowserRouter>
-            </div>
-        );
+        
+        if(localStorage.onclub ==   "false"){
+            return (
+                <div>
+                    <BrowserRouter>
+                        <StNav/>
+                        <Route path="/home"
+                            component={StHome}/>
+                        <Route path="/myProfile">
+                            <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
+                                name={"can"}
+                                ge250_251={"taken"}
+                                bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
+                        </Route>
+                        <Route path="/notifications"
+                            component={StNotifications}/>
+                        <Route path="/clubs">
+                            <StClubs/>
+                        </Route>
+                        <Route path="/assignments"
+                            component={StAssignments}/>
+                    </BrowserRouter>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <BrowserRouter>
+                        <ClNav/>
+                        <Route path="/club/home"
+                            component={StHome}/>
+                    </BrowserRouter>
+                </div>
+            );
+        }
 
-    } else if (localStorage.role == "ROLE_ADVISOR") {
+    } 
+    
+
+    
+    
+    else if (localStorage.role == "ROLE_ADVISOR") {
         return (
             <div className="">
                 <BrowserRouter>

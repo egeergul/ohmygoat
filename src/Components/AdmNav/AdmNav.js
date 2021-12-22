@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom'
 import {useHistory} from "react-router-dom";
 
 const AdmNav = () => {
+    let history = useHistory()
+
     return (
         <div>
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
@@ -21,6 +23,7 @@ const AdmNav = () => {
                                 onClick={
                                     () => {
                                         localStorage.clear()
+                                        history.push("/")
                                         window.location.reload();
                                     }
                             }>Logout</NavLink>

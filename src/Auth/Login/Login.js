@@ -48,6 +48,7 @@ const Login = () => {
             localStorage.setItem('email', response.email);
             localStorage.setItem('id', response.id);
             localStorage.setItem("role", response.roles[0]);
+            localStorage.setItem("onclub", "false");
             history.replace('/home');
         }).catch((e) => {
             console.log("here");

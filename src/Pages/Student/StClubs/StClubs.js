@@ -32,11 +32,10 @@ const my_clubs = [
     pp: "https://productimages.hepsiburada.net/s/50/375/11037982130226.jpg"
 }];
 
-const StClubs = () => { 
+const StClubs = (props) => { 
     const [clubs, setClubs] = useState(null);
     useEffect(() => {
 
-        //console.log(localStorage.token)
         fetch(
             "http://localhost:8080/club/allClubs",
             {
@@ -79,6 +78,14 @@ const StClubs = () => {
         <div>
             <div>
 
+                <button onClick={
+                    () => {
+            
+                        localStorage.setItem("onclub", "true");
+                        window.location.reload();
+
+                    }
+                }>click</button>
                 <div className="dflex m-3 d-flex justify-content-center">
                     <button className="btn btn-primary btn-block mx-3"
                         onClick={

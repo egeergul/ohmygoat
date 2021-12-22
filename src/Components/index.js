@@ -1,4 +1,5 @@
 import StNav from "./StNav/StNav"
+import ClNav from "./ClNav/ClNav"
 import AdmNav from "./AdmNav/AdmNav"
 import AdvNav from "./AdvNav/AdvNav"
 import Club from "./Club/Club"
@@ -10,6 +11,7 @@ import ClubProfile from "./ClubProfile/ClubProfile"
 import StudentPreview from "./StudentPreview/StudentPreview"
 
 export {StNav, Event, Notification, Club, AdminClub,
-    AdmNav, Assignment,  StudentPreview, ClubProfile, AdvNav}
+    AdmNav, Assignment,  StudentPreview, ClubProfile, AdvNav,
+    ClNav}
 
 
