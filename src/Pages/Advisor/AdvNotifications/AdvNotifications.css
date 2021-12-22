@@ -1,7 +1,8 @@
-.st-home{
+.adv-notifications{
     display: grid;
+    height: 90vh;
     align-items: center;
-    height: 85vh;
-    overflow-y: scroll;
     justify-content: center;
+    overflow-y: scroll;
+
 }

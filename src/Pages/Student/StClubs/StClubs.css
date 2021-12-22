@@ -1,7 +1,7 @@
-.st-home{
+.st-clubs{
     display: grid;
     align-items: center;
-    height: 85vh;
+    height: 75vh;
     overflow-y: scroll;
     justify-content: center;
 }
