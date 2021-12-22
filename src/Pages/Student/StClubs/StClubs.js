@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import "./StClubs.css"
 import {Club} from "../../../Components"
+import { useHistory } from 'react-router-dom';
 
 //TODO 
 const my_clubs = [
@@ -67,12 +68,11 @@ const StClubs = (props) => {
                 console.log(e.message);
             });
 
-
-
     }, []);
 
 
     const [isMyClubs, setMyClubs] = useState(true);
+    let history = useHistory();
     var mapped = isMyClubs ? my_clubs : clubs;
     return (
         <div>
@@ -80,8 +80,8 @@ const StClubs = (props) => {
 
                 <button onClick={
                     () => {
-            
                         localStorage.setItem("onclub", "true");
+                        history.push("/club/home");
                         window.location.reload();
 
                     }

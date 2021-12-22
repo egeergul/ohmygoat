@@ -1,27 +1,24 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState} from "react";
-import {BrowserRouter, Route, useHistory} from "react-router-dom";
+import React from "react";
+import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
-import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
+import {ClHome} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
-import { AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
-import {StNav, AdvNav, ClNav, Assignment, ClubProfile, AdmNav} from "./Components"
+import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
+import {
+    StNav,
+    AdvNav,
+    ClNav,
+    ClubProfile,
+    AdmNav
+} from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
-import UserRegistration from "./UserRegistration"
-import {Navbar} from "react-bootstrap";
-import useToken from './Auth/useToken';
 
-
-function App() {
-    
-    //const {token, setToken} = useToken();
-    
-  
-
+function App() { // If there are no logged in users, render this part
     if (!localStorage.getItem('token')) {
         return (
             <div>
@@ -33,11 +30,12 @@ function App() {
                     <Route exact path="/redirecting"
                         component={Buffer}/>
                 </BrowserRouter>
-           
+
             </div>
         )
     }
-    
+
+    // If the logged in user is an admin, render this part else 
     else if (localStorage.role == "ROLE_ADMIN") {
         return (
             <div className="">
@@ -50,10 +48,12 @@ function App() {
                 </BrowserRouter>
             </div>
         )
-}    
-    else if (localStorage.role == "ROLE_STUDENT") {
-        
-        if(localStorage.onclub ==   "false"){
+    }
+
+    // If the logged in user is a student, render this part else 
+    if (localStorage.role == "ROLE_STUDENT") { 
+        // If the student is not visiting the clubs system, render this part
+        if (localStorage.onclub == "false") {
             return (
                 <div>
                     <BrowserRouter>
@@ -76,23 +76,22 @@ function App() {
                     </BrowserRouter>
                 </div>
             );
-        } else {
+        }
+        // If the student is  visiting the clubs system, render this part 
+        else {
             return (
                 <div>
                     <BrowserRouter>
                         <ClNav/>
                         <Route path="/club/home"
-                            component={StHome}/>
+                            component={ClHome}/>
                     </BrowserRouter>
                 </div>
             );
         }
 
-    } 
-    
-
-    
-    
+    }
+    // If the logged in user is an admin, render this part 
     else if (localStorage.role == "ROLE_ADVISOR") {
         return (
             <div className="">
@@ -109,9 +108,7 @@ function App() {
                 </BrowserRouter>
             </div>
         )
-
-    } 
+    }
 }
-
 
 export default App;

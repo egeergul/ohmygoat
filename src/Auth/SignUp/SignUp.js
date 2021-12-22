@@ -14,21 +14,18 @@ const SignUp = () => {
     const [passwordRepeat, setPasswordRepeat] = useState("");
 
     const handleSubmit = (event) => {
-        if(username == "" || email == "" || password == "" ){
+        if (username == "" || email == "" || password == "") {
             window.alert("No fileds can be left empty!")
-        }
-        else if (!email.includes("@ug.bilkent.edu.tr")) {
+        } else if (!email.includes("@ug.bilkent.edu.tr")) {
             window.alert("Only Bilkent Students can register")
-        }
-        else if (password.length >= 40 || password.length < 6) {
+        } else if (password.length >= 40 || password.length < 6) {
             window.alert("Provided username is too long or short")
-        }
-        else if (password != passwordRepeat) {
+        } else if (password != passwordRepeat) {
             window.alert("Provided passwords are incorrect")
-           
+
         } else if (username.length >= 20 || username.length < 3) {
             window.alert("Provided username is too long or short")
-            
+
         } else {
             event.preventDefault();
 
@@ -39,23 +36,21 @@ const SignUp = () => {
                     "Accept": "application/json"
                 },
                 body: JSON.stringify(
-                    {name: username, email,  password}
-                ),
+                    {name: username, email, password}
+                )
             }).then((r) => {
                 console.log(r);
                 if (r.ok) {
                     console.log("I am okay")
                     history.push("/")
-                }
-                else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("hata oluştu"));
                 } else {
                     return Promise.reject(new Error("bilinmeyen hata"));
-                } 
+                }
             })
         }
     };
-
 
     return (
 
