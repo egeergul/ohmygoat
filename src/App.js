@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
 import {BrowserRouter, Route, useHistory} from "react-router-dom";
-import {Login, SignUp} from "./Auth"
+import {Login, SignUp, Buffer} from "./Auth"
 import PropTypes from 'prop-types';
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
@@ -19,7 +19,7 @@ import useToken from './Auth/useToken';
 function App() {
     
     //const {token, setToken} = useToken();
-    let history = useHistory();
+    
   
 
     if (!localStorage.getItem('token')) {
@@ -30,6 +30,8 @@ function App() {
                         component={SignUp}/>
                     <Route exact path="/"
                         component={Login}/>
+                    <Route exact path="/redirecting"
+                        component={Buffer}/>
                 </BrowserRouter>
            
             </div>
