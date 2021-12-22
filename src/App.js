@@ -4,7 +4,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
-import {ClHome} from "./Pages/Club"
+import {ClHome, CreateEvent} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
 import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
 import {
@@ -85,6 +85,8 @@ function App() { // If there are no logged in users, render this part
                         <ClNav/>
                         <Route path="/club/home"
                             component={ClHome}/>
+                        <Route path="/club/create-event"
+                            component={CreateEvent}/>
                     </BrowserRouter>
                 </div>
             );
