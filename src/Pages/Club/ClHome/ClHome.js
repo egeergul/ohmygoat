@@ -62,8 +62,8 @@ const ClHome = () => {
                         name={
                             event.name
                         }
-                        mode={
-                            event.mode
+                        quota={
+                            event.quota
                         }
                         description={
                             event.description

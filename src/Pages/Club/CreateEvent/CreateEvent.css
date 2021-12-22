@@ -1,12 +1,13 @@
 .create-club-container{
     display: grid;
     align-items: center;
-    height: 85vh;
-    overflow-y: scroll;
+  
     justify-content: center;
 }
 
 .crate-event{
+    margin-top: 35px;
+    margin-bottom: 35px;
     max-width: 85vw;
     min-width: 70vw;
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75 ) ;

@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import DatePicker from "react-datepicker"
+import TimePicker from 'react-time-picker';
+import InputSpinner from 'react-bootstrap-input-spinner'  
 import "react-datepicker/dist/react-datepicker.css"
 import "./CreateEvent.css"
 import {useHistory} from "react-router-dom";
@@ -7,8 +9,11 @@ import {useHistory} from "react-router-dom";
 const CreateEvent = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+    const [startClock, setStartClock] = useState('10:00');
+    const [endClock, setEndClock] = useState('10:00');
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
+    const [quota, setQuota] = useState(0)
     let history = useHistory();
     const handleSubmit = (event) => {
     
@@ -28,8 +33,7 @@ const CreateEvent = () => {
                     "Authorization": `Bearer ${localStorage.token}`,
                 },
                 body: JSON.stringify(
-
-                    {name, description, clubId : 1, quota: 30, eventDate: startDate.toString() }
+                    {name, description, clubId : 1, quota, eventDate: startDate.toString() }
                 )
             }).then((r) => {
                 console.log(r);
@@ -67,26 +71,48 @@ const CreateEvent = () => {
                             }>
                         </textarea>
                         </label>
+                        <div className="d-flex flex-row mt-3">
+                            <p className='mr-5'>Select the quota: </p>
+                        <InputSpinner
+                            type={'int'}
+                            min={1}
+                            step={1}
+                            value={quota}
+                            onChange={num => setQuota(num)}
+                            variant={'dark'}
+                            size="sm"
+                        />
+                        </div>
                         <div className="row mt-3">
                             <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
                             <h6> Select Start Date </h6>
                             <DatePicker 
+                                dateFormat="dd/MM/yyyy"
                                 selected ={startDate} 
                                 onChange={(date) =>{setStartDate(date);}
                             }/>
+                            <TimePicker className="mt-3"
+                                onChange={setStartClock}
+                                value={startClock}
+                            />
                             </div>
                             <div className="column col-md d-flex flex-column justify-content-center align-items-center">
                             <h6> Select End Date </h6>
                             <DatePicker 
+                                dateFormat="dd/MM/yyyy"
                                 selected ={endDate} 
                                 onChange={(date) =>{setEndDate(date);}
                             }/>
+                            <TimePicker className="mt-3"
+                                onChange={setEndClock}
+                                value={endClock}
+                            />
                             </div>
                         </div>
                         <button className="mt-3 btn btn-primary btn-block" type="submit">Create Event</button>
                     </form>
                 </div>
-            </div>            
+            </div>          
         </div>
        
     )
