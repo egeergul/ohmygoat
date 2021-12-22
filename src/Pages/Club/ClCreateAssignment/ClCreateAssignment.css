@@ -1,28 +1,21 @@
-.create-club-container{
+.create-assigment-container{
     display: grid;
     align-items: center;
     justify-content: center;
 }
-
-.crate-event{
+.create-assignment{
     margin-top: 35px;
     margin-bottom: 35px;
     max-width: 85vw;
     min-width: 70vw;
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75 ) ;
     background-color: white;
-    
 }
-.create-event-header{
+.create-assignment-header{
     padding: 20px;
     background-color: #C70039;
     color: beige;
 }
-.create-event-body{
+.create-assignment-body{
     padding: 20px;
-}
-.react-datepicker__input-container{
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
 }
