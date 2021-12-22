@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./Login.css"
 import PropTypes from 'prop-types';
 import Logo from "../../Assets/bilkent_logo.png"
-import {BrowserRouter as Link} from "react-router-dom";
+
 import {useHistory} from "react-router-dom";
 
 
@@ -10,6 +10,14 @@ import {useHistory} from "react-router-dom";
 const Login = () => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+
+    /*
+    useEffect(() => {
+        console.log("Before", localStorage)
+        localStorage.clear();
+        console.log("After", localStorage)
+      });
+    */
 
     let history = useHistory();
 
