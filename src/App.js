@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import React, {useState} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
-import {ClHome, CreateEvent} from "./Pages/Club"
+import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
 import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
 import {
@@ -19,6 +19,10 @@ import "./App.css"
 
 
 function App() { // If there are no logged in users, render this part
+
+    const [nav, setNav] = useState(1);
+
+
     if (!localStorage.getItem('token')) {
         return (
             <div>
@@ -30,7 +34,6 @@ function App() { // If there are no logged in users, render this part
                     <Route exact path="/redirecting"
                         component={Buffer}/>
                 </BrowserRouter>
-
             </div>
         )
     }
@@ -82,11 +85,26 @@ function App() { // If there are no logged in users, render this part
             return (
                 <div>
                     <BrowserRouter>
-                        <ClNav/>
+                        <ClNav 
+                            nav = {nav} 
+                            setNav = {setNav}/>
                         <Route path="/club/home"
                             component={ClHome}/>
-                        <Route path="/club/create-event"
-                            component={CreateEvent}/>
+                        <Route path="/club/create-event">
+                            <CreateEvent/>
+                        </Route>
+                        <Route path="/club/notifications"
+                            component={ClNotifications}/>
+                        <Route path="/club/assignments">
+                            <ClAssignments
+                                nav = {nav} 
+                                setNav = {setNav}/>
+                        </Route>
+                        <Route path="/club/create-assignment"
+                            component={ClCreateAssignment}/>
+
+
+
                     </BrowserRouter>
                 </div>
             );
