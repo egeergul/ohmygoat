@@ -47,10 +47,11 @@ const SignUp = () => {
                     console.log("I am okay")
                     history.push("/")
                 }
-                if (r.status === 401 || r.status === 403 || r.status === 500) {
+                else if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("hata oluştu"));
-                }
-                return Promise.reject(new Error("bilinmeyen hata"));
+                } else {
+                    return Promise.reject(new Error("bilinmeyen hata"));
+                } 
             })
         }
     };
