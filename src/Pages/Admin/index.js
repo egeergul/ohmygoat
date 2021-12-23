@@ -1,5 +1,5 @@
-import HomePage from "./HomePage/HomePage"
+import AdmHome from "./AdmHome/AdmHome"
 import CreateClub from "./CreateClub/CreateClub"
 
 
-export {HomePage, CreateClub}
+export { CreateClub, AdmHome}

@@ -12,8 +12,8 @@ const Event = (props) => {
                     <p>{
                         props.name
                     }</p>
-                    <p>{
-                        props.mode
+                    <p>Max Quota is: {
+                        props.quota
                     }</p>
                 </div>
                 <div className="event-body">

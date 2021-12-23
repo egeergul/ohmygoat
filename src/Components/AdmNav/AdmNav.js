@@ -1,16 +1,11 @@
 import React from 'react'
-import {
-    Navbar,
-    Nav,
-    NavLink,
-    Container,
-    NavDropdown
-} from 'react-bootstrap'
+import {Navbar, Nav, NavLink, Container} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {useHistory} from "react-router-dom";
-import "./AdvNav.css"
-const AdvNav = () => {
+
+const AdmNav = () => {
     let history = useHistory()
+
     return (
         <div>
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
@@ -21,23 +16,8 @@ const AdvNav = () => {
                         <Nav className="me-auto ">
                             <NavLink as={Link}
                                 to="/home">Home</NavLink>
-                            <NavDropdown title="My Club" id="navbarScrollingDropdown">
-                                <NavDropdown.Item as={Link} to="/club-members">
-                                    Club Members
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/documents">
-                                    Documents
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/view-club">
-                                    View Club
-                                </NavDropdown.Item>
-                            
-                            </NavDropdown>
-
                             <NavLink as={Link}
-                                to="/notifications">Notification</NavLink>
+                                to="/create-club">Create Club</NavLink>
                             <NavLink as={Link}
                                 to="/"
                                 onClick={
@@ -55,4 +35,4 @@ const AdvNav = () => {
     )
 }
 
-export default AdvNav
+export default AdmNav

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./Login.css"
 import PropTypes from 'prop-types';
 import Logo from "../../Assets/bilkent_logo.png"
-import {BrowserRouter as Link} from "react-router-dom";
+
 import {useHistory} from "react-router-dom";
 
 
@@ -11,9 +11,15 @@ const Login = () => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
 
+    /*
+    useEffect(() => {
+        console.log("Before", localStorage)
+        localStorage.clear();
+        console.log("After", localStorage)
+      });
+    */
 
     let history = useHistory();
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -42,7 +48,8 @@ const Login = () => {
             localStorage.setItem('email', response.email);
             localStorage.setItem('id', response.id);
             localStorage.setItem("role", response.roles[0]);
-            history.replace('/home');
+            localStorage.setItem("onclub", "false");
+            history.push('/redirecting');
         }).catch((e) => {
             console.log("here");
         });
@@ -71,7 +78,7 @@ const Login = () => {
                             }/>
                     </label>
                     <div>
-                        <button className="mt-3 btn btn-primary btn-block" type="submit">Submit</button>
+                        <button className="mt-3 btn btn-primary btn-block" type="submit">Login</button>
                     </div>
                 </form>
                 <p className="text-center form-check" onClick={()=>history.push("/signup")} >Already have an account? Click here to register</p>

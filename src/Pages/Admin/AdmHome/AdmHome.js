@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import "./StClubs.css"
+import "./AdmHome.css"
 import {Club} from "../../../Components"
-import { useHistory } from 'react-router-dom';
 
 //TODO 
 const my_clubs = [
@@ -33,7 +32,7 @@ const my_clubs = [
     pp: "https://productimages.hepsiburada.net/s/50/375/11037982130226.jpg"
 }];
 
-const StClubs = (props) => { 
+const AdmHome = () => { 
     const [clubs, setClubs] = useState(null);
     useEffect(() => {
 
@@ -68,45 +67,17 @@ const StClubs = (props) => {
                 console.log(e.message);
             });
 
+
     }, []);
 
 
-    const [isMyClubs, setMyClubs] = useState(true);
-    let history = useHistory();
-    var mapped = isMyClubs ? my_clubs : clubs;
     return (
         <div>
             <div>
-
-                <button onClick={
-                    () => {
-                        localStorage.setItem("onclub", "true");
-                        history.push("/club/home");
-                        window.location.reload();
-
-                    }
-                }>click</button>
-                <div className="dflex m-3 d-flex justify-content-center">
-                    <button className="btn btn-primary btn-block mx-3"
-                        onClick={
-                            () => {
-                                setMyClubs(true)
-                            }
-                    }>My Clubs</button>
-
-                    <button className="btn btn-primary btn-block"
-                        onClick={
-                            () => {
-                                setMyClubs(false)
-                            }
-                    }>All Clubs</button>
-                </div>
-
-                <div className="st-clubs">
+                <div className="adm-home">
                     {
-                        clubs && 
-
-                    mapped.map((club) => (
+                    clubs && 
+                    clubs.map((club) => (
                         <Club name={
                                 club.name
                             }
@@ -130,4 +101,4 @@ const StClubs = (props) => {
         </div>
     )}
     
-export default StClubs
+export default AdmHome
