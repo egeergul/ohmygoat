@@ -1,69 +1,82 @@
 import React, {useState} from 'react'
 import "./Club.css"
+import { useHistory} from 'react-router-dom'
 
 const Club = (props) => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const clubId = props.id;
-        
-        // if club is not joined, join club
-        if(JSON.stringify(props.isMember) == "[]") {
-            fetch("http://localhost:8080/club/joinClub", {
+    const clubId = props.id;
+    let history = useHistory();
+    const joinClub = () => {
+
+        fetch("http://localhost:8080/club/joinClub", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify(
-                {studentId: localStorage.id,clubId: clubId}
+                {studentId: localStorage.id, clubId: clubId}
             )
-            }).then((r) => {
-                console.log(r);
-                if (r.ok) {
-                    window.location.reload();
-                    return r;
-                }
-                if (r.status === 401 || r.status === 403 || r.status === 500) {
-                    return Promise.reject(new Error("hata oluştu"));
-                }
-                return Promise.reject(new Error("bilinmeyen hata"));
-            }).then((r) => r.json()).then((response) => {
-                console.log(response);
-            }).catch((e) => {
-                console.log("here");
-            });
-        } else { //else leave club
+        }).then((r) => {
+            console.log(r);
+            if (r.ok) {
+                window.location.reload();
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("hata oluştu"));
+            }
+            return Promise.reject(new Error("bilinmeyen hata"));
+        }).then((r) => r.json()).then((response) => {
+            console.log(response);
+        }).catch((e) => {
+            console.log("here");
+        });
 
-            fetch("http://localhost:8080/club/leaveClub", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(
-                    {studentId: localStorage.id,clubId: clubId}
-                )
-                }).then((r) => {
-                    console.log(r);
-                    if (r.ok) {
-                        window.location.reload();
-                        return r;
-                    }
-                    if (r.status === 401 || r.status === 403 || r.status === 500) {
-                        return Promise.reject(new Error("hata oluştu"));
-                    }
-                    return Promise.reject(new Error("bilinmeyen hata"));
-                }).then((r) => r.json()).then((response) => {
-                    console.log(response);
-                }).catch((e) => {
-                    console.log("here");
-                });
+
+    };
+
+    const leaveClub = () => {
+        fetch("http://localhost:8080/club/leaveClub", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(
+                {studentId: localStorage.id, clubId: clubId}
+            )
+        }).then((r) => {
+            console.log(r);
+            if (r.ok) {
+                window.location.reload();
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("hata oluştu"));
+            }
+            return Promise.reject(new Error("bilinmeyen hata"));
+        }).then((r) => r.json()).then((response) => {
+            console.log(response);
+        }).catch((e) => {
+            console.log("here is a problem: " + e);
+        });
+    }
+
+    const visitClub = () => {
+        if(JSON.stringify(props.isMember) != "[]"){ //is a member
+            localStorage.setItem("onclub", "true");
+            localStorage.setItem("clubId", clubId);
+            history.push("/club/home");
+            window.location.reload();
+        } else { // not a member
+
         }
+       
     };
     return (
         <div>
             <div className="club-container">
-            
+
                 <div className="club-header">
                     <img className="pp"
                         src={
@@ -74,7 +87,10 @@ const Club = (props) => {
                     }</p>
                 </div>
                 <div className="club-body">
-                    <p>Chess Club  | {props.total_events} Total Events</p>
+                    <p>Chess Club  | {
+                        props.total_events
+                    }
+                        Total Events</p>
                     <div className="container">
                         <div className="club-body-bottom row">
                             <div className="col-md-8 club-body-left">
@@ -82,15 +98,15 @@ const Club = (props) => {
                                     props.description
                                 } </p>
                             </div>
-                            <form className="col-md-2 club-body-right" onSubmit={handleSubmit}>
+                            <div className="col-md-2 club-body-right">
                                 {
-                                    JSON.stringify(props.isMember) == "[]" ?
-                                    <button className="btn btn-primary btn-block">Join</button>
-                                    :
-                                    <button className="btn btn-primary btn-block">Leave</button> 
-                                }
-                                <button className="btn btn-primary btn-block">Visit Club</button>
-                            </form>
+                                JSON.stringify(props.isMember) == "[]" ? <button onClick={joinClub}
+                                    className="btn btn-primary btn-block">Join</button> : <button onClick={leaveClub}
+                                    className="btn btn-primary btn-block">Leave</button>
+                            }
+                                <button onClick={visitClub}
+                                    className="btn btn-primary btn-block">Visit Club</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,5 +114,4 @@ const Club = (props) => {
         </div>
     )
 }
-
 export default Club

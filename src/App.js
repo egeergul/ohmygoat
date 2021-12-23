@@ -22,7 +22,6 @@ function App() { // If there are no logged in users, render this part
 
     const [nav, setNav] = useState(1);
 
-
     if (!localStorage.getItem('token')) {
         return (
             <div>
@@ -102,9 +101,6 @@ function App() { // If there are no logged in users, render this part
                         </Route>
                         <Route path="/club/create-assignment"
                             component={ClCreateAssignment}/>
-
-
-
                     </BrowserRouter>
                 </div>
             );

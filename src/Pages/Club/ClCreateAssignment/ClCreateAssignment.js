@@ -27,6 +27,7 @@ const ClCreateAssignment = () => {
                             onChange={
                                 e => setDescription(e.target.value)
                         }></textarea>
+                        <button className= "create-button mt-3 btn btn-primary btn-block" type="submit">Create Assignment</button>
                     </form>
                 </div>
             </div>

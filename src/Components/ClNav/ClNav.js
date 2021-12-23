@@ -1,7 +1,7 @@
 import React from 'react'
 import {Navbar, Nav, NavLink, Container} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from 'react-router-dom'
+
 
 const ClNav = (props) => {
     let history = useHistory()
@@ -9,7 +9,6 @@ const ClNav = (props) => {
     if (props.nav == 1) {
         return (
             <div>
-    
                 <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
                     <Container>
                         <Navbar.Brand>ohmygoat.com</Navbar.Brand>
@@ -32,6 +31,7 @@ const ClNav = (props) => {
                                         to="/"
                                         onClick={
                                             () => {
+                                                localStorage.removeItem("clubId")
                                                 localStorage.onclub = "false";
                                                 history.push("/home")
                                                 window.location.reload();
