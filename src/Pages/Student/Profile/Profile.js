@@ -49,8 +49,7 @@ const Profile = (props) => {
                     }`,
                 },
                 credentials: "include",
-            },
-            console.log("olmayan"))
+            })
             .then((r) => {
                 if (r.ok) {
                     console.log(r);
@@ -58,8 +57,9 @@ const Profile = (props) => {
                 }
                 if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("Bir hata oluştu " + r.status ));
+                } else {
+                    return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
                 }
-                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             })
             .then((r) => r.json())
             .then((r) => {
