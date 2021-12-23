@@ -17,6 +17,7 @@ const Club = (props) => {
         }).then((r) => {
             console.log(r);
             if (r.ok) {
+                window.location.reload();
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -32,7 +33,9 @@ const Club = (props) => {
     };
     return (
         <div>
+            <p>{props.roles.toString()}</p>
             <div className="club-container">
+            
                 <div className="club-header">
                     <img className="pp"
                         src={
@@ -43,13 +46,7 @@ const Club = (props) => {
                     }</p>
                 </div>
                 <div className="club-body">
-                    <p>Chess Club | {
-                        props.upcoming_events
-                    }
-                        Events | {
-                        props.total_events
-                    }
-                        Total Events</p>
+                    <p>Chess Club  | {props.total_events} Total Events</p>
                     <div className="container">
                         <div className="club-body-bottom row">
                             <div className="col-md-8 club-body-left">
@@ -57,16 +54,22 @@ const Club = (props) => {
                                     props.description
                                 } </p>
                             </div>
+                            <p>
+                                { localStorage.id.toString()}
+                            </p>
+                            <p>{ localStorage.id.toString() in  props.role}</p>
                             <form className="col-md-2 club-body-right" onSubmit={handleSubmit}>
-                                <button className="btn btn-primary btn-block">Join</button>  
+                                {
+                                    localStorage.id.toString() in  props.role ? 
+                                    <button className="btn btn-primary btn-block">Join</button> :
+                                    <button className="btn btn-primary btn-block">Leave</button> 
+                                }
                                 <button className="btn btn-primary btn-block">Visit Club</button>
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     )
 }

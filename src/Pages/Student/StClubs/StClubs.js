@@ -22,7 +22,6 @@ const StClubs = (props) => {
             )
             .then((r) => {
                 if (r.ok) {
-                    console.log(r);
                     return r;
                 }
                 if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -32,7 +31,7 @@ const StClubs = (props) => {
             })
             .then((r) => r.json())
             .then((r) => {
-                console.log(r);
+                console.log("here: " + r);
                 setClubs(r)
 
             })
@@ -57,8 +56,7 @@ const StClubs = (props) => {
                         }`,
                     },
                     credentials: "include",
-                },
-            console.log("olmayan"))
+                })
                 .then((r) => {
                     if (r.ok) {
                         console.log(r);
@@ -120,11 +118,14 @@ const StClubs = (props) => {
                         <Club name={
                                 club.name
                             }
-                            upcoming_events={
-                                club.upcoming_events
+                            role = {
+                                club.roles
+                            }
+                            roles = {
+                                JSON.stringify(club.roles)
                             }
                             total_events={
-                                club.total_events
+                                club.numberOfEvents
                             }
                             description={
                                 club.description
