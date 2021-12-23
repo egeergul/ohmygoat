@@ -33,7 +33,10 @@ const CreateEvent = () => {
                     "Authorization": `Bearer ${localStorage.token}`,
                 },
                 body: JSON.stringify(
-                    {name, description, clubId : 1, quota, eventDate: startDate.toString() }
+    
+
+                    {name, description, clubId : 2, quota, eventDate: startDate.toString(),
+                         duration: 10, status: "status", photos: "" }
                 )
             }).then((r) => {
                 console.log(r);
