@@ -4,7 +4,6 @@ import {StNav, Event, Club} from "../../../Components"
 import {confirm} from "react-confirm-box";
 import { useHistory } from 'react-router-dom';
 
-
 const Profile = (props) => {
     let history = useHistory();
     const [clubs, setmyClubs] = useState([]);
