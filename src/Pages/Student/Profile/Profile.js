@@ -3,7 +3,7 @@ import "./Profile.css"
 import {StNav, Event, Club} from "../../../Components"
 import {confirm} from "react-confirm-box";
 import { useHistory } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const Profile = (props) => {
     let history = useHistory();
@@ -109,6 +109,7 @@ const Profile = (props) => {
         });
     }, []);
 
+    
     return (
         <div className="st-body-grid">
             <div className="flex_cont">
@@ -138,7 +139,14 @@ const Profile = (props) => {
                                     {
                                     localStorage.bio
                                 }</p>
-                                <button className="btn btn-primary btn-block">Edit Profile</button>
+                                <Link to={{pathname:'/editStudentProfile', state:{
+                                    name:localStorage.name,
+                                    ge250: localStorage.ge250_251,
+                                    bio: localStorage.bio
+                                }}}>
+                                <button  className="btn btn-primary btn-block">Edit Profile</button>
+                                </Link>
+                                
                             </div>
                         </div>
                     </div>

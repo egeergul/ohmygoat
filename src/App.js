@@ -16,6 +16,7 @@ import {
 } from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
+import EditProfile from './Pages/Student/Profile/EditProfile';
 
 
 function App() { // If there are no logged in users, render this part
@@ -67,6 +68,9 @@ function App() { // If there are no logged in users, render this part
                                 name={"can"}
                                 ge250_251={"taken"}
                                 bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
+                        </Route>
+                        <Route path='/editStudentProfile'>
+                            <EditProfile></EditProfile>
                         </Route>
                         <Route path="/notifications"
                             component={StNotifications}/>
