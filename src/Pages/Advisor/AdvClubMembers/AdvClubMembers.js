@@ -8,7 +8,7 @@ const AdvClubMembers = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:8080/club/getMembersOfClub?id=" + localStorage.getItem("clubId"), {
+        fetch("http://localhost:8080/club/getMembersOfClub?id=" + localStorage.getItem("clubId"), {  
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
