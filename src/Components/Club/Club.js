@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import "./Club.css"
 import { useHistory} from 'react-router-dom'
-
 const Club = (props) => {
     const clubId = props.id;
     let history = useHistory();
@@ -31,7 +30,6 @@ const Club = (props) => {
         }).catch((e) => {
             console.log("here");
         });
-
 
     };
 
@@ -87,10 +85,7 @@ const Club = (props) => {
                     }</p>
                 </div>
                 <div className="club-body">
-                    <p>Chess Club  | {
-                        props.total_events
-                    }
-                        Total Events</p>
+                    <p>{props.total_events}Total Events</p>
                     <div className="container">
                         <div className="club-body-bottom row">
                             <div className="col-md-8 club-body-left">

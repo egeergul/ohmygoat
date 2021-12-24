@@ -38,7 +38,11 @@ const StHome = () => {
             <div className="st-home">
                 {
                 events.map((event) => (
-                    <Event club={
+                    <Event 
+                        eventId = {
+                            event.eventId
+                        }
+                        club={
                             event.club
                         }
                         name={
@@ -47,12 +51,25 @@ const StHome = () => {
                         quota={
                             event.quota
                         }
+                        remainingQuota = {
+                            event.remainingQuota
+                        }
+                        date={
+                            event.eventDate
+                        }
                         description={
                             event.description
                         }
                         img={
-                            event.img
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFk6kSNgK6Mhq9vrL-P6vQrHp60fJKYXuADtH8VAgPYEatKTBFt741R3SgLK_OwkkMRQ&usqp=CAU"
+                        }
+                        startClock = {
+                            event.startClock
+                        }
+                        endClock = {
+                            event.endClock
                         }/>
+                        
                 ))
             } </div>
         </div>

@@ -23,6 +23,15 @@ const AdvHome = () => {
 
     return (
         <div> 
+           { /*
+            name
+            private int clubId;
+        
+            private String eventDate;
+            private int duration;
+            private String status;
+            private String photos;* */}
+
             <div className="adv-home">
             {
             feed.map((event) => (
@@ -32,8 +41,8 @@ const AdvHome = () => {
                     name={
                         event.name
                     }
-                    mode={
-                        event.mode
+                    quota={
+                        event.quota
                     }
                     description={
                         event.description

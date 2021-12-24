@@ -25,6 +25,7 @@ const StClubs = (props) => {
             credentials: "include"
         },).then((r) => {
             if (r.ok) {
+                console.log(r)
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -32,7 +33,7 @@ const StClubs = (props) => {
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log("here: " + r);
+            console.log(r);
             setAllClubs(r)
 
         }).catch((e) => {
@@ -72,13 +73,6 @@ const StClubs = (props) => {
     return (
         <div>
             <div>
-                <button onClick={
-                    () => {
-                        localStorage.setItem("onclub", "true");
-                        history.push("/club/home");
-                        window.location.reload();
-                    }
-                }>click</button>
 
                 <div className="dflex m-3 d-flex justify-content-center">
                     <button className="btn btn-primary btn-block mx-3"

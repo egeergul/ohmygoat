@@ -2,6 +2,42 @@ import React from 'react'
 import "./Event.css"
 
 const Event = (props) => {
+    const eventId = props.eventId;
+    
+    const viewEvent = ()=> {
+        const studentId = localStorage.getItem("id");
+        fetch("http://localhost:8080/event/joinEvent" , {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`,
+                body: JSON.stringify(
+                    {studentId: studentId, eventId: eventId}
+                )
+                
+            },
+            credentials: "include"
+        }).then((r) => {
+            if (r.ok) {
+                
+                console.log(r);
+                return r;
+            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                console.log("ım here")
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then((r) => r.json()).then((r) => {
+            console.log(r);
+
+        }).catch((e) => {
+            console.log(e.message);
+        });    
+    }
     return (
         <div>
             <div className="event-container">
@@ -12,12 +48,20 @@ const Event = (props) => {
                     <p>{
                         props.name
                     }</p>
-                    <p>Max Quota is: {
-                        props.quota
-                    }</p>
+                    <div className="d-flex flex-column">
+                        <p>Max Quota: {
+                            props.quota
+                        }</p>
+                        <p>Available Quota: {props.remainingQuota}</p>
+                    </div>
                 </div>
-                <div className="event-body">
-                    <div className="container">
+                <div >
+                    
+                   <div className="event-body">
+                   <div className="container">
+                   <div className="row">
+                        
+                       </div>
                         <div className="row">
                             <div className="col-lg-4">
                                 <img src={
@@ -27,19 +71,21 @@ const Event = (props) => {
                             </div>
                             <div className="col-lg-8">
                                 <div className="event-body-right">
+                                    <p >Event Date: {props.date}</p>
+                                    <p >from {props.startClock} to {props.endClock}</p>
                                     <p>{
                                         props.description
                                     }</p>
-                                    <button className="btn btn-primary btn-block">View Event</button>
+                                    <button onClick={viewEvent} className="btn btn-primary btn-block">Join Event</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                   </div>
                 </div>
             </div>
         </div>
     )
 }
-
 
 export default Event
