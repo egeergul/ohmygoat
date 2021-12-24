@@ -1,83 +1,41 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {StudentPreview} from "../../../Components"
 import "./AdvClubMembers.css"
 
-
 const AdvClubMembers = () => {
 
-    const members = [
-        {
-            name: "egrtgrt rtrtre",
-            id: "21902240",
-            department: "CS",
-            position: 1
-        },
-        {
-            name: "egertrtrt rtrrt",
-            id: "21902240",
-            department: "CS",
-            position: 1
-        },
+    const [members, setMembers] = useState([]);
 
-        {
-            name: "ege",
-            id: "21902240",
-            department: "CS",
-            position: 1
-        },
+    useEffect(() => {
 
-        {
-            name: "ege er ",
-            id: "21902240",
-            department: "CS",
-            position: 4
-        }, {
-            name: "eg ere",
-            id: "21902240",
-            department: "CS",
-            position: 2
-        }, {
-            name: "ege gerg ",
-            id: "21902240",
-            department: "CS",
-            position: 1
-        }, {
-            name: "ege ge erg  e",
-            id: "21902240",
-            department: "CS",
-            position: 3
-        }, {
-            name: "egeerg  ererg erge re",
-            id: "21902240",
-            department: "CS",
-            position: 2
-        }, {
-            name: "egeere er",
-            id: "21902240",
-            department: "CS",
-            position: 2
-        }, {
-            name: "egeereg erergger",
-            id: "21902240",
-            department: "CS",
-            position: 3
-        }, {
-            name: "egeergerg rerergrger",
-            id: "21902240",
-            department: "CS",
-            position: 3
-        }, {
-            name: "ege",
-            id: "21902240",
-            department: "CS",
-            position: 1
-        }, {
-            name: "ege",
-            id: "21902240",
-            department: "CS",
-            position: 2
-        }
-    ];
+        fetch("http://localhost:8080/club/getMembersOfClub?id=" + localStorage.getItem("clubId"), {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            credentials: "include"
+        },).then((r) => {
+            if (r.ok) {
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            }
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        }).then((r) => r.json()).then((r) => {
+            console.log("here: " + r);
+            setMembers(r)
+            console.log(r)
+
+
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+    }, []);
 
     const [check1 , setCheck1] = useState(true);
     const [check2, setCheck2] = useState(true);
@@ -107,17 +65,17 @@ const AdvClubMembers = () => {
                            </div>
                         </div>
                     </div>
-                    
+
                     <div className="column col-sm col-lg d-flex flex-column justify-content-center align-items-center">
                         {
-                        members.filter(student=> 
-                            (student.position == 1 && check1)
-                            || (student.position == 2 && check2)
-                            || (student.position == 3 && check3)
-                            || (student.position == 4 && check4)
+                        members.filter(student=>
+                            (student.role == "MEMBER" && check1)
+                            || (student.role == "ACTIVE_MEMBER" && check2)
+                            || (student.role == "BOARD_MEMBER" && check3)
+                            || (student.role == "PRESIDENT" && check4)
                             )
-                        
-                        
+
+
                         .map((student) => (
                              <StudentPreview name={
                                     student.name
@@ -126,11 +84,11 @@ const AdvClubMembers = () => {
                                     student.id
                                 }
                                 department={
-                                    student.department
+                                    student.ge250
                                 }
                                 position={
-                                    student.position
-                                }/> 
+                                    student.role
+                                }/>
                         ))
                     } </div>
                 </div>
