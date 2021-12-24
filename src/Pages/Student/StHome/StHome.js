@@ -4,6 +4,7 @@ import "./StHome.css"
 
 const StHome = () => {
     const [events, setEvents] = useState([]);
+    const [myEvents, setMyEvents] = useState([]);
     useEffect(() => {
         fetch("http://localhost:8080/event/allEvents", {
             method: "GET",
@@ -30,7 +31,38 @@ const StHome = () => {
         }).catch((e) => {
             console.log(e.message);
         });
+
+        
+    fetch("http://localhost:8080/event/myEvents?id=" + localStorage.id, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${
+                localStorage.token
+            }`
+        },
+        credentials: "include"
+    }).then((r) => {
+        if (r.ok) {
+            console.log("My events")
+            console.log(r);
+            return r;
+        } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+            return Promise.reject(new Error("Bir hata oluştu " + r.status));
+        } else {
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        }
+    }).then((r) => r.json()).then((r) => {
+        console.log(r);
+        setMyEvents(r)
+
+    }).catch((e) => {
+        console.log(e.message);
+    });
+
+
     }, []);
+
 
 
     return (
@@ -38,7 +70,14 @@ const StHome = () => {
             <div className="st-home">
                 {
                 events.map((event) => (
+                   
                     <Event 
+                        isStudent = {true}
+                        isClub = {false}
+                        isAdvisor={false}
+                        status={
+                            event.status
+                        }
                         eventId = {
                             event.eventId
                         }
@@ -71,6 +110,9 @@ const StHome = () => {
                         }
                         endClock = {
                             event.endClock
+                        }
+                        isInEvent={
+                            !(myEvents.filter(a => a.eventId == event.eventId).length==0) 
                         }/>
                         
                 ))

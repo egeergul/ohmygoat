@@ -1,75 +1,10 @@
 import React, {useState} from 'react'
 import "./CreateClub.css"
+import {useHistory} from "react-router-dom";
 
-const advisors = [
-    {
-        name: "eray.t",
-        department: "CS"
-    },
-    {
-        name: "ali.b",
-        department: "CS"
-    },
-    {
-        name: "noire.k",
-        department: "CS"
-    },
-    {
-        name: "vavava.z",
-        department: "CS"
-    }, {
-        name: "eray.t",
-        department: "CS"
-    }, {
-        name: "ali.b",
-        department: "CS"
-    }, {
-        name: "noire.k",
-        department: "CS"
-    }, {
-        name: "vavava.z",
-        department: "CS"
-    }, {
-        name: "eray.t",
-        department: "CS"
-    }, {
-        name: "ali.b",
-        department: "CS"
-    }, {
-        name: "noire.k",
-        department: "CS"
-    }, {
-        name: "vavava.z",
-        department: "CS"
-    }, {
-        name: "eray.t",
-        department: "CS"
-    }, {
-        name: "ali.b",
-        department: "CS"
-    }, {
-        name: "noire.k",
-        department: "CS"
-    }, {
-        name: "vavava.z",
-        department: "CS"
-    }, {
-        name: "eray.t",
-        department: "CS"
-    }, {
-        name: "ali.b",
-        department: "CS"
-    }, {
-        name: "noire.k",
-        department: "CS"
-    }, {
-        name: "vavava.z",
-        department: "CS"
-    }
-];let listItems = []
 
-for (let i = 0; i < 10000; i++) {
-listItems.push({id: i, content: i})}const CreateClub = (props) => {
+const CreateClub = (props) => {
+let history = useHistory()
 const [clubName, setClubName] = useState("");
 const [email, setEmail] = useState("");
 const [advName, setAdvName] = useState("");
@@ -86,10 +21,8 @@ const handleSubmit = (event) => {
             {name: advName, email, password: "123456", clubId : null }
         )
     }).then((r) => {
-        console.log("this is advisor")
         console.log(r);
         if (r.ok) {
-            createClub()
             return r;
         }
         if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -98,14 +31,19 @@ const handleSubmit = (event) => {
         return Promise.reject(new Error("bilinmeyen hata"));
     }).then((r) => r.json()).then((response) => {
         console.log(response);
-        window.alert(response.message)
+        window.alert(response.message);
+        const advisorId = response.message.substring(response.message.indexOf("!")+1).trim()
+        return advisorId
+        
+    }).then((id) => {
+        createClub(id)
     }).catch((e) => {
         console.log("here");
     })
 
 }
 
-const createClub = () =>{
+const createClub = (passedid) =>{
     fetch("http://localhost:8080/club/addClub", {
         method: "POST",
         headers: {
@@ -113,11 +51,13 @@ const createClub = () =>{
             "Accept": "application/json"
         },
         body: JSON.stringify( 
-            {name: clubName, description: "Description field is to be edited later on by the club!", clubAdvisorId: 3, photo : "" }
+            {name: clubName, description: "Description field is to be edited later on by the club!", clubAdvisorId: passedid, photo : "" }
         )
     }).then((r) => {
         console.log(r);
         if (r.ok) {
+            history.push("/home")
+            window.location.reload();
             return r;
         }
         if (r.status === 401 || r.status === 403 || r.status === 500) {

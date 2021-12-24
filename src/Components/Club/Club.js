@@ -85,7 +85,7 @@ const Club = (props) => {
                     }</p>
                 </div>
                 <div className="club-body">
-                    <p>{props.total_events}Total Events</p>
+                    <p>{props.total_events} {'\u00A0'} Total Events</p>
                     <div className="container">
                         <div className="club-body-bottom row">
                             <div className="col-md-8 club-body-left">

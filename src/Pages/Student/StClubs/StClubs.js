@@ -35,11 +35,30 @@ const StClubs = (props) => {
         }).then((r) => r.json()).then((r) => {
             console.log(r);
             setAllClubs(r)
+            
+           /* var data = []
+            for(var i = 0; i < r.length; i++) {
+                var obj = r[i];
+                var filtered = obj.roles.filter(role => role.studentId == localStorage.getItem("id"));
+                if(filtered.length == 0){
+                    console.log("aslanım")
+                    data.push(obj)
+
+                }
+                    
+                console.log("ege")
+                console.log(filtered);
+                console.log("ege")
+            }
+            console.log(data)
+            setMyClubs(data)* */
 
         }).catch((e) => {
             console.log(e.message);
         });
 
+
+        
         fetch("http://localhost:8080/club/getStudentClub?id=" + stId, {
             method: "GET",
             headers: {
@@ -73,7 +92,6 @@ const StClubs = (props) => {
     return (
         <div>
             <div>
-
                 <div className="dflex m-3 d-flex justify-content-center">
                     <button className="btn btn-primary btn-block mx-3"
                         onClick={
