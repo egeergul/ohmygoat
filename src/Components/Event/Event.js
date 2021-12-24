@@ -25,6 +25,7 @@ const Event = (props) => {
         }).then((r) => {
             if (r.ok) {
                 console.log(r);
+                
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 
@@ -37,6 +38,7 @@ const Event = (props) => {
             }
         }).then((r) => r.json()).then((r) => {
             console.log(r);
+            window.alert(r.message);
 
         }).catch((e) => {
             console.log(e.message);
