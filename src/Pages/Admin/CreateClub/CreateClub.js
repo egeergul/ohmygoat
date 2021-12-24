@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import "./CreateClub.css"
+import {useHistory} from "react-router-dom";
 
 
-for (let i = 0; i < 10000; i++) {
-listItems.push({id: i, content: i})}const CreateClub = (props) => {
+const CreateClub = (props) => {
+let history = useHistory()
 const [clubName, setClubName] = useState("");
 const [email, setEmail] = useState("");
 const [advName, setAdvName] = useState("");
@@ -55,7 +56,8 @@ const createClub = (passedid) =>{
     }).then((r) => {
         console.log(r);
         if (r.ok) {
-            
+            history.push("/home")
+            window.location.reload();
             return r;
         }
         if (r.status === 401 || r.status === 403 || r.status === 500) {
