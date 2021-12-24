@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const EditProfile = (props) =>{
-    const[newName, setNewName] = useState(localStorage.name);
-    const[newGe250, setGe250] = useState(localStorage.ge250_251);
+    let data = useLocation();
+    const[newName, setNewName] = useState(data.state.name);
+    const[newGe250, setGe250] = useState(data.state.ge250);
 
     const history = useHistory();
 
@@ -50,12 +52,12 @@ const EditProfile = (props) =>{
             <form className="d-flex flex-column"
             onSubmit= {handleSubmit} >
                 <label forName='studentName' >Your Name</label>
-                    <input type="mt-3 text" name='studentName' value={localStorage.name} className="form-control"
+                    <input type="mt-3 text" name='studentName' placeholder={data.state.name} className="form-control"
                         onChange={
                             e => setNewName(e.target.value)
                         }/>
                 <label forName='ge250'>Ge250 </label>
-                    <input rows="5" cols="60" type="number" name='ge250' className="mt-2 form-control"
+                    <input rows="5" cols="60" type="number" placeholder={data.state.ge250} name='ge250' className="mt-2 form-control"
                         onChange={
                             e => setGe250(e.target.value)
                     }></input>

@@ -10,6 +10,9 @@ const Profile = (props) => {
     const [clubs, setmyClubs] = useState([]);
     const studentId = localStorage.getItem("id");
     const [events, setmyEvents] = useState([]);
+    const [studentName, setStudentName] = useState('');
+    const[studentGe250, setStudentGe250] = useState(0);
+
     const deleteProfile = async () => {
         const result = await confirm("Are you sure you want to delete your account?");
         if (result) {
@@ -50,6 +53,37 @@ const Profile = (props) => {
         }
         console.log("You click No!");
     };
+
+    useEffect(() => {
+
+        fetch("http://localhost:8080/auth/getStudentInfo?id=" + studentId, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            credentials: "include"
+        }).then((r) => {
+            if (r.ok) {
+                console.log(r);
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then((r) => r.json()).then((r) => {
+            console.log(r);
+            setStudentName(r.name);
+            setStudentGe250(r.ge250);
+
+        }).catch((e) => {
+            console.log(e.message);
+        });
+    }, []);
 
     useEffect(() => {
 
@@ -128,21 +162,14 @@ const Profile = (props) => {
                         <div className="col-md-8 ">
                             <div className="header_right">
                                 <h3>{
-                                    localStorage.name
+                                    studentName
                                 }</h3>
                                 <p>GE 250: {
-                                    localStorage.ge250_251
-                                }</p>
-                                <p>
-                                    <span>bio:
-                                    </span>
-                                    {
-                                    localStorage.bio
+                                    studentGe250
                                 }</p>
                                 <Link to={{pathname:'/editStudentProfile', state:{
-                                    name:localStorage.name,
-                                    ge250: localStorage.ge250_251,
-                                    bio: localStorage.bio
+                                    name:studentName,
+                                    ge250: studentGe250,
                                 }}}>
                                 <button  className="btn btn-primary btn-block">Edit Profile</button>
                                 </Link>
