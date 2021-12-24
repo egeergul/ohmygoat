@@ -3,31 +3,35 @@ import "./Event.css"
 
 const Event = (props) => {
     const eventId = props.eventId;
-    
+
+
     const viewEvent = ()=> {
         const studentId = localStorage.getItem("id");
+        console.log(studentId);
+        console.log(eventId);
         fetch("http://localhost:8080/event/joinEvent" , {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${
-                    localStorage.token
-                }`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
+
                 body: JSON.stringify(
-                    {studentId: studentId, eventId: eventId}
+                    {studentId, eventId}
                 )
-                
-            },
-            credentials: "include"
+
         }).then((r) => {
             if (r.ok) {
-                
                 console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
             } else {
+                console.log(r);
+
                 console.log("ım here")
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
