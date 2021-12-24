@@ -13,7 +13,16 @@
 .st-prev-container > p {
     margin-right: 12px;
 }
-
+.st-edit-role{
+    border-radius: 10px;
+    padding: 12px;
+    background: #fff;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75 ) ;
+}
+.cancel{
+    background: red;
+    color: #fff;
+}
 @media only screen and (max-width: 480px) {
     .st-prev-container{
         flex-direction: column;

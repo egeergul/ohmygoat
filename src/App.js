@@ -125,6 +125,7 @@ function App() { // If there are no logged in users, render this part
                         component={AdvClubMembers}/>
                     <Route path="/view-club"
                         component={ClubProfile}/>
+             
                 </BrowserRouter>
             </div>
         )
