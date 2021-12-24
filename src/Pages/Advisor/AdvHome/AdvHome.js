@@ -6,6 +6,7 @@ const AdvHome = () => {
 
     const [feed, setFeed] = useState([]);
     useEffect(() => {
+
         fetch("http://localhost:8080/event/allEvents", {
             method: "GET",
             headers: {
@@ -26,7 +27,8 @@ const AdvHome = () => {
             }
         }).then((r) => r.json()).then((r) => {
             console.log(r);
-            setFeed(r)
+            var myClubsEvents = r.filter(event => event.clubId == localStorage.clubId)
+            setFeed(myClubsEvents)
 
         }).catch((e) => {
             console.log(e.message);
@@ -34,8 +36,7 @@ const AdvHome = () => {
     }, []);
 
     return (
-        <div> 
-           { /*
+        <div> {/*
             name
             private int clubId;
         
@@ -45,41 +46,41 @@ const AdvHome = () => {
             private String photos;* */}
 
             <div className="adv-home">
-            {
-            feed.map((event) => (
-                <Event eventId = {
-                    event.eventId
-                }
-                       club={
-                           event.club
-                       }
-                       name={
-                           event.name
-                       }
-                       quota={
-                           event.quota
-                       }
-                       remainingQuota = {
-                           event.remainingQuota
-                       }
-                       date={
-                           event.eventDate
-                       }
-                       description={
-                           event.description
-                       }
-                       img={
-                           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFk6kSNgK6Mhq9vrL-P6vQrHp60fJKYXuADtH8VAgPYEatKTBFt741R3SgLK_OwkkMRQ&usqp=CAU"
-                       }
-                       startClock = {
-                           event.startClock
-                       }
-                       endClock = {
-                           event.endClock
-                       }/>
-            ))
-            } 
-            </div>
+                {
+                feed.map((event) => (
+                    <Event eventId={
+                            event.eventId
+                        }
+                        club={
+                            event.club
+                        }
+                        name={
+                            event.name
+                        }
+                        quota={
+                            event.quota
+                        }
+                        ge250={
+                            event.ge250
+                        }
+                        remainingQuota={
+                            event.remainingQuota
+                        }
+                        date={
+                            event.eventDate
+                        }
+                        description={
+                            event.description
+                        }
+                        img={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFk6kSNgK6Mhq9vrL-P6vQrHp60fJKYXuADtH8VAgPYEatKTBFt741R3SgLK_OwkkMRQ&usqp=CAU"}
+                        startClock={
+                            event.startClock
+                        }
+                        endClock={
+                            event.endClock
+                        }/>
+                ))
+            } </div>
         </div>
     )
 }
