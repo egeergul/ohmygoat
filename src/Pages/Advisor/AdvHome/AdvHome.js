@@ -48,7 +48,12 @@ const AdvHome = () => {
             <div className="adv-home">
                 {
                 feed.map((event) => (
-                    <Event eventId={
+                    <Event 
+                        isAdvisor={true}
+                        status={
+                            event.status
+                        }
+                        eventId={
                             event.eventId
                         }
                         club={

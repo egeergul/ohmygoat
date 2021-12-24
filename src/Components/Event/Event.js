@@ -86,7 +86,82 @@ const Event = (props) => {
         });    
     }
 
+    const approveEvent = ()=> {
+        
+        fetch("http://localhost:8080/advisor/acceptEvent" , {
+            method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
 
+                body: JSON.stringify(
+                    {id: eventId}
+                )
+
+        }).then((r) => {
+            if (r.ok) {
+                console.log(r);
+                return r;
+            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                console.log(r);
+
+                console.log("ım here")
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then((r) => r.json()).then((r) => {
+            console.log(r);
+            window.alert(r.message);
+            window.location.reload()
+
+        }).catch((e) => {
+            console.log(e.message);
+        });    
+    }
+
+    const declinEvent = () =>{
+        
+        fetch("http://localhost:8080/advisor/rejectEvent" , {
+            method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
+
+                body: JSON.stringify(
+                    {id: eventId}
+                )
+
+        }).then((r) => {
+            if (r.ok) {
+                console.log(r);
+                return r;
+            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                console.log(r);
+
+                console.log("ım here")
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then((r) => r.json()).then((r) => {
+            console.log(r);
+            window.alert(r.message);
+            window.location.reload()
+
+        }).catch((e) => {
+            console.log(e.message);
+        }); 
+
+    }
 
     return (
         <div>
@@ -132,10 +207,23 @@ const Event = (props) => {
                                         props.description
                                     }</p>
                                     {
-                                        props.isInEvent ? 
-                                        <button onClick={leaveEvent} className="btn btn-primary btn-block">Leave Event</button>
+                                        !props.isAdvisor ?
+                                        
+                                            props.isInEvent ? 
+                                            <button onClick={leaveEvent} className="btn btn-primary btn-block">Leave Event</button>
+                                            :
+                                            <button onClick={joinEvent} className="btn btn-primary btn-block">Join Event</button>
                                         :
-                                        <button onClick={joinEvent} className="btn btn-primary btn-block">Join Event</button>
+                                        
+                                            props.status == "NOT_DECIDED" ? 
+                                            <div className="d-flex flex-row ">
+                                                <button onClick={approveEvent} className="btn btn-primary btn-block">Approve</button>
+                                                <button   onClick={declinEvent} className="mx-3 btn btn-primary btn-block">Decline</button>
+                                            </div>
+                                            :
+                                            <></>
+                                        
+
                                     }
                                     
                                 </div>
