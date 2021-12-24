@@ -4,13 +4,13 @@ import "./StudentPreview.css"
 const StudentPreview = (props) => {
     var studentPos;
 
-    if(props.position == 1)
+    if(props.position == "MEMBER")
         studentPos = "Regular Member"
-    else if(props.position == 2)
+    else if(props.position == "ACTIVE_MEMBER")
         studentPos = "Active Member"
-    else if(props.position == 3)
+    else if(props.position == "BOARD_MEMBER")
         studentPos = "Director Board Member"
-    else if(props.position == 4)
+    else if(props.position == "PRESIDENT")
         studentPos = "The President"
     else    
         studentPos = "Something went wrong!"
