@@ -61,7 +61,7 @@ const StHome = () => {
                             event.description
                         }
                         img={
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFk6kSNgK6Mhq9vrL-P6vQrHp60fJKYXuADtH8VAgPYEatKTBFt741R3SgLK_OwkkMRQ&usqp=CAU"
+                            "https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"
                         }
                         startClock = {
                             event.startClock
