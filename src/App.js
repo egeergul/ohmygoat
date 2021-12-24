@@ -38,7 +38,7 @@ function App() { // If there are no logged in users, render this part
     }
 
     // If the logged in user is an admin, render this part else 
-    else if (localStorage.role == "ROLE_ADMIN") {
+    else if ( localStorage.role == "ROLE_ADMIN") {
         return (
             <div className="">
                 <BrowserRouter>

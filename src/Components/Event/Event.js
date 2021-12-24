@@ -51,9 +51,14 @@ const Event = (props) => {
                     <p>{
                         props.club
                     }</p>
+                    <div className="d-flex flex-column ">
                     <p>{
                         props.name
                     }</p>
+                    <p>GE 250/251: {'\u00A0'} {
+                        props.ge250
+                    }</p>
+                    </div>
                     <div className="d-flex flex-column">
                         <p>Max Quota: {
                             props.quota

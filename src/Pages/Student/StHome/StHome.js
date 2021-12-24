@@ -45,6 +45,9 @@ const StHome = () => {
                         club={
                             event.club
                         }
+                        ge250 = {
+                            event.ge250
+                        }
                         name={
                             event.name
                         }

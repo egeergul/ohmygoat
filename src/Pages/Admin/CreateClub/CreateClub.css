@@ -15,7 +15,7 @@
 .create-club{
     display: grid;
     align-items: center;
-    height: 85vh;
+    height: max-content;
     overflow-y: scroll;
     justify-content: center;
 }
