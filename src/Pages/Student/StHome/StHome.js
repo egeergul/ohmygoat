@@ -70,7 +70,14 @@ const StHome = () => {
             <div className="st-home">
                 {
                 events.map((event) => (
+                   
                     <Event 
+                        isStudent = {true}
+                        isClub = {false}
+                        isAdvisor={false}
+                        status={
+                            event.status
+                        }
                         eventId = {
                             event.eventId
                         }

@@ -100,7 +100,14 @@ const ClHome = () => {
                             event.img
                         }/>
                 )) : myEvents.map((event) => (
-                    <Event club={
+                    <Event 
+                        isStudent = {false}
+                        isClub = {true}
+                        isAdvisor={false}
+                        status={
+                            event.status
+                        }    
+                        club={
                             event.club
                         }
                         name={

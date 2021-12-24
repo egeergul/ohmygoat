@@ -49,6 +49,8 @@ const AdvHome = () => {
                 {
                 feed.map((event) => (
                     <Event 
+                        isStudent = {false}
+                        isClub = {false}
                         isAdvisor={true}
                         status={
                             event.status
