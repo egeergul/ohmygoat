@@ -38,29 +38,23 @@
 }
 .club-body-left{
     margin-right: 12px;
-    
     display: flex;
-  
     align-items: center;
     flex-grow: 7;
 }
 .club-body-right{
-    
    display: flex;
    flex-direction: column;
    justify-content: center;
-    
-    align-items: center;
-    
-    flex-grow: 5;
+   align-items: center;
+   flex-grow: 5;
 }
 .club-body-right > button{
-    
-    margin-top: 12px;
-    width: max-content;
+   margin-top: 12px;
+   width: max-content;
 }
 .club-body > img {
-    max-width: 300px;
-    width: 100%;
-    object-fit: contain;
+   max-width: 300px;
+   width: 100%;
+   object-fit: contain;
 }

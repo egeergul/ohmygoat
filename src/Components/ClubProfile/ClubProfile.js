@@ -1,6 +1,6 @@
 import React from 'react'
 import "./ClubProfile.css"
-import {Event} from "../"
+import {Event, Forum} from "../"
 
 const ClubProfile = () => {
 
@@ -64,7 +64,7 @@ const ClubProfile = () => {
                     </div>
                 </div>
                 <div className="row mt-5">
-                    <h3>CLub's Events</h3>
+                    <h3>Club's Events</h3>
                     <div className='d-flex flex-row club-events'>
                         {
                         events.map((event) => (
@@ -78,14 +78,17 @@ const ClubProfile = () => {
                                     event.mode
                                 }
                                 description={
-                                    event.description
+                                    
+                                    event.description.substring(0,100) + "..."  
                                 }
                                 img={
                                     event.img
                                 }/>
                         ))
                     } </div>
+                    <Forum/>
                 </div>
+                
             </div>
         </div>
     )

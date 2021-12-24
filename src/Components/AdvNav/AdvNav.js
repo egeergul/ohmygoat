@@ -43,6 +43,7 @@ const AdvNav = () => {
                                 onClick={
                                     () => {
                                         localStorage.clear()
+                                        history.push("/")
                                         window.location.reload();
                                     }
                             }>Logout</NavLink>
