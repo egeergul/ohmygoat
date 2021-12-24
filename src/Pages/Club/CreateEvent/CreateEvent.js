@@ -17,15 +17,15 @@ const CreateEvent = () => {
     let history = useHistory();
 
     const handleSubmit = (event) => {
+        event.preventDefault()
 
         const clubId = localStorage.clubId;
-      
         var m1 = (startDate.getMonth() + 1)
         if (startDate.getMonth() < 9)
             m1 = "0" + (startDate.getMonth() +1)
         var d1 = startDate.getDate()
         if (startDate.getDate() < 10)
-            d1 = "0" + startDate.Date()
+            d1 = "0" + startDate.getDate()
         const startDateFormatted = startDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
 
         var m2 =( startDate.getMonth() +1)
@@ -35,13 +35,16 @@ const CreateEvent = () => {
         if (startDate.getDate() < 10)
             d2 = "0" + startDate.getDate()
         const endDateFormatted = startDate.getFullYear() + "-" + m2 + "-" +d2+ "T" + endClock + ":00"
+        
+        console.log(startDateFormatted)
+        console.log(endDateFormatted)
 
         if (name == "" || description == "") {
             window.alert("None of the fields can be left empty!")
            
         } else {
             console.log("No bad credentials");
-            event.preventDefault();
+         
             fetch("http://localhost:8080/event/addEvent", {
                 method: "POST",
                 headers: {
@@ -59,8 +62,8 @@ const CreateEvent = () => {
                         description,
                         clubId,
                         quota,
-                        eventDate: startDate.toString(),
-                        finishDate: endClock.toString(),
+                        eventDate: startDateFormatted,
+                        finishDate: endDateFormatted,
                         photos: "",
                         ge250
                     }
@@ -88,7 +91,7 @@ const CreateEvent = () => {
                 </div>
                 <div className="create-event-body ">
                     <form className="d-flex flex-column"
-                        onSubmit={handleSubmit}>
+                    onSubmit= {handleSubmit} >
                         <label>
                             <input type="mt-3 text" className="form-control" placeholder="Event Name"
                                 onChange={
@@ -158,7 +161,7 @@ const CreateEvent = () => {
 
                             </div>
                         </div>
-                        <button className="mt-3 btn btn-primary btn-block" type="submit">Create Event</button>
+                        <button className="mt-3 btn btn-primary btn-block" type='submit' >Create Event</button>
                     </form>
                 </div>
             </div>
