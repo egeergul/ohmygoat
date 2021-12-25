@@ -75,7 +75,7 @@ const EditEvent = (props) =>{
     return <div className='create-club-container'>
     <div className="crate-event">
         <div className="create-event-header">
-            <h3>Create Event</h3>
+            <h3>Edit Event</h3>
         </div>
         <div className="create-event-body ">
             <form className="d-flex flex-column"
