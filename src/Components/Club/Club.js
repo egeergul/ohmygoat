@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React  from 'react'
 import "./Club.css"
+import {confirm} from "react-confirm-box";
 import { useHistory} from 'react-router-dom'
 const Club = (props) => {
     
@@ -32,6 +33,58 @@ const Club = (props) => {
         }).catch((e) => {
             console.log("here");
         });
+
+    };
+
+    const deleteClub = async () =>{
+        
+        const result = await confirm("Are you sure you want to delete your account?");
+        if (result) {
+            console.log(clubId)
+            fetch("http://localhost:8080/club/deleteClub", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(
+                    { id: clubId}
+                )
+            }).then((r) => {
+                console.log(r);
+                if (r.ok) {
+                    console.log(r)
+                    window.location.reload();
+                    return r;
+                }
+                if (r.status === 401 || r.status === 403 || r.status === 500) {
+                    return Promise.reject(new Error("hata oluştu"));
+                }
+                return Promise.reject(new Error("bilinmeyen hata"));
+            }).then((r) => r.json()).then((response) => {
+                console.log(response);
+            }).catch((e) => {
+                console.log("here is a problem: " + e);
+            });
+
+            return;
+        }
+        console.log("You click No!");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     };
 
@@ -145,7 +198,7 @@ const Club = (props) => {
                                     props.isAdmin ? <div>
                                         <button 
                                     className="btn btn-primary btn-block">Change Advisor</button>
-                                    <button 
+                                    <button onClick = {deleteClub}
                                     className="mt-2 btn btn-primary btn-block">Delete Club</button>
                                 </div> :
                                 <div>

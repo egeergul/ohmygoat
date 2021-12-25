@@ -120,7 +120,6 @@ const StClubs = (props) => {
                     ))
                 } </div>
 
-
             </div>
         </div>
     )

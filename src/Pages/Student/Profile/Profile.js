@@ -55,8 +55,6 @@ const Profile = (props) => {
     },[])
 
     useEffect(() => {
-
-        console.log('pivvcvcxv');
         console.log(picLink);
         fetch("http://localhost:8080/files/" + picLink, {
                 method: "GET",
@@ -86,18 +84,11 @@ const Profile = (props) => {
                     type: "application/json"
                  })))
                 setImageData(r);
-                //setImageData(new Blob([r], {type: "application/zip"}));
-                
-                //setImageUrl(URL.createObjectURL(r.blob(), {type: 'application/pdf'}));
-                //setImageUrl(URL.createObjectURL(new Blob([r], {type: "application/zip"})).blob);
-                //console.log(URL.createObjectURL(new Blob([r], {type: "application/zip"})));
-                //console.log(URL.createObjectURL(r).blob);
                 console.log(imageUrl);
                 console.log(imageData);
             }).catch((e) => {
                 console.log(e.message);
             });
-    
     }, [picLink]);
 
 

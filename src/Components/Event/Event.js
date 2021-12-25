@@ -1,16 +1,89 @@
 import React,
- {useEffect} from 'react'
+ {useEffect, useState} from 'react'
 import "./Event.css"
 import { Link } from 'react-router-dom';
 
 const Event = (props) => {
     const eventId = props.eventId;
+    const[picLink, setPicLink] = useState(null);
+    const[picture, setPicture] = useState(null);
+    const [imageData, setImageData] = React.useState({});
+    const[imageUrl, setImageUrl] = useState(null);
     
+    useEffect(() => {
+        fetch("http://localhost:8080/event/eventView?id=" + eventId, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${
+                localStorage.token
+            }`
+        },
+        credentials: "include"
+    }).then((r) => {
+        if (r.ok) {
+            console.log(r);
+            return r;
+        }
+        if (r.status === 401 || r.status === 403 || r.status === 500) {
+            return Promise.reject(new Error("Bir hata oluştu " + r.status));
+        } else 
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        
+    }).then((r) => r.json()).then((r) => {
+        console.log("response is")
+        console.log(r);
+     
+        setPicLink(r.photos);
+
+        setPicture(`http://localhost:8080/files/${r.photos}`);
+        console.log(picture);
+
+    }).catch((e) => {
+        console.log(e.message);
+    });
+    },[])
+
+
+
+
 
     useEffect(() => {
-        console.log("Ege club id")
-        console.log(props)
-      },[]);
+        console.log(picLink);
+        fetch("http://localhost:8080/files/" + picLink, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
+                credentials: "include"
+            }).then((r) => {
+                if (r.ok) {
+                    console.log(r);
+                    return r;
+                }
+                if (r.status === 401 || r.status === 403 || r.status === 500) {
+                    return Promise.reject(new Error("Bir hata oluştu " + r.status));
+                } else {
+                    return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+                }
+            }).then(r => r.blob()).then((r) => {
+    
+                console.log(r);
+                var binaryData = [];
+                binaryData.push(r);
+                setImageUrl(URL.createObjectURL(new Blob(binaryData, {
+                    type: "application/json"
+                 })))
+                setImageData(r);
+                console.log(imageUrl);
+                console.log(imageData);
+            }).catch((e) => {
+                console.log(e.message);
+            });
+    }, [picLink]);
 
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
@@ -227,9 +300,8 @@ const Event = (props) => {
                             </div>
                             <div className="row">
                                 <div className="col-lg-4">
-                                    <img src={
-                                            props.img
-                                        }
+                                <img className="pp_class"
+                                src={imageUrl}
                                         className="event-img"/>
                                 </div>
                                 <div className="col-lg-8">
