@@ -4,7 +4,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
 import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
-import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment} from "./Pages/Club"
+import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment, ClProfilePage} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
 import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
 import {
@@ -105,6 +105,8 @@ function App() { // If there are no logged in users, render this part
                         </Route>
                         <Route path="/club/create-assignment"
                             component={ClCreateAssignment}/>
+                        <Route path="/club/profile"
+                            component={ClProfilePage}/>
                     </BrowserRouter>
                 </div>
             );

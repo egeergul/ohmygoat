@@ -1,4 +1,5 @@
 import React from 'react'
+import { propTypes } from 'react-bootstrap/esm/Image';
 import "./Event.css"
 
 const Event = (props) => {
@@ -163,6 +164,10 @@ const Event = (props) => {
 
     }
 
+    const editEvent = () => {
+
+    }
+
     if(props.isStudent && props.status!="ACCEPTED"){
         return (<div></div>)
     }
@@ -236,8 +241,6 @@ const Event = (props) => {
                                             props.description
                                         }</p>
                                         {
-
-
                                         (props.isAdvisor && !props.isStudent && !props.isClub) ? props.status == "NOT_DECIDED" ? <div className="d-flex flex-row ">
                                             <button onClick={approveEvent}
                                                 className="btn btn-primary btn-block">Approve</button>
@@ -245,8 +248,11 @@ const Event = (props) => {
                                                 className="mx-3 btn btn-primary btn-block">Decline</button>
                                         </div> : <></> : props.isStudent ? props.isInEvent ? <button onClick={leaveEvent}
                                             className="btn btn-primary btn-block">Leave Event</button> : <button onClick={joinEvent}
-                                            className="btn btn-primary btn-block">Join Event</button> : <button onClick={declinEvent}
-                                            className="mx-3 btn btn-primary btn-block">Edit Event</button>
+                                            className="btn btn-primary btn-block">Join Event</button> :
+                                             props.isClub && props.club == localStorage.clubId ?
+                                            
+                                            <button onClick={editEvent}
+                                            className="mx-3 btn btn-primary btn-block">Edit Event</button> : <></>
                                     } </div>
                                 </div>
                             </div>
