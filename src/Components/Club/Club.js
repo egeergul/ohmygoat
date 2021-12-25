@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Club.css"
 import { useHistory} from 'react-router-dom'
 const Club = (props) => {

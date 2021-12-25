@@ -127,9 +127,8 @@ const StudentPreview = (props) => {
                     <p>Current Role</p>
                     <div className="d-flex flex-row justify-content-around align-items-around">
                         <button onClick={remove} className="mx-1 btn btn-primary btn-block">Remove Froum Club</button>
-                        <button onClick={promote} className="mx-1 btn btn-primary btn-block">Promote</button>
                         <button onClick={demote} className="mx-1 btn btn-primary btn-block">Demote</button>
-                       
+                        <button onClick={promote} className="mx-1 btn btn-primary btn-block">Promote</button>
                         <button onClick={cancel} className="mx-3 btn btn-primary btn-block cancel">Cancel</button>
                     </div>
                 </div>

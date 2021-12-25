@@ -12,6 +12,39 @@ const Profile = (props) => {
     const [events, setmyEvents] = useState([]);
     const [studentName, setStudentName] = useState('');
     const[studentGe250, setStudentGe250] = useState(0);
+    
+    const [myClubs, setMyClubs] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:8080/club/getStudentClub?id=" + studentId, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${
+                localStorage.token
+            }`
+        },
+        credentials: "include"
+    }).then((r) => {
+        if (r.ok) {
+            console.log(r);
+            return r;
+        }
+        if (r.status === 401 || r.status === 403 || r.status === 500) {
+            return Promise.reject(new Error("Bir hata oluştu " + r.status));
+        } else 
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        
+    }).then((r) => r.json()).then((r) => {
+        console.log(r);
+        setMyClubs(r)
+
+    }).catch((e) => {
+        console.log(e.message);
+    });
+    },[])
+
+
+
 
     const deleteProfile = async () => {
         const result = await confirm("Are you sure you want to delete your account?");
@@ -188,21 +221,29 @@ const Profile = (props) => {
                             // TODO
                             // if (club.description.length() > 15)
                             //    club.description = club.description[0:15] + "..."; 
-                            <Club name={
-                                    club.name
-                                }
-                                upcoming_events={
-                                    club.upcoming_events
-                                }
-                                total_events={
-                                    club.total_events
-                                }
-                                description={
-                                    club.description
-                                }
-                                pp={
-                                    club.pp
-                                }/>
+                            <Club 
+                            setNav2 = {props.setNav2}    
+                            name={
+                                club.name
+                            }
+                            roles={
+                                JSON.stringify(club.roles)
+                            }
+                            total_events={
+                                club.numberOfEvents
+                            }
+                            description={
+                                club.description
+                            }
+                            pp={
+                                club.pp
+                            }
+                            id={
+                                club.id
+                            }
+                            isMember={
+                              myClubs.filter(a => a.id == club.id) 
+                            }/> 
                         ))
                     } </div>
                     <div className="profile_events col-lg-6">
