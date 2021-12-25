@@ -171,6 +171,21 @@ const Event = (props) => {
         <div>
             <div className="event-container">
                 <div className="event-header">
+                    {
+                        props.isClub && props.status == "ACCEPTED" ?
+                        <h3 className='accepted'>
+                            ACCEPTED
+                        </h3> :
+                        
+                            props.status=="REJECTED" ? 
+                            <h3 className='rejected'>
+                                REJECTED
+                            </h3> :
+                            <h3 className='waiting'>
+                                WAITING APPROVAL
+                            </h3>
+                        
+                    }
                     <p>{
                         props.club
                     }</p>

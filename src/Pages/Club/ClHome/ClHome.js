@@ -35,14 +35,14 @@ const ClHome = () => {
             console.log(e.message);
         });
 
-        fetch("http://localhost:8080/event/clubEvents?id=1" , {
+        fetch("http://localhost:8080/event/clubEvents?id=1", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${
                     localStorage.token
-                }`,
-               
+                }`
+
             },
             credentials: "include"
         }).then((r) => {
@@ -84,31 +84,20 @@ const ClHome = () => {
             <div className="st-notifications">
                 {
                 viewAllEvents ? events.map((event) => (
-                    <Event club={
-                            event.club
-                        }
-                        name={
-                            event.name
-                        }
-                        quota={
-                            event.quota
-                        }
-                        description={
-                            event.description
-                        }
-                        img={
-                            event.img
-                        }/>
-                )) : myEvents.map((event) => (
-                    <Event 
-                        isStudent = {false}
-                        isClub = {true}
+                    <Event isStudent={false}
+                        isClub={true}
                         isAdvisor={false}
                         status={
                             event.status
-                        }    
+                        }
+                        eventId={
+                            event.eventId
+                        }
                         club={
                             event.club
+                        }
+                        ge250={
+                            event.ge250
                         }
                         name={
                             event.name
@@ -116,11 +105,65 @@ const ClHome = () => {
                         quota={
                             event.quota
                         }
+                        remainingQuota={
+                            event.remainingQuota
+                        }
+                        date={
+                            event.eventDate
+                        }
                         description={
                             event.description
                         }
-                        img={
-                            event.img
+                        img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
+                        startClock={
+                            event.startClock
+                        }
+                        endClock={
+                            event.endClock
+                        }
+                        isInEvent={
+                            !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
+                        }/>
+                )) : myEvents.map((event) => (
+                    <Event isStudent={false}
+                        isClub={true}
+                        isAdvisor={false}
+                        status={
+                            event.status
+                        }
+                        eventId={
+                            event.eventId
+                        }
+                        club={
+                            event.club
+                        }
+                        ge250={
+                            event.ge250
+                        }
+                        name={
+                            event.name
+                        }
+                        quota={
+                            event.quota
+                        }
+                        remainingQuota={
+                            event.remainingQuota
+                        }
+                        date={
+                            event.eventDate
+                        }
+                        description={
+                            event.description
+                        }
+                        img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
+                        startClock={
+                            event.startClock
+                        }
+                        endClock={
+                            event.endClock
+                        }
+                        isInEvent={
+                            !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
                         }/>
                 ))
             } </div>
