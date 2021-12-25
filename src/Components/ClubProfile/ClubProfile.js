@@ -1,16 +1,65 @@
 import React, {useEffect, useState} from 'react'
 import "./ClubProfile.css"
 import {Event, Forum} from "../"
+import { Link } from 'react-router-dom';
 
 const ClubProfile = (props) => {
+    const [imageData, setImageData] = React.useState({});
+    const[imageUrl, setImageUrl] = useState(null);
+    const[picLink, setPicLink] = useState(null);
+    const[picture, setPicture] = useState(null);
+    console.log('djdsksdkkdkdkddk');
+    const photoLink = props.photo;
 
- 
+    useEffect(() => {
+
+        fetch("http://localhost:8080/files/" + photoLink, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
+                credentials: "include"
+            }).then((r) => {
+                if (r.ok) {
+                    console.log(r);
+                    return r;
+                }
+                if (r.status === 401 || r.status === 403 || r.status === 500) {
+                    return Promise.reject(new Error("Bir hata oluştu " + r.status));
+                } else {
+                    return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+                }
+            }).then(r => r.blob()).then((r) => {
+                console.log(r);
+                var binaryData = [];
+                binaryData.push(r);
+                setImageUrl(URL.createObjectURL(new Blob(binaryData, {
+                    type: "application/json"
+                 })))
+                setImageData(r);
+                //setImageData(new Blob([r], {type: "application/zip"}));
+                
+                //setImageUrl(URL.createObjectURL(r.blob(), {type: 'application/pdf'}));
+                //setImageUrl(URL.createObjectURL(new Blob([r], {type: "application/zip"})).blob);
+                //console.log(URL.createObjectURL(new Blob([r], {type: "application/zip"})));
+                //console.log(URL.createObjectURL(r).blob);
+                console.log(imageUrl);
+                console.log(imageData);
+            }).catch((e) => {
+                console.log(e.message);
+            });
+    
+    }, [photoLink]);
+
     return (
         <div>
             <div className="container">
                 <div className="row d-flex justify-content-center align-items-center mt-5">
                     <div className="column col-md d-flex flex-row justify-content-center align-items-center ">
-                        <img className="club-pp d-flex r" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Association_for_Computing_Machinery_%28ACM%29_logo.svg/1024px-Association_for_Computing_Machinery_%28ACM%29_logo.svg.png" alt="club profile picture"/>
+                        <img className="club-pp d-flex r" src={imageUrl} alt="club profile picture"/>
 
                     </div>
                     <div className="column col-md d-flex flex-row justify-content-center align-items-center">
@@ -23,8 +72,17 @@ const ClubProfile = (props) => {
                             <div className="club-bio-body d-flex flex-column ">
                                 <p>socials</p>
                                 <p>{props.description}</p>
-                                <button>Edit Profile</button>
-                                <button>See Assignments</button>
+                                <Link to={{pathname:'/editClubProfile', state:{
+                                    description:props.description,
+                                    name:props.name,
+                                    id: props.clubId
+                                }}}>
+                                <button  className="btn btn-primary btn-block">Edit Profile</button>
+                                </Link>
+                                <Link>
+                                <button className="btn btn-primary btn-block" >See Assignments</button>
+
+                                </Link>
 
                             </div>
                         </div>
