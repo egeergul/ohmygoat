@@ -93,6 +93,9 @@ const ClHome = () => {
 
                     <div>
                         <Event isStudent={false}
+                        endDate={
+                            event.eventFinish
+                        }
                         isClub={true}
                         isAdvisor={false}
                         status={
@@ -153,6 +156,9 @@ const ClHome = () => {
                         <Event isStudent={false}
                     clubName={
                         event.clubName
+                    }
+                    endDate={
+                        event.eventFinish
                     }
                         isClub={true}
                         isAdvisor={false}

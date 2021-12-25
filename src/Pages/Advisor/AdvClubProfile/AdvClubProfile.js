@@ -106,7 +106,9 @@ const AdvClubProfile = () => {
                         myEvents != [] && 
                         myEvents.map((event) => (
                         <Event isStudent={false}
-
+                            endDate={
+                                event.eventFinish
+                            }
                             isClub={false}
                             isAdvisor={true}
                             status={

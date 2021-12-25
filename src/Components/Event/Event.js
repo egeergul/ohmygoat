@@ -49,7 +49,8 @@ const Event = (props) => {
 
 
     useEffect(() => {
-        console.log(picLink);
+        
+        console.log(props);
         fetch("http://localhost:8080/files/" + picLink, {
                 method: "GET",
                 headers: {
@@ -244,6 +245,14 @@ const Event = (props) => {
 
     }
 
+    const eventDate = props.date.substring(0, props.date.indexOf("T"))
+    const year = eventDate.substring(0, eventDate.indexOf("-"))
+    const month = eventDate.substring(eventDate.indexOf("-")+1, eventDate.length-3)
+    const day = eventDate.substring(eventDate.length-2)
+    const eventDateFormatted = day + "/" + month + "/" + year
+
+    const startClock = props.date.substring(props.date.indexOf("T")+1, (props.date.length - 3))
+    const endClock = props.endDate.substring(props.endDate.indexOf("T")+1, (props.date.length - 3))
 
     if(props.isStudent && props.status!="ACCEPTED"){
         return (<div></div>)
@@ -271,7 +280,7 @@ const Event = (props) => {
                         
                     }
                     <p>{
-                        props.clubName // TODO
+                        props.clubName 
                     }</p>
                     <div className="d-flex flex-column">
                         <p>Max Quota: {
@@ -306,14 +315,15 @@ const Event = (props) => {
                                 </div>
                                 <div className="col-lg-8">
                                     <div className="event-body-right">
-                                        <p>Event Date: {
-                                            props.date
+                                        <p> {
+                                            eventDateFormatted
                                         }</p>
-                                        <p>from {
-                                            props.startClock
+                                        <p> {
+                                            startClock
                                         }
-                                            to {
-                                            props.endClock
+                                         - 
+                                        {
+                                            endClock
                                         }</p>
                                         <p>{
                                             props.description

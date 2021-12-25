@@ -119,6 +119,9 @@ const StClubView = () => {
                                 eventId={
                                     event.eventId
                                 }
+                                endDate={
+                                    event.eventFinish
+                                }
                                 club={
                                     event.clubId
                                 }

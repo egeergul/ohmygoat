@@ -67,6 +67,9 @@ const AdvHome = () => {
                             quota={
                                 event.quota
                             }
+                            endDate={
+                                event.eventFinish
+                            }
                             ge250={
                                 event.ge250
                             }

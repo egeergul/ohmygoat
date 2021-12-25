@@ -2,7 +2,11 @@ import React from 'react'
 import "./Assignment.css"
 
 const Assignment = (props) => {
-
+    const eventDate = props.date
+    const year = eventDate.substring(0, eventDate.indexOf("-"))
+    const month = eventDate.substring(eventDate.indexOf("-")+1, eventDate.length-3)
+    const day = eventDate.substring(eventDate.length-2)
+    const eventDateFormatted = day + "/" + month + "/" + year
     return (
         <div>
             <div>
@@ -23,7 +27,7 @@ const Assignment = (props) => {
                             }</p>
                         </div>
                         <p>due to {
-                            props.date
+                            eventDateFormatted
                         }</p>
                     </div>
                     <div className="assignment-body">

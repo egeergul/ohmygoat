@@ -73,6 +73,13 @@ const ClCreateAssignment = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        var m1 = (dueDate.getMonth() + 1)
+        if (dueDate.getMonth() < 9)
+            m1 = "0" + (dueDate.getMonth() +1)
+        var d1 = dueDate.getDate()
+        if (dueDate.getDate() < 10)
+            d1 = "0" + dueDate.getDate()
+        const startDateFormatted = dueDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
         if (description == "") {
             window.alert("None of the fields can be left empty!")
 
@@ -94,7 +101,7 @@ const ClCreateAssignment = () => {
 
             body: JSON.stringify(
                 {
-                    due_date: dueDate,
+                    due_date: startDateFormatted,
                     name: name,
                     description: description,
                     clubId: localStorage.getItem("clubId"),

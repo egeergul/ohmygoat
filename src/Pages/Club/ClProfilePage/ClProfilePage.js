@@ -137,6 +137,9 @@ const ClProfilePage = () => {
                             date={
                                 event.eventDate
                             }
+                            endDate={
+                                event.eventFinish
+                            }
                             description={
                                 event.description
                             }

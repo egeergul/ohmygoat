@@ -295,7 +295,9 @@ const Profile = (props) => {
                         {
                         events.map((event) => (
                              <Event 
-                           
+                             endDate={
+                                event.eventFinish
+                            }
                             status={
                                 event.status
                             }

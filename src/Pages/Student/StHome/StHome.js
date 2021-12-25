@@ -103,6 +103,9 @@ const StHome = () => {
                             date={
                                 event.eventDate
                             }
+                            endDate={
+                                event.eventFinish
+                            }
                             description={
                                 event.description
                             }
