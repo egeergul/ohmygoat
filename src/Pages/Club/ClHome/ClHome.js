@@ -35,7 +35,7 @@ const ClHome = () => {
             console.log(e.message);
         });
 
-        fetch("http://localhost:8080/event/clubEvents?id=1" , {
+        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.getItem('clubId')  , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const ClHome = () => {
             <div className="st-notifications">
                 {
                 viewAllEvents ? events.map((event) => (
-                    <Event club={
+                    <Event id={event.eventId} club={
                             event.club
                         }
                         name={
@@ -104,6 +104,7 @@ const ClHome = () => {
                         isStudent = {false}
                         isClub = {true}
                         isAdvisor={false}
+                        id={event.eventId}
                         status={
                             event.status
                         }    

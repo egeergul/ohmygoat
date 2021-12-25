@@ -17,7 +17,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 import EditProfile from './Pages/Student/Profile/EditProfile';
-
+import EditEvent from "./Components/Event/EditEvent";
 
 function App() { // If there are no logged in users, render this part
 
@@ -95,6 +95,9 @@ function App() { // If there are no logged in users, render this part
                             component={ClHome}/>
                         <Route path="/club/create-event">
                             <CreateEvent/>
+                        </Route>
+                        <Route path='/editEvent'> 
+                        <EditEvent></EditEvent>
                         </Route>
                         <Route path="/club/notifications"
                             component={ClNotifications}/>

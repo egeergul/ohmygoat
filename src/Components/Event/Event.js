@@ -1,9 +1,10 @@
 import React from 'react'
 import "./Event.css"
+import { Link } from 'react-router-dom';
 
 const Event = (props) => {
-    const eventId = props.eventId;
-
+    const eventId = props.id;
+    console.log(eventId);
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
         console.log(studentId);
@@ -228,9 +229,22 @@ const Event = (props) => {
                                                 className="mx-3 btn btn-primary btn-block">Decline</button>
                                         </div> : <></> : props.isStudent ? props.isInEvent ? <button onClick={leaveEvent}
                                             className="btn btn-primary btn-block">Leave Event</button> : <button onClick={joinEvent}
-                                            className="btn btn-primary btn-block">Join Event</button> : <button onClick={declinEvent}
+                                            className="btn btn-primary btn-block">Join Event</button> : 
+                                            <Link to={{pathname:'/editEvent', state:{
+                                                name:props.name,
+                                                ge250: props.ge250,
+                                                quota: props.quota,
+                                                start: props.startClock,
+                                                endClock: props.endClock,
+                                                description: props.description,
+                                                date: props.date,
+                                                id: eventId
+                                            }}}>
+                                            <button
                                             className="mx-3 btn btn-primary btn-block">Edit Event</button>
-                                    } </div>
+                                            </Link>
+                                            
+                                    } <p>fhdfhsjdhfjdh{eventId}</p></div>
                                 </div>
                             </div>
                         </div>
