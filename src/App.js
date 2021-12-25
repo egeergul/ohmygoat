@@ -6,7 +6,7 @@ import {Profile} from "./Pages/Student"
 import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
 import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment, ClProfilePage} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
-import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
+import {AdvHome, AdvNotifications, AdvClubMembers, AdvClubProfile} from "./Pages/Advisor"
 import {
     StNav,
     AdvNav,
@@ -129,7 +129,7 @@ function App() { // If there are no logged in users, render this part
                     <Route path="/club-members"
                         component={AdvClubMembers}/>
                     <Route path="/view-club"
-                        component={ClubProfile}/>
+                        component={AdvClubProfile}/>
              
                 </BrowserRouter>
             </div>

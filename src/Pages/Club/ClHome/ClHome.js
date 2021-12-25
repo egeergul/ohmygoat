@@ -105,7 +105,7 @@ const ClHome = () => {
                         ge250={
                             event.ge250
                         }
-                        id={event.eventId} 
+                        eventId={event.eventId} 
                         club={
                             event.club
 
@@ -126,7 +126,7 @@ const ClHome = () => {
                             event.description
                         }
 
-                        img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
+                        img={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAOVBMVEUxHkkqcJMuTnIxGUUxAEEl178xF0QxG0gtWXwxGkYvQ2gqdJctVXkxFUQvQGYxFUMsX4IuR2wvOF6QPzTkAAABhUlEQVR4nO3SW0oDARBE0cTHxDG+979YkfpTwYEgqU7OWUFdune7y3Z3f+4F/03hfArnUzifwvkUzqdwPoXzXWfhephrPWwoXPaDHZ+WLYXPy1TPLw+bCn9ceoz1UeEXhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEs+2W5Her1ZVPh8Wauty2F6/u5Z57iY/27cLee+9dO8T3w18LLonA+hfMpnE/hfArnUzifwvmuofAT+ck8h2oKjw0AAAAASUVORK5CYII="}
                         startClock={
                             event.startClock
                         }
@@ -147,7 +147,7 @@ const ClHome = () => {
                     <Event isStudent={false}
                         isClub={true}
                         isAdvisor={false}
-                        id={event.eventId}
+                        eventId={event.eventId}
                         status={
                             event.status
                         }
@@ -176,7 +176,7 @@ const ClHome = () => {
                             event.description
                         }
 
-                        img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
+                        img={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAOVBMVEUxHkkqcJMuTnIxGUUxAEEl178xF0QxG0gtWXwxGkYvQ2gqdJctVXkxFUQvQGYxFUMsX4IuR2wvOF6QPzTkAAABhUlEQVR4nO3SW0oDARBE0cTHxDG+979YkfpTwYEgqU7OWUFdune7y3Z3f+4F/03hfArnUzifwvkUzqdwPoXzXWfhephrPWwoXPaDHZ+WLYXPy1TPLw+bCn9ceoz1UeEXhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEs+2W5Her1ZVPh8Wauty2F6/u5Z57iY/27cLee+9dO8T3w18LLonA+hfMpnE/hfArnUzifwvmuofAT+ck8h2oKjw0AAAAASUVORK5CYII="}
                         startClock={
                             event.startClock
                         }

@@ -14,6 +14,35 @@ const StudentPreview = (props) => {
         setStudentId(null)
     }
     const remove = () => {
+        if(studentPos == "The President"){
+            window.alert("You cannot remove club president directly")
+            return;
+        }
+        fetch("http://localhost:8080/club/leaveClub" , {  
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            body: JSON.stringify(
+                {studentId , clubId:localStorage.clubId}
+            ),
+            credentials: "include"
+        },).then((r) => {
+            if (r.ok) {
+                window.location.reload()
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            }
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
 
     }
     const promote = () => {

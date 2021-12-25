@@ -3,7 +3,7 @@ import "./Event.css"
 import { Link } from 'react-router-dom';
 
 const Event = (props) => {
-    const eventId = props.id;
+    const eventId = props.eventId;
     console.log(eventId);
     console.log('hfjdsf');
     console.log(props.endClock);
@@ -244,14 +244,37 @@ const Event = (props) => {
                                             props.description
                                         }</p>
                                         {
-                                        (props.isAdvisor && !props.isStudent && !props.isClub) ? props.status == "NOT_DECIDED" ? <div className="d-flex flex-row ">
+                                        (props.isAdvisor && !props.isStudent && !props.isClub) ?
+                                        
+                                        // if advsior
+                                        props.status == "NOT_DECIDED" ? 
+                                        //if advsior and not decided event
+                                        <div className="d-flex flex-row ">
                                             <button onClick={approveEvent}
                                                 className="btn btn-primary btn-block">Approve</button>
                                             <button onClick={declinEvent}
                                                 className="mx-3 btn btn-primary btn-block">Decline</button>
-                                        </div> : <></> : props.isStudent ? props.isInEvent ? <button onClick={leaveEvent}
-                                            className="btn btn-primary btn-block">Leave Event</button> : <button onClick={joinEvent}
-                                            className="btn btn-primary btn-block">Join Event</button> :
+                                        </div> : 
+                                        // if advsior but event is decided
+                                        <></> 
+                                        
+                                        // end of advisor
+
+                                        //if student
+                                        : props.isStudent ? 
+                                            
+                                            //if student and already joined event
+                                            props.isInEvent ? <button onClick={leaveEvent}
+                                                className="btn btn-primary btn-block">Leave Event</button> 
+                                            
+                                            //if student but did not joined event
+                                            : <button onClick={joinEvent} className="btn btn-primary btn-block">Join Event</button> 
+                                            
+                                        // end of student
+                                        
+                                        // if club
+                                        :
+                                            //if club and that event is theirs
                                              props.isClub && props.club == localStorage.clubId ?
                                             
                                              <Link to={{pathname:'/editEvent', state:{
@@ -263,10 +286,10 @@ const Event = (props) => {
                                                 description: props.description,
                                                 date: props.date,
                                                 id: eventId
-                                            }}}>
-                                            <button
-                                            className="mx-3 btn btn-primary btn-block">Edit Event</button>
-                                            </Link> : <></>
+                                            }}}> <button className="mx-3 btn btn-primary btn-block">Edit Event</button> </Link> : 
+                                            
+                                            // if club but the event isn't theirs
+                                            <></>
                                     } </div>
                                 </div>
                             </div>
