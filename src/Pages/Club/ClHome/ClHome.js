@@ -35,7 +35,7 @@ const ClHome = () => {
             console.log(e.message);
         });
 
-        fetch("http://localhost:8080/event/clubEvents?id=1", {
+        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.clubId, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -55,6 +55,11 @@ const ClHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
+            for(var i = 0; i < r.length; i++) {
+                var obj = r[i];
+                obj["club"] = localStorage.clubId ;
+                
+            }
             console.log(r);
             setMyEvents(r)
 
@@ -94,7 +99,7 @@ const ClHome = () => {
                             event.eventId
                         }
                         club={
-                            event.club
+                            event.clubId
                         }
                         ge250={
                             event.ge250
