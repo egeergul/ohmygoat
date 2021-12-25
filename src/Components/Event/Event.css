@@ -37,3 +37,30 @@
     width: 100%;
     object-fit: contain;
 }
+.accepted{
+    display: inline;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: white;
+    color: green;
+}
+.rejected{
+    display: inline;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: white;
+    color: red;
+}
+.waiting{
+    display: inline;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(58, 57, 57);
+}
+@media screen and (max-width: 780px) {
+    .event-header {
+      display: flex;
+      flex-direction: column;
+    }
+  }

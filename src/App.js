@@ -3,15 +3,14 @@ import React, {useState} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
 import {Profile} from "./Pages/Student"
-import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
-import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment} from "./Pages/Club"
+import {StHome, StNotifications, StClubs, StAssignments, StClubView} from "./Pages/Student"
+import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment, ClProfilePage} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
-import {AdvHome, AdvNotifications, AdvClubMembers} from "./Pages/Advisor"
+import {AdvHome, AdvNotifications, AdvClubMembers, AdvClubProfile} from "./Pages/Advisor"
 import {
     StNav,
     AdvNav,
     ClNav,
-    ClubProfile,
     AdmNav
 } from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +21,7 @@ import EditEvent from "./Components/Event/EditEvent";
 function App() { // If there are no logged in users, render this part
 
     const [nav, setNav] = useState(1);
+    const [nav2, setNav2] = useState(1);
 
     if (!localStorage.getItem('token')) {
         return (
@@ -60,7 +60,9 @@ function App() { // If there are no logged in users, render this part
             return (
                 <div>
                     <BrowserRouter>
-                        <StNav/>
+                        <StNav 
+                        nav2 = {nav2} 
+                        setNav2 = {setNav2}/>
                         <Route path="/home"
                             component={StHome}/>
                         <Route path="/myProfile">
@@ -70,15 +72,21 @@ function App() { // If there are no logged in users, render this part
                                 bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
                         </Route>
                         <Route path='/editStudentProfile'>
-                            <EditProfile></EditProfile>
+                            <EditProfile/>
                         </Route>
                         <Route path="/notifications"
                             component={StNotifications}/>
                         <Route path="/clubs">
-                            <StClubs/>
+                            <StClubs 
+                                 setNav2 = {setNav2}/>
                         </Route>
                         <Route path="/assignments"
                             component={StAssignments}/>
+                        <Route path="/view-club">
+                            <StClubView
+                                nav2 = {nav2} 
+                                setNav2 = {setNav2} />       
+                        </Route>
                     </BrowserRouter>
                 </div>
             );
@@ -108,6 +116,8 @@ function App() { // If there are no logged in users, render this part
                         </Route>
                         <Route path="/club/create-assignment"
                             component={ClCreateAssignment}/>
+                        <Route path="/club/profile"
+                            component={ClProfilePage}/>
                     </BrowserRouter>
                 </div>
             );
@@ -127,7 +137,8 @@ function App() { // If there are no logged in users, render this part
                     <Route path="/club-members"
                         component={AdvClubMembers}/>
                     <Route path="/view-club"
-                        component={ClubProfile}/>
+                        component={AdvClubProfile}/>
+             
                 </BrowserRouter>
             </div>
         )

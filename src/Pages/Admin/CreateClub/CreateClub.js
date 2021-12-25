@@ -90,16 +90,13 @@ return (
                                     e => setClubName(e.target.value)
                                 }/>
                         </label>
-                        <p>
-                            <i>Default password will be oh_my_goat_new_club</i>
-                        </p>
                     </div>
                     
                     {/*Step 2*/}
                     <div className="step d-flex flex-column">
                         <div className="d-flex flex-row">
                             <p className='circle'>2</p>
-                            <p><i>Create a new advisor</i></p>
+                            <p>Create a new advisor</p>
                         </div>
                         <label>
                             <input type="text" className="mt-2 form-control" placeholder="New Advisor's Name"
@@ -115,7 +112,7 @@ return (
                                 }/>
                         </label>
                         <p>
-                            <i>Default password will be oh_my_goat_new_advisor</i>
+                            <i>Default password will be 123456</i>
                         </p>
 
                     </div>   

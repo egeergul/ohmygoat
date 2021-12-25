@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
-import UploadFiles from "../../../Helper/UploadFiles";
+
 
 const EditProfile = (props) =>{
     let data = useLocation();
@@ -35,6 +35,10 @@ const EditProfile = (props) =>{
             credentials: "include"
         }, ).then((r) => {
             if (r.ok) {
+                localStorage.clear()
+                history.push("/")
+                window.alert("Changes are saved! Please login again...")
+                window.location.reload()
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {

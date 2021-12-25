@@ -1,12 +1,16 @@
-import React from 'react'
+import React,
+ {useEffect} from 'react'
 import "./Event.css"
 import { Link } from 'react-router-dom';
 
 const Event = (props) => {
-    const eventId = props.id;
-    console.log(eventId);
-    console.log('hfjdsf');
-    console.log(props.endClock);
+    const eventId = props.eventId;
+    
+
+    useEffect(() => {
+        console.log("Ege club id")
+        console.log(props)
+      },[]);
 
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
@@ -167,6 +171,7 @@ const Event = (props) => {
 
     }
 
+
     if(props.isStudent && props.status!="ACCEPTED"){
         return (<div></div>)
     }
@@ -175,18 +180,26 @@ const Event = (props) => {
         <div>
             <div className="event-container">
                 <div className="event-header">
+                    {
+                        props.isClub && props.club == localStorage.clubId && props.status == "ACCEPTED" ?
+                        <h3 className='accepted'>
+                            ACCEPTED
+                        </h3> :
+                        
+                            props.isClub && props.club == localStorage.clubId && props.status=="REJECTED" ? 
+                            <h3 className='rejected'>
+                                REJECTED
+                            </h3> :
+                            
+                            props.isClub && props.club == localStorage.clubId && props.status=="NOT_DECIDED" ?
+                                <h3 className='waiting'>
+                                    WAITING APPROVAL
+                                </h3> : <></>
+                        
+                    }
                     <p>{
-                        props.club
+                        props.clubName // TODO
                     }</p>
-                    <div className="d-flex flex-column ">
-                        <p>{
-                            props.name
-                        }</p>
-                        <p>GE 250/251: {'\u00A0'}
-                            {
-                            props.ge250
-                        }</p>
-                    </div>
                     <div className="d-flex flex-column">
                         <p>Max Quota: {
                             props.quota
@@ -200,7 +213,18 @@ const Event = (props) => {
 
                     <div className="event-body">
                         <div className="container">
-                            <div className="row"></div>
+                            <div className="row">
+                            <div className="d-flex flex-row justify-content-between align-items-center">
+                                <h3>{
+                                    props.name
+                                }</h3>
+                                <p>GE 250/251: {'\u00A0'}
+                                    {
+                                    props.ge250
+                                }</p>
+                            </div>
+
+                            </div>
                             <div className="row">
                                 <div className="col-lg-4">
                                     <img src={
@@ -223,17 +247,40 @@ const Event = (props) => {
                                             props.description
                                         }</p>
                                         {
-
-
-                                        (props.isAdvisor && !props.isStudent && !props.isClub) ? props.status == "NOT_DECIDED" ? <div className="d-flex flex-row ">
+                                        (props.isAdvisor && !props.isStudent && !props.isClub) ?
+                                        
+                                        // if advsior
+                                        props.status == "NOT_DECIDED" ? 
+                                        //if advsior and not decided event
+                                        <div className="d-flex flex-row ">
                                             <button onClick={approveEvent}
                                                 className="btn btn-primary btn-block">Approve</button>
                                             <button onClick={declinEvent}
                                                 className="mx-3 btn btn-primary btn-block">Decline</button>
-                                        </div> : <></> : props.isStudent ? props.isInEvent ? <button onClick={leaveEvent}
-                                            className="btn btn-primary btn-block">Leave Event</button> : <button onClick={joinEvent}
-                                            className="btn btn-primary btn-block">Join Event</button> : 
-                                            <Link to={{pathname:'/editEvent', state:{
+                                        </div> : 
+                                        // if advsior but event is decided
+                                        <></> 
+                                        
+                                        // end of advisor
+
+                                        //if student
+                                        : props.isStudent ? 
+                                            
+                                            //if student and already joined event
+                                            props.isInEvent ? <button onClick={leaveEvent}
+                                                className="btn btn-primary btn-block">Leave Event</button> 
+                                            
+                                            //if student but did not joined event
+                                            : <button onClick={joinEvent} className="btn btn-primary btn-block">Join Event</button> 
+                                            
+                                        // end of student
+                                        
+                                        // if club
+                                        :
+                                            //if club and that event is theirs
+                                             props.isClub && props.club == localStorage.clubId ?
+                                            
+                                             <Link to={{pathname:'/editEvent', state:{
                                                 name:props.name,
                                                 ge250: props.ge250,
                                                 quota: props.quota,
@@ -242,12 +289,11 @@ const Event = (props) => {
                                                 description: props.description,
                                                 date: props.date,
                                                 id: eventId
-                                            }}}>
-                                            <button
-                                            className="mx-3 btn btn-primary btn-block">Edit Event</button>
-                                            </Link>
+                                            }}}> <button className="mx-3 btn btn-primary btn-block">Edit Event</button> </Link> : 
                                             
-                                    } <p>fhdfhsjdhfjdh{eventId}</p></div>
+                                            // if club but the event isn't theirs
+                                            <></>
+                                    } </div>
                                 </div>
                             </div>
                         </div>

@@ -36,8 +36,8 @@ const AdvNav = () => {
                             
                             </NavDropdown>
 
-                            <NavLink as={Link}
-                                to="/notifications">Notification</NavLink>
+                            {/*<NavLink as={Link}
+                                to="/notifications">Notification</NavLink> */}
                             <NavLink as={Link}
                                 to="/"
                                 onClick={
