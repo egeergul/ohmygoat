@@ -29,13 +29,13 @@ const ClHome = () => {
             }
         }).then((r) => r.json()).then((r) => {
             console.log(r);
-            setEvents(r)
+            setEvents(r);
 
         }).catch((e) => {
             console.log(e.message);
         });
 
-        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.clubId, {
+        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.getItem('clubId')  , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -89,6 +89,7 @@ const ClHome = () => {
             <div className="st-notifications">
                 {
                 viewAllEvents ? events.map((event) => (
+
                     <Event isStudent={false}
                         isClub={true}
                         isAdvisor={false}
@@ -103,6 +104,11 @@ const ClHome = () => {
                         }
                         ge250={
                             event.ge250
+                        }
+                        id={event.eventId} 
+                        club={
+                            event.club
+
                         }
                         name={
                             event.name
@@ -119,6 +125,7 @@ const ClHome = () => {
                         description={
                             event.description
                         }
+
                         img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
                         startClock={
                             event.startClock
@@ -128,11 +135,19 @@ const ClHome = () => {
                         }
                         isInEvent={
                             !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
-                        }/>
+                        }
+
+                        img={
+                            event.img
+                        }
+                        date={event.eventDate}
+                        endClock={event.eventFinish}/>
+
                 )) : myEvents.map((event) => (
                     <Event isStudent={false}
                         isClub={true}
                         isAdvisor={false}
+                        id={event.eventId}
                         status={
                             event.status
                         }
@@ -160,6 +175,7 @@ const ClHome = () => {
                         description={
                             event.description
                         }
+
                         img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
                         startClock={
                             event.startClock
@@ -169,7 +185,14 @@ const ClHome = () => {
                         }
                         isInEvent={
                             !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
-                        }/>
+                        }
+
+                        img={
+                            event.img
+                        }
+                        date={event.eventDate}
+                        endClock={event.eventFinish}/>
+
                 ))
             } </div>
         </div>

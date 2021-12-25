@@ -1,9 +1,12 @@
 import React from 'react'
-import { propTypes } from 'react-bootstrap/esm/Image';
 import "./Event.css"
+import { Link } from 'react-router-dom';
 
 const Event = (props) => {
-    const eventId = props.eventId;
+    const eventId = props.id;
+    console.log(eventId);
+    console.log('hfjdsf');
+    console.log(props.endClock);
 
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
@@ -251,8 +254,19 @@ const Event = (props) => {
                                             className="btn btn-primary btn-block">Join Event</button> :
                                              props.isClub && props.club == localStorage.clubId ?
                                             
-                                            <button onClick={editEvent}
-                                            className="mx-3 btn btn-primary btn-block">Edit Event</button> : <></>
+                                             <Link to={{pathname:'/editEvent', state:{
+                                                name:props.name,
+                                                ge250: props.ge250,
+                                                quota: props.quota,
+                                                start: props.startClock,
+                                                endClock: props.endClock,
+                                                description: props.description,
+                                                date: props.date,
+                                                id: eventId
+                                            }}}>
+                                            <button
+                                            className="mx-3 btn btn-primary btn-block">Edit Event</button>
+                                            </Link> : <></>
                                     } </div>
                                 </div>
                             </div>
