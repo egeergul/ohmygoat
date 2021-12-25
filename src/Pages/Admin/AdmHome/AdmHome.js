@@ -78,21 +78,25 @@ const AdmHome = () => {
                     {
                     clubs && 
                     clubs.map((club) => (
-                        <Club name={
+                        <Club 
+                            isAdmin = { true}  
+                            name={
                                 club.name
                             }
-                            upcoming_events={
-                                club.upcoming_events
-                            }
+                           
                             total_events={
-                                club.total_events
+                                club.numberOfEvents
                             }
                             description={
                                 club.description
                             }
                             pp={
                                 club.pp
-                            }/>
+                            }
+                            id={
+                                club.id
+                            }
+                            /> 
                     ))
                 } </div>
 

@@ -108,11 +108,7 @@ const EditProfile = (props) =>{
                         onChange={
                             e => setNewName(e.target.value)
                         }/>
-                <label forName='ge250'>Ge250 </label>
-                    <input rows="5" cols="60" type="number" placeholder={data.state.ge250} name='ge250' className="mt-2 form-control"
-                        onChange={
-                            e => setGe250(e.target.value)
-                    }></input>
+               
                 <label forName='file_area'>Submit A profile pic</label>
                     <input type='file' name='file_area' onChange={handlePicture} multiple/>
                     {/* <UploadFiles></UploadFiles> */}
