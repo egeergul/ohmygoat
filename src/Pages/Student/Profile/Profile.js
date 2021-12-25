@@ -305,21 +305,50 @@ const Profile = (props) => {
                     <div className="profile_events col-lg-6">
                         {
                         events.map((event) => (
-                            <Event club={
-                                    event.club
-                                }
-                                name={
-                                    event.name
-                                }
-                                mode={
-                                    event.mode
-                                }
-                                description={
-                                    event.description
-                                }
-                                img={
-                                    event.img
-                                }/>
+                            <Event 
+                           
+                            status={
+                                event.status
+                            }
+                            eventId = {
+                                event.eventId
+                            }
+                            club={
+                                event.club
+                            }
+                            ge250 = {
+                                event.ge250
+                            }
+                            name={
+                                event.name
+                            }
+                            clubName={
+                                event.clubName
+                            }
+                            quota={
+                                event.quota
+                            }
+                            remainingQuota = {
+                                event.remainingQuota
+                            }
+                            date={
+                                event.eventDate
+                            }
+                            description={
+                                event.description
+                            }
+                            img={
+                                "https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"
+                            }
+                            startClock = {
+                                event.startClock
+                            }
+                            endClock = {
+                                event.endClock
+                            }
+                            isInEvent={
+                                !(events.filter(a => a.eventId == event.eventId).length==0) 
+                            }/>
                         ))
                     } </div>
                 </div>

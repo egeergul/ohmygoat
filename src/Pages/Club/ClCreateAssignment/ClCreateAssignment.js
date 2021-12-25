@@ -80,7 +80,8 @@ const ClCreateAssignment = () => {
                 console.log(r);
                 if (r.ok) {
                     console.log("I am okay")
-                    history.push("/club/home")
+                    history.push("/club/assignments")
+                    window.location.reload()
                 } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("hata oluştu"));
                 } else {
