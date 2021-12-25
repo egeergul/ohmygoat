@@ -113,6 +113,9 @@ const ClProfilePage = () => {
                             eventId={
                                 event.eventId
                             }
+                            clubName={
+                                event.clubName
+                            }
                             club={
                                 event.clubId
                             }

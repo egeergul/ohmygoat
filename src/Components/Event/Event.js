@@ -1,12 +1,16 @@
-import React from 'react'
+import React,
+ {useEffect} from 'react'
 import "./Event.css"
 import { Link } from 'react-router-dom';
 
 const Event = (props) => {
     const eventId = props.eventId;
-    console.log(eventId);
-    console.log('hfjdsf');
-    console.log(props.endClock);
+    
+
+    useEffect(() => {
+        console.log("Ege club id")
+        console.log(props)
+      },[]);
 
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
@@ -167,9 +171,6 @@ const Event = (props) => {
 
     }
 
-    const editEvent = () => {
-
-    }
 
     if(props.isStudent && props.status!="ACCEPTED"){
         return (<div></div>)
@@ -199,15 +200,6 @@ const Event = (props) => {
                     <p>{
                         props.clubName // TODO
                     }</p>
-                    <div className="d-flex flex-column ">
-                        <p>{
-                            props.name
-                        }</p>
-                        <p>GE 250/251: {'\u00A0'}
-                            {
-                            props.ge250
-                        }</p>
-                    </div>
                     <div className="d-flex flex-column">
                         <p>Max Quota: {
                             props.quota
@@ -221,7 +213,18 @@ const Event = (props) => {
 
                     <div className="event-body">
                         <div className="container">
-                            <div className="row"></div>
+                            <div className="row">
+                            <div className="d-flex flex-row justify-content-between align-items-center">
+                                <h3>{
+                                    props.name
+                                }</h3>
+                                <p>GE 250/251: {'\u00A0'}
+                                    {
+                                    props.ge250
+                                }</p>
+                            </div>
+
+                            </div>
                             <div className="row">
                                 <div className="col-lg-4">
                                     <img src={

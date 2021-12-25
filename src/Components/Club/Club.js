@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import "./Club.css"
 import { useHistory} from 'react-router-dom'
 const Club = (props) => {
+    
+
     const clubId = props.id;
     let history = useHistory();
     const joinClub = () => {
@@ -70,7 +72,7 @@ const Club = (props) => {
 
         }
        
-    };
+    }; 
     return (
         <div>
             <div className="club-container">

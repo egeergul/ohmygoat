@@ -90,6 +90,9 @@ const StHome = () => {
                         name={
                             event.name
                         }
+                        clubName={
+                            event.clubName
+                        }
                         quota={
                             event.quota
                         }

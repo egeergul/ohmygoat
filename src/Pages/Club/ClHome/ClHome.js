@@ -125,6 +125,9 @@ const ClHome = () => {
                         description={
                             event.description
                         }
+                        clubName={
+                            event.clubName
+                        }
 
                         img={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAOVBMVEUxHkkqcJMuTnIxGUUxAEEl178xF0QxG0gtWXwxGkYvQ2gqdJctVXkxFUQvQGYxFUMsX4IuR2wvOF6QPzTkAAABhUlEQVR4nO3SW0oDARBE0cTHxDG+979YkfpTwYEgqU7OWUFdune7y3Z3f+4F/03hfArnUzifwvkUzqdwPoXzXWfhephrPWwoXPaDHZ+WLYXPy1TPLw+bCn9ceoz1UeEXhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEs+2W5Her1ZVPh8Wauty2F6/u5Z57iY/27cLee+9dO8T3w18LLonA+hfMpnE/hfArnUzifwvmuofAT+ck8h2oKjw0AAAAASUVORK5CYII="}
                         startClock={
@@ -145,6 +148,9 @@ const ClHome = () => {
 
                 )) : myEvents.map((event) => (
                     <Event isStudent={false}
+                    clubName={
+                        event.clubName
+                    }
                         isClub={true}
                         isAdvisor={false}
                         eventId={event.eventId}
