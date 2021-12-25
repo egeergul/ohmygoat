@@ -51,9 +51,6 @@ const StAssignments = () => {
                             assignment.clubName
                         }
                                     name ={assignment.name}
-                                    assigned_to={
-                                        "ali"
-                                    }
                                     date={
                                         assignment.due_date.substring(0, assignment.due_date.indexOf("T"))
                                     }
