@@ -8,10 +8,14 @@ import InputSpinner from 'react-bootstrap-input-spinner'
 
 const EditEvent = (props) =>{
     let location = useLocation();
-    
-    const [startDate, setStartDate] = useState(new Date())
-    const [startClock, setStartClock] = useState(location.state.startClock);
-    const [endClock, setEndClock] = useState(location.state.endClock);
+    const starting = new Date(location.state.date.substring(0,10));/* 
+    if(location.state.endClock)
+        console.log(location.state.endClock.substring(11, location.state.endClock.length));
+    console.log(location.state.date.substring(11,location.state.date.length));
+    console.log(location.state.startClock); */
+    const [startDate, setStartDate] = useState(starting);
+    const [startClock, setStartClock] = useState('10:30');
+    const [endClock, setEndClock] = useState('11:30');
     const [name, setName] = useState(location.state.name);
     const [description, setDescription] = useState(location.state.description);
     const [quota, setQuota] = useState(location.state.quota);
@@ -28,7 +32,8 @@ const EditEvent = (props) =>{
         if (startDate.getDate() < 10)
             d1 = "0" + startDate.getDate()
         const startDateFormatted = startDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
-
+        console.log('formatted');
+        console.log(startDateFormatted);
         var m2 =( startDate.getMonth() +1)
         if (startDate.getMonth() < 9)
             m2 = "0" + (startDate.getMonth() +1)

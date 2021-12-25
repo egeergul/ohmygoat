@@ -29,7 +29,7 @@ const ClHome = () => {
             }
         }).then((r) => r.json()).then((r) => {
             console.log(r);
-            setEvents(r)
+            setEvents(r);
 
         }).catch((e) => {
             console.log(e.message);
@@ -98,7 +98,9 @@ const ClHome = () => {
                         }
                         img={
                             event.img
-                        }/>
+                        }
+                        date={event.eventDate}
+                        endClock={event.eventFinish}/>
                 )) : myEvents.map((event) => (
                     <Event 
                         isStudent = {false}
@@ -122,7 +124,9 @@ const ClHome = () => {
                         }
                         img={
                             event.img
-                        }/>
+                        }
+                        date={event.eventDate}
+                        endClock={event.eventFinish}/>
                 ))
             } </div>
         </div>

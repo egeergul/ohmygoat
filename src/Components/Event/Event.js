@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 const Event = (props) => {
     const eventId = props.id;
     console.log(eventId);
+    console.log('hfjdsf');
+    console.log(props.endClock);
+
     const joinEvent = () => {
         const studentId = localStorage.getItem("id");
         console.log(studentId);
