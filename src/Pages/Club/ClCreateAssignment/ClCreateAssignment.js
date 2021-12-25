@@ -7,90 +7,112 @@ import "./ClCreateAssignment.css"
 
 
 const ClCreateAssignment = () => {
-    let history = useHistory()
     const [description, setDescription] = useState("")
-    const [name, setName] = useState("")
     const [dueDate, setDueDate] = useState(new Date())
+    const [ids, setIds] = useState([]);
     const [startClock, setStartClock] = useState('10:30');
-    const [members, setMembers] = useState([])
+    const [clubName, setClubName] = useState([]);
+    const [name, setName] = useState([]);
+
+
     useEffect(() => {
-        const clubId = localStorage.clubId;
-        fetch("http://localhost:8080/club/getRolesOfClub?id="+clubId, {
+        fetch("http://localhost:8080/assignment/getNameOfClub?id=" + localStorage.getItem("id"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${
                     localStorage.token
-                }`,
-                
+                }`
             },
             credentials: "include"
-        }).then((r) => {
+        },).then((r) => {
             if (r.ok) {
-                
-                console.log(r);
                 return r;
-            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
-                
-                return Promise.reject(new Error("Bir hata oluştu " + r.status));
-            } else {
-                console.log("ım here")
-                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            }
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
+            console.log("here: " + r);
+            console.log(r)
+            setClubName(r)
+
 
         }).catch((e) => {
             console.log(e.message);
-        });    
-    });
+        });
 
-    const handelSubmit = (event)=>{
+        fetch("http://localhost:8080/club/getMembersIdsOfClub?id=" + localStorage.getItem("clubId"), {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            credentials: "include"
+        },).then((r) => {
+            if (r.ok) {
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            }
+            return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+        }).then((r) => r.json()).then((r) => {
+            console.log("here: " + r);
+            setIds(r)
+
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+
+    }, []);
+
+    const handleSubmit = (event) => {
         event.preventDefault()
-        const clubId = localStorage.clubId;
-        var m1 = (dueDate.getMonth() + 1)
-        if (dueDate.getMonth() < 9)
-            m1 = "0" + (dueDate.getMonth() +1)
-        var d1 = dueDate.getDate()
-        if (dueDate.getDate() < 10)
-            d1 = "0" + dueDate.getDate()
-        const startDateFormatted = dueDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
-        
-        fetch("http://localhost:8080/assignment/addAssignment", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${
-                        localStorage.token
-                    }`
-                },
+        if (description == "") {
+            window.alert("None of the fields can be left empty!")
 
-                body: JSON.stringify(
-                    {
-                        due_date: startDateFormatted,
-                        name,
-                        description,
-                        clubId,
-                        assignees: null,
-                        documents: null
-                    }
-                )
-            }).then((r) => {
-                console.log(r);
-                if (r.ok) {
-                    console.log("I am okay")
-                    history.push("/club/home")
-                } else if (r.status === 401 || r.status === 403 || r.status === 500) {
-                    return Promise.reject(new Error("hata oluştu"));
-                } else {
-                    return Promise.reject(new Error("bilinmeyen hata"));
+        } else {
+            console.log("No bad credentials");
+
+
+        }
+        fetch("http://localhost:8080/assignment/addAssignment", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+
+            body: JSON.stringify(
+                {
+                    due_date : dueDate,
+                    name :name,
+                    description : description,
+                    clubId : localStorage.getItem("clubId"),
+                    assignees : ids,
                 }
-            })
-        
-        
-        console.log("Im clicked")
+            )
+        }).then((r) => {
+            console.log(r);
+            if (r.ok) {
+                console.log("I am okay")
+            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("hata oluştu"));
+            } else {
+                return Promise.reject(new Error("bilinmeyen hata"));
+            }
+        })
+
     }
+
 
     return (
         <div className='create-assigment-container'>
@@ -99,7 +121,7 @@ const ClCreateAssignment = () => {
                     <h3>Create New Assignment</h3>
                 </div>
                 <div className="create-assignment-body">
-                    <form onSubmit={handelSubmit} action="">
+                    <form onSubmit={handleSubmit} action="">
                             <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
                                 <h6> Select Due Date </h6>
                                 <DatePicker 
@@ -128,7 +150,7 @@ const ClCreateAssignment = () => {
               
                             <p>Please select your favorite Web language:</p>
                             <input type="radio" id="html" name="fav_language" value="member"/>
-                            <label for="member">Member</label>
+                            <label for="member">embers.id</label>
                             
                
 

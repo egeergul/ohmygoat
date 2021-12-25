@@ -18,8 +18,8 @@ const Assignment = (props) => {
                                     props.club
                                 }</p>
                             </div>
-                            <p>&nbsp;&nbsp;Assigned to- @{
-                                props.assigned_to
+                            <p>{
+                                props.name
                             }</p>
                         </div>
                         <p>due to {
