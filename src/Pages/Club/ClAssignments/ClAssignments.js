@@ -54,8 +54,9 @@ const ClAssignments = (props) => {
                     {
                     assignments.map((assignment) => (
                         <Assignment club={
-                            assignment.clubName
-                        }
+                                        assignment.clubName
+                                    }
+                                    isClub = {true}
                                     name ={assignment.name}
                                     date={
                                         assignment.due_date.substring(0, assignment.due_date.indexOf("T"))

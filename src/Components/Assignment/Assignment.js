@@ -30,7 +30,23 @@ const Assignment = (props) => {
                         <p>{
                             props.description
                         }</p>
-                        <button className="btn btn-primary btn-block">Do It!</button>
+
+                       <div className='d-flex flex-column'>
+                       {
+                            props.isClub && localStorage.roleOfStudent.toString() == "PRESIDENT"?
+                            <button className="my-3 btn btn-primary btn-block">Mark as Done!</button>:
+                            <></>
+                        }
+
+                        {
+                            props.isClub?
+                            <button className="btn btn-primary btn-block">View Assignment</button> 
+                            :
+                            <button className="btn btn-primary btn-block">Do It!</button>
+                        }
+
+                       </div>
+                        
                     </div>
                 </div>
             </div>

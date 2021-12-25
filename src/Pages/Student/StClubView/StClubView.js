@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {ClubProfile, Event} from "../../../Components"
 
+
 const StClubView = () => {
     const [description, setDescription] = useState("")
     const [name, setName] = useState("")
@@ -8,6 +9,7 @@ const StClubView = () => {
     const [myEvents, setMyEvents] = useState([]);
     const [numberOfEvents, setNumberOfEvents] = useState(0);
     const [numberOfMember, setNumberOfMembers] = useState(0);
+    const [photoLink, setPhotoLink] = useState(null);
     
 
     useEffect(() => {
@@ -38,6 +40,7 @@ const StClubView = () => {
             setClubId(r[0].id)
             setNumberOfEvents(r[0].numberOfEvents)
             setNumberOfMembers(r[0].roles.length)
+            setPhotoLink(r[0].photos);
             
             return (r[0].id)
         }).then((id) => {
@@ -92,7 +95,8 @@ const StClubView = () => {
                     name={name}
                     numberOfEvents= {numberOfEvents}
                     numberOfMember= {numberOfMember}
-                    clubId={clubId}/>
+                    clubId={clubId}
+                    photo={photoLink}/>
 
             </div>
             <div>

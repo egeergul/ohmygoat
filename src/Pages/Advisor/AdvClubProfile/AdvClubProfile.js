@@ -7,7 +7,7 @@ const AdvClubProfile = () => {
     const [myEvents, setMyEvents] = useState([]);
     const [numberOfEvents, setNumberOfEvents] = useState(0);
     const [numberOfMember, setNumberOfMembers] = useState(0);
-    
+    const [photoLink, setPhotoLink] = useState(null);
 
     useEffect(() => {
         console.log("page here")
@@ -37,6 +37,7 @@ const AdvClubProfile = () => {
             setClubId(r[0].id)
             setNumberOfEvents(r[0].numberOfEvents)
             setNumberOfMembers(r[0].roles.length)
+            setPhotoLink(r[0].photos);
             
             return (r[0].id)
         }).then((id) => {
@@ -89,6 +90,7 @@ const AdvClubProfile = () => {
             <div>
                 <ClubProfile description={description}
                     name={name}
+                    photo={photoLink}
                     numberOfEvents= {numberOfEvents}
                     numberOfMember= {numberOfMember}
                     clubId={clubId}/>

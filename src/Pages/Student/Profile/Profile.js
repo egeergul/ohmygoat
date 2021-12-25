@@ -257,9 +257,6 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='container'>
-                    <DocumentUpload></DocumentUpload>
-            </div>
             <div className="container">
                 <div className="row">
                     <div className="profile_clubs col-lg-6">
@@ -280,7 +277,7 @@ const Profile = (props) => {
                                 club.numberOfEvents
                             }
                             description={
-                                club.description
+                                club.description.substring(0,30)
                             }
                             pp={
                                 club.pp
