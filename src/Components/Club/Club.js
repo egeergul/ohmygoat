@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useState} from 'react'
 import "./Club.css"
 import { useHistory} from 'react-router-dom'
 const Club = (props) => {
     
-
+   
     const clubId = props.id;
     let history = useHistory();
     const joinClub = () => {
@@ -63,14 +63,57 @@ const Club = (props) => {
     }
 
     const visitClub = () => {
-        if(JSON.stringify(props.isMember) != "[]"){ //is a member
-            localStorage.setItem("onclub", "true");
-            localStorage.setItem("clubId", clubId);
-            history.push("/club/home");
-            window.location.reload();
-        } else { // not a member
 
-        }
+        fetch("http://localhost:8080/club/clubView?id=" + clubId, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            
+        }).then((r) => {
+            console.log(r);
+            if (r.ok) {
+               
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("hata oluştu"));
+            }
+            return Promise.reject(new Error("bilinmeyen hata"));
+        }).then((r) => r.json()).then((r) => {
+            
+            const clubRoles = r[0].roles;
+            const role = clubRoles.filter(x=> x.studentId == localStorage.id)
+            const roleSt = (role[0]["name"])
+            console.log(roleSt)
+            
+            return roleSt
+        }).catch((e) => {
+            console.log("here is a problem: " + e);
+        }).then(
+            (role)=> {
+                if(JSON.stringify(props.isMember) == "[]" || role.toString() =="MEMBER"){ //is not a member or regular member
+                    console.log("no member or regular")
+                    history.push("/view-club");
+                    
+                } else { // active member or higher member
+                    console.log("acitve or higher")
+                    localStorage.setItem("onclub", "true");
+                    localStorage.setItem("clubId", clubId);
+                    localStorage.setItem("roleOfStudent", role);
+                    console.log(role)
+                    history.push("/club/home");
+                    window.location.reload();
+                    // buraya loacal ile at ve student nav bar iki çık
+                }
+            }
+        )
+
+       
        
     }; 
     return (

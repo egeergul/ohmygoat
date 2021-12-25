@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Login, SignUp, Buffer} from "./Auth"
 import {Profile} from "./Pages/Student"
-import {StHome, StNotifications, StClubs, StAssignments} from "./Pages/Student"
+import {StHome, StNotifications, StClubs, StAssignments, StClubView} from "./Pages/Student"
 import {ClHome, CreateEvent, ClNotifications, ClAssignments, ClCreateAssignment, ClProfilePage} from "./Pages/Club"
 import {CreateClub, AdmHome} from "./Pages/Admin"
 import {AdvHome, AdvNotifications, AdvClubMembers, AdvClubProfile} from "./Pages/Advisor"
@@ -11,7 +11,6 @@ import {
     StNav,
     AdvNav,
     ClNav,
-    ClubProfile,
     AdmNav
 } from "./Components"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -79,6 +78,8 @@ function App() { // If there are no logged in users, render this part
                         </Route>
                         <Route path="/assignments"
                             component={StAssignments}/>
+                        <Route path="/view-club"
+                            component={StClubView}/>
                     </BrowserRouter>
                 </div>
             );
