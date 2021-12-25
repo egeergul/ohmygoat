@@ -1,6 +1,3 @@
-
-
-return (
 <FormControl component="fieldset">
   <FormLabel component="legend">Advisor</FormLabel>
   <RadioGroup
@@ -17,6 +14,4 @@ return (
     <FormControlLabel value="David Davenport" control={<Radio />} label="David Davenport" />
   </RadioGroup>
 </FormControl>
-  ) 
-  export default AdmHome
   
