@@ -12,6 +12,10 @@ const Profile = (props) => {
     const [events, setmyEvents] = useState([]);
     const [studentName, setStudentName] = useState('');
     const[studentGe250, setStudentGe250] = useState(0);
+    const[picLink, setPicLink] = useState(null);
+    const[picture, setPicture] = useState(null);
+    const [imageData, setImageData] = React.useState({});
+    const[imageUrl, setImageUrl] = useState(null);
 
     const deleteProfile = async () => {
         const result = await confirm("Are you sure you want to delete your account?");
@@ -79,6 +83,10 @@ const Profile = (props) => {
             console.log(r);
             setStudentName(r.name);
             setStudentGe250(r.ge250);
+            setPicLink(r.photoName);
+
+            setPicture(`http://localhost:8080/files/${r.photoName}`);
+            console.log(picture);
 
         }).catch((e) => {
             console.log(e.message);
@@ -143,21 +151,71 @@ const Profile = (props) => {
         });
     }, []);
 
+
+
+  useEffect(() => {
+
+    console.log('pivvcvcxv');
+    console.log(picLink);
+    fetch("http://localhost:8080/files/" + picLink, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            credentials: "include"
+        }).then((r) => {
+            if (r.ok) {
+                console.log(r);
+                return r;
+            }
+            if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then(r => r.blob()).then((r) => {
+
+            console.log(r);
+            var binaryData = [];
+            binaryData.push(r);
+            setImageUrl(URL.createObjectURL(new Blob(binaryData, {
+                type: "application/json"
+             })))
+            setImageData(r);
+            //setImageData(new Blob([r], {type: "application/zip"}));
+            
+            //setImageUrl(URL.createObjectURL(r.blob(), {type: 'application/pdf'}));
+            //setImageUrl(URL.createObjectURL(new Blob([r], {type: "application/zip"})).blob);
+            //console.log(URL.createObjectURL(new Blob([r], {type: "application/zip"})));
+            //console.log(URL.createObjectURL(r).blob);
+            console.log(imageUrl);
+            console.log(imageData);
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+}, [picLink]);
+
     
     return (
         <div className="st-body-grid">
             <div className="flex_cont">
+                
                 <button onClick={deleteProfile}
                     className="btn btn-primary btn-block del_my_acc">
-                    Delete My Account
+                    Delete My Account{picLink}
+                    
                 </button>
                 <div className="container">
                     <div className="row header_bio">
                         <div className="col-md-4 header_left">
                             <img className="pp_class"
-                                src={
-                                    localStorage.pp
-                                }/>
+                                src={imageUrl}
+                                    
+                                />
                         </div>
                         <div className="col-md-8 ">
                             <div className="header_right">
