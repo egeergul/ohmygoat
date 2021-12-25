@@ -13,7 +13,7 @@ const ClCreateAssignment = () => {
     const [startClock, setStartClock] = useState('10:30');
     const [clubName, setClubName] = useState([]);
     const [name, setName] = useState([]);
-
+    let history = useHistory()
 
     useEffect(() => {
         fetch("http://localhost:8080/assignment/getNameOfClub?id=" + localStorage.getItem("id"), {
@@ -82,6 +82,7 @@ const ClCreateAssignment = () => {
 
         }
         fetch("http://localhost:8080/assignment/addAssignment", {
+
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -93,17 +94,20 @@ const ClCreateAssignment = () => {
 
             body: JSON.stringify(
                 {
-                    due_date : dueDate,
-                    name :name,
-                    description : description,
-                    clubId : localStorage.getItem("clubId"),
-                    assignees : ids,
+                    due_date: dueDate,
+                    name: name,
+                    description: description,
+                    clubId: localStorage.getItem("clubId"),
+                    assignees: ids
+
                 }
             )
         }).then((r) => {
             console.log(r);
             if (r.ok) {
                 console.log("I am okay")
+                history.push("/club/assignments")
+                window.location.reload()
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("hata oluştu"));
             } else {
@@ -121,40 +125,35 @@ const ClCreateAssignment = () => {
                     <h3>Create New Assignment</h3>
                 </div>
                 <div className="create-assignment-body">
-                    <form onSubmit={handleSubmit} action="">
-                            <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
-                                <h6> Select Due Date </h6>
-                                <DatePicker 
-                                    dateFormat="dd/MM/yyyy"
-                                    selected ={dueDate} 
-                                    onChange={(date) =>{setDueDate(date);}
+                    <form onSubmit={handleSubmit}
+                        action="">
+                        <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
+                            <h6>
+                                Select Due Date
+                            </h6>
+                            <DatePicker dateFormat="dd/MM/yyyy" selected ={dueDate}
+                                onChange={
+                                    (date) => {
+                                        setDueDate(date);
+                                    }
                                 }/>
-                                <TimePicker className="mt-3"
-                                        onChange={setStartClock}
-                                        value={startClock}/>
-                            </div>
-                        
-                            <label>
+                            <TimePicker className="mt-3"
+                                onChange={setStartClock}
+                                value={startClock}/>
+                        </div>
+
+                        <label>
                             <input type="mt-3 text" className="form-control" placeholder="Assignment Name"
                                 onChange={
                                     e => setName(e.target.value)
                                 }/>
                         </label>
-                    
+
                         <textarea rows="5" cols="60" type="text" className="mt-2 form-control" placeholder="Assignment Description"
                             onChange={
                                 e => setDescription(e.target.value)
                         }></textarea>
-
-
-              
-                            <p>Please select your favorite Web language:</p>
-                            <input type="radio" id="html" name="fav_language" value="member"/>
-                            <label for="member">embers.id</label>
-                            
-               
-
-                        <button className= "create-button mt-3 btn btn-primary btn-block" type="submit">Create Assignment</button>
+                        <button className="create-button mt-3 btn btn-primary btn-block" type="submit">Create Assignment</button>
                     </form>
                 </div>
             </div>

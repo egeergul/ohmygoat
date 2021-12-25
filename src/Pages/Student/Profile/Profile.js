@@ -4,6 +4,7 @@ import {StNav, Event, Club} from "../../../Components"
 import {confirm} from "react-confirm-box";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import DocumentUpload from '../../Document/DocumentUpload';
 
 const Profile = (props) => {
     let history = useHistory();
@@ -14,6 +15,12 @@ const Profile = (props) => {
     const[studentGe250, setStudentGe250] = useState(0);
     
     const [myClubs, setMyClubs] = useState([]);
+
+    const[picLink, setPicLink] = useState(null);
+    const[picture, setPicture] = useState(null);
+    const [imageData, setImageData] = React.useState({});
+    const[imageUrl, setImageUrl] = useState(null);
+
     useEffect(() => {
         fetch("http://localhost:8080/club/getStudentClub?id=" + studentId, {
         method: "GET",
@@ -36,14 +43,62 @@ const Profile = (props) => {
         
     }).then((r) => r.json()).then((r) => {
         console.log(r);
-        setMyClubs(r)
+        setMyClubs(r);
+        setPicLink(r.photoName);
+
+        setPicture(`http://localhost:8080/files/${r.photoName}`);
+        console.log(picture);
 
     }).catch((e) => {
         console.log(e.message);
     });
     },[])
 
+    useEffect(() => {
 
+        console.log('pivvcvcxv');
+        console.log(picLink);
+        fetch("http://localhost:8080/files/" + picLink, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${
+                        localStorage.token
+                    }`
+                },
+                credentials: "include"
+            }).then((r) => {
+                if (r.ok) {
+                    console.log(r);
+                    return r;
+                }
+                if (r.status === 401 || r.status === 403 || r.status === 500) {
+                    return Promise.reject(new Error("Bir hata oluştu " + r.status));
+                } else {
+                    return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+                }
+            }).then(r => r.blob()).then((r) => {
+    
+                console.log(r);
+                var binaryData = [];
+                binaryData.push(r);
+                setImageUrl(URL.createObjectURL(new Blob(binaryData, {
+                    type: "application/json"
+                 })))
+                setImageData(r);
+                //setImageData(new Blob([r], {type: "application/zip"}));
+                
+                //setImageUrl(URL.createObjectURL(r.blob(), {type: 'application/pdf'}));
+                //setImageUrl(URL.createObjectURL(new Blob([r], {type: "application/zip"})).blob);
+                //console.log(URL.createObjectURL(new Blob([r], {type: "application/zip"})));
+                //console.log(URL.createObjectURL(r).blob);
+                console.log(imageUrl);
+                console.log(imageData);
+            }).catch((e) => {
+                console.log(e.message);
+            });
+    
+    }, [picLink]);
 
 
     const deleteProfile = async () => {
@@ -112,6 +167,7 @@ const Profile = (props) => {
             console.log(r);
             setStudentName(r.name);
             setStudentGe250(r.ge250);
+            setPicLink(r.photoName);
 
         }).catch((e) => {
             console.log(e.message);
@@ -188,9 +244,7 @@ const Profile = (props) => {
                     <div className="row header_bio">
                         <div className="col-md-4 header_left">
                             <img className="pp_class"
-                                src={
-                                    localStorage.pp
-                                }/>
+                                src={imageUrl}/>
                         </div>
                         <div className="col-md-8 ">
                             <div className="header_right">
@@ -212,7 +266,9 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-
+            <div className='container'>
+                    <DocumentUpload></DocumentUpload>
+            </div>
             <div className="container">
                 <div className="row">
                     <div className="profile_clubs col-lg-6">

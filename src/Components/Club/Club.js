@@ -146,16 +146,16 @@ const Club = (props) => {
                                         <button 
                                     className="btn btn-primary btn-block">Change Advisor</button>
                                     <button 
-                                    className="btn btn-primary btn-block">Delete Club</button>
+                                    className="mt-2 btn btn-primary btn-block">Delete Club</button>
                                 </div> :
                                 <div>
                                     {
                                 JSON.stringify(props.isMember) == "[]" ? <button onClick={joinClub}
                                     className="btn btn-primary btn-block">Join</button> : <button onClick={leaveClub}
-                                    className="btn btn-primary btn-block">Leave</button>
+                                    className="mt-2 btn btn-primary btn-block">Leave</button>
                                 }
                                 <button onClick={visitClub}
-                                    className="btn btn-primary btn-block">Visit Club</button>
+                                    className="mt-2 btn btn-primary btn-block">Visit Club</button>
 
                                 </div>
 
