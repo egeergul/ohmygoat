@@ -21,6 +21,7 @@ import EditEvent from "./Components/Event/EditEvent";
 function App() { // If there are no logged in users, render this part
 
     const [nav, setNav] = useState(1);
+    const [nav2, setNav2] = useState(1);
 
     if (!localStorage.getItem('token')) {
         return (
@@ -59,7 +60,9 @@ function App() { // If there are no logged in users, render this part
             return (
                 <div>
                     <BrowserRouter>
-                        <StNav/>
+                        <StNav 
+                        nav2 = {nav2} 
+                        setNav2 = {setNav2}/>
                         <Route path="/home"
                             component={StHome}/>
                         <Route path="/myProfile">
@@ -69,17 +72,21 @@ function App() { // If there are no logged in users, render this part
                                 bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
                         </Route>
                         <Route path='/editStudentProfile'>
-                            <EditProfile></EditProfile>
+                            <EditProfile/>
                         </Route>
                         <Route path="/notifications"
                             component={StNotifications}/>
                         <Route path="/clubs">
-                            <StClubs/>
+                            <StClubs 
+                                 setNav2 = {setNav2}/>
                         </Route>
                         <Route path="/assignments"
                             component={StAssignments}/>
-                        <Route path="/view-club"
-                            component={StClubView}/>
+                        <Route path="/view-club">
+                            <StClubView
+                                nav2 = {nav2} 
+                                setNav2 = {setNav2} />       
+                        </Route>
                     </BrowserRouter>
                 </div>
             );

@@ -32,6 +32,7 @@ const ClNav = (props) => {
                                         onClick={
                                             () => {
                                                 localStorage.removeItem("clubId")
+                                                localStorage.removeItem("roleOfStudent")
                                                 localStorage.onclub = "false";
                                                 history.push("/home")
                                                 window.location.reload();

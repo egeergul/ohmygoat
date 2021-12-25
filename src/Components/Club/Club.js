@@ -98,6 +98,8 @@ const Club = (props) => {
             (role)=> {
                 if(JSON.stringify(props.isMember) == "[]" || role.toString() =="MEMBER"){ //is not a member or regular member
                     console.log("no member or regular")
+                    localStorage.setItem("clubId", clubId)
+                    props.setNav2(2)
                     history.push("/view-club");
                     
                 } else { // active member or higher member
@@ -108,7 +110,7 @@ const Club = (props) => {
                     console.log(role)
                     history.push("/club/home");
                     window.location.reload();
-                    // buraya loacal ile at ve student nav bar iki çık
+                   
                 }
             }
         )
