@@ -22,8 +22,8 @@ const StNav = () => {
                                     to="/assignments">Assignment</NavLink>
                                 <NavLink as={Link}
                                     to="/clubs">Clubs</NavLink>
-                                <NavLink as={Link}
-                                    to="/notifications">Notification</NavLink>
+                                {/*<NavLink as={Link}
+                                    to="/notifications">Notification</NavLink> */}
                                 <NavLink as={Link}
                                     to="/myprofile">My Profile</NavLink>
                                 <NavLink as={Link}
