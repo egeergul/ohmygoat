@@ -87,10 +87,12 @@ const ClHome = () => {
                 }>My Events</button>
             </div>
             <div className="st-notifications">
+                <div className="d-flex flex-column-reverse">
                 {
                 viewAllEvents ? events.map((event) => (
 
-                    <Event isStudent={false}
+                    <div>
+                        <Event isStudent={false}
                         isClub={true}
                         isAdvisor={false}
                         status={
@@ -129,8 +131,7 @@ const ClHome = () => {
                             event.clubName
                         }
 
-                        img={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAOVBMVEUxHkkqcJMuTnIxGUUxAEEl178xF0QxG0gtWXwxGkYvQ2gqdJctVXkxFUQvQGYxFUMsX4IuR2wvOF6QPzTkAAABhUlEQVR4nO3SW0oDARBE0cTHxDG+979YkfpTwYEgqU7OWUFdune7y3Z3f+4F/03hfArnUzifwvkUzqdwPoXzXWfhephrPWwoXPaDHZ+WLYXPy1TPLw+bCn9ceoz1UeEXhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEs+2W5Her1ZVPh8Wauty2F6/u5Z57iY/27cLee+9dO8T3w18LLonA+hfMpnE/hfArnUzifwvmuofAT+ck8h2oKjw0AAAAASUVORK5CYII="}
-                        startClock={
+                         startClock={
                             event.startClock
                         }
                         endClock={
@@ -145,9 +146,11 @@ const ClHome = () => {
                         }
                         date={event.eventDate}
                         endClock={event.eventFinish}/>
+                    </div>
 
                 )) : myEvents.map((event) => (
-                    <Event isStudent={false}
+                   <div>
+                        <Event isStudent={false}
                     clubName={
                         event.clubName
                     }
@@ -182,7 +185,6 @@ const ClHome = () => {
                             event.description
                         }
 
-                        img={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAOVBMVEUxHkkqcJMuTnIxGUUxAEEl178xF0QxG0gtWXwxGkYvQ2gqdJctVXkxFUQvQGYxFUMsX4IuR2wvOF6QPzTkAAABhUlEQVR4nO3SW0oDARBE0cTHxDG+979YkfpTwYEgqU7OWUFdune7y3Z3f+4F/03hfArnUzifwvkUzqdwPoXzXWfhephrPWwoXPaDHZ+WLYXPy1TPLw+bCn9ceoz1UeEXhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEobKYwFDZTGAqbKQyFzRSGwmYKQ2EzhaGwmcJQ2ExhKGymMBQ2UxgKmykMhc0UhsJmCkNhM4WhsJnCUNhMYShspjAUNlMYCpspDIXNFIbCZgpDYTOFobCZwlDYTGEs+2W5Her1ZVPh8Wauty2F6/u5Z57iY/27cLee+9dO8T3w18LLonA+hfMpnE/hfArnUzifwvmuofAT+ck8h2oKjw0AAAAASUVORK5CYII="}
                         startClock={
                             event.startClock
                         }
@@ -198,9 +200,12 @@ const ClHome = () => {
                         }
                         date={event.eventDate}
                         endClock={event.eventFinish}/>
+                   </div>
 
                 ))
-            } </div>
+            } 
+                </div>
+            </div>
         </div>
     )
 }

@@ -10,7 +10,7 @@ const StClubView = () => {
     const [numberOfEvents, setNumberOfEvents] = useState(0);
     const [numberOfMember, setNumberOfMembers] = useState(0);
     const [photoLink, setPhotoLink] = useState(null);
-    
+
 
     useEffect(() => {
         console.log("page here")
@@ -41,8 +41,8 @@ const StClubView = () => {
             setNumberOfEvents(r[0].numberOfEvents)
             setNumberOfMembers(r[0].roles.length)
             setPhotoLink(r[0].photos);
-            
-            return (r[0].id)
+
+            return(r[0].id)
         }).then((id) => {
 
             fetch("http://localhost:8080/event/clubEvents?id=" + id, {
@@ -65,7 +65,7 @@ const StClubView = () => {
                     return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
                 }
             }).then((r) => r.json()).then((r) => {
-                
+
                 console.log(r);
                 for (var i = 0; i < r.length; i++) {
                     var obj = r[i];
@@ -91,65 +91,68 @@ const StClubView = () => {
         <div>
 
             <div>
-                <ClubProfile description={description}
+                <ClubProfile 
+                    isStudent = {true}
+                    description={description}
                     name={name}
-                    numberOfEvents= {numberOfEvents}
-                    numberOfMember= {numberOfMember}
+                    numberOfEvents={numberOfEvents}
+                    numberOfMember={numberOfMember}
                     clubId={clubId}
                     photo={photoLink}/>
 
             </div>
             <div>
-                
+
 
                 <div className='d-flex flex-column align-items-center justify-content-center p-5'>
-                <h3>Club's Events</h3>
-                    {
-                        myEvents != [] && 
-                        myEvents.map((event) => (
-                        <Event isStudent={false}
+                    <h3>Club's Events</h3>
+                    <div className="d-flex flex-column-reverse">
+                        {
+                        myEvents != [] && myEvents.map((event) => (
+                            <Event isStudent={true}
 
-                            isClub={false}
-                            isAdvisor={true}
-                            status={
-                                event.status
-                            }
-                            eventId={
-                                event.eventId
-                            }
-                            club={
-                                event.clubId
-                            }
-                            ge250={
-                                event.ge250
-                            }
-                            name={
-                                event.name
-                            }
-                            quota={
-                                event.quota
-                            }
-                            remainingQuota={
-                                event.remainingQuota
-                            }
-                            date={
-                                event.eventDate
-                            }
-                            description={
-                                event.description
-                            }
-                            img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
-                            startClock={
-                                event.startClock
-                            }
-                            endClock={
-                                event.endClock
-                            }
-                            isInEvent={
-                                !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
-                            }/>
-                    ))
-                } </div>
+                                isClub={false}
+                                isAdvisor={false}
+                                status={
+                                    event.status
+                                }
+                                eventId={
+                                    event.eventId
+                                }
+                                club={
+                                    event.clubId
+                                }
+                                ge250={
+                                    event.ge250
+                                }
+                                name={
+                                    event.name
+                                }
+                                quota={
+                                    event.quota
+                                }
+                                remainingQuota={
+                                    event.remainingQuota
+                                }
+                                date={
+                                    event.eventDate
+                                }
+                                description={
+                                    event.description
+                                }
+                                img={"https://i.pinimg.com/736x/b2/8a/ee/b28aee3a7e645b68bcebc83f780af2a5.jpg"}
+                                startClock={
+                                    event.startClock
+                                }
+                                endClock={
+                                    event.endClock
+                                }
+                                isInEvent={
+                                    !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
+                                }/>
+                        ))
+                    } </div>
+                </div>
             </div>
         </div>
     )

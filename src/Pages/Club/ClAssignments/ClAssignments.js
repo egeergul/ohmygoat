@@ -51,6 +51,7 @@ const ClAssignments = (props) => {
                 className="m-4 btn btn-primary btn-block">Create New Assignment</button>
 
                 <div className="cl-assignment">
+                    <div className="d-flex flex-column-reverse">
                     {
                     assignments.map((assignment) => (
                         <Assignment club={
@@ -69,7 +70,9 @@ const ClAssignments = (props) => {
                                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxciyGtNprXskRvTxL6sLgglWj5MXb5YQGcw&usqp=CAU"
                                     }/>
                     ))
-                } </div>
+                }
+                    </div>
+                 </div>
 
 
         </div>

@@ -101,6 +101,7 @@ const AdvClubProfile = () => {
 
                 <div className='d-flex flex-column align-items-center justify-content-center p-5'>
                 <h3>Club's Events</h3>
+                    <div className="d-flex flex-column-reverse">
                     {
                         myEvents != [] && 
                         myEvents.map((event) => (
@@ -146,7 +147,9 @@ const AdvClubProfile = () => {
                                 !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
                             }/>
                     ))
-                } </div>
+                } 
+                    </div>
+                </div>
             </div>
         </div>
     )
