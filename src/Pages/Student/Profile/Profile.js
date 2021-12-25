@@ -4,9 +4,10 @@ import {StNav, Event, Club} from "../../../Components"
 import {confirm} from "react-confirm-box";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import DocumentUpload from '../../Document/DocumentUpload';
+import defaultPP from "../../../Assets/ppDefault.jpg"
 
 const Profile = (props) => {
+    
     let history = useHistory();
     const [clubs, setmyClubs] = useState([]);
     const studentId = localStorage.getItem("id");
@@ -235,7 +236,7 @@ const Profile = (props) => {
                     <div className="row header_bio">
                         <div className="col-md-4 header_left">
                             <img className="pp_class"
-                                src={imageUrl}/>
+                                src={imageUrl ? imageUrl: defaultPP }/>
                         </div>
                         <div className="col-md-8 ">
                             <div className="header_right">

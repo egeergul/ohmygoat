@@ -9,6 +9,7 @@ const StClubs = (props) => {
     const [myClubs, setMyClubs] = useState([]);
     const stId = localStorage.getItem("id");
     const [viewMyClubs, setViewMyClubs] = useState(true);
+    const [onPage, setOnPage] = useState("My Clubs");
     let history = useHistory();
     var mapped = viewMyClubs ? myClubs : allClubs;
 
@@ -75,10 +76,13 @@ const StClubs = (props) => {
     return (
         <div>
             <div>
+                <h4 className="text-center m-2">{onPage} </h4>
                 <div className="dflex m-3 d-flex justify-content-center">
-                    <button className="btn btn-primary btn-block mx-3"
+                    <button
+                    className="btn btn-primary btn-block mx-3"
                         onClick={
                             () => {
+                                setOnPage("My Clubs")
                                 setViewMyClubs(true)
                             }
                     }>My Clubs</button>
@@ -86,6 +90,7 @@ const StClubs = (props) => {
                     <button className="btn btn-primary btn-block"
                         onClick={
                             () => {
+                                setOnPage("All Clubs")
                                 setViewMyClubs(false)
                             }
                     }>All Clubs</button>
