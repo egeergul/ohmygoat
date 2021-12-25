@@ -4,6 +4,7 @@ import {StNav, Event, Club} from "../../../Components"
 import {confirm} from "react-confirm-box";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import DocumentUpload from '../../Document/DocumentUpload';
 
 const Profile = (props) => {
     let history = useHistory();
@@ -265,7 +266,9 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-
+            <div className='container'>
+                    <DocumentUpload></DocumentUpload>
+            </div>
             <div className="container">
                 <div className="row">
                     <div className="profile_clubs col-lg-6">
