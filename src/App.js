@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 import EditProfile from './Pages/Student/Profile/EditProfile';
 import EditEvent from "./Components/Event/EditEvent";
+import EditClubProfile from "./Pages/Club/ClProfilePage/EditClubProfile";
 
 function App() { // If there are no logged in users, render this part
 
@@ -113,6 +114,9 @@ function App() { // If there are no logged in users, render this part
                             <ClAssignments
                                 nav = {nav} 
                                 setNav = {setNav}/>
+                        </Route>
+                        <Route path='/editClubProfile'>
+                            <EditClubProfile></EditClubProfile>
                         </Route>
                         <Route path="/club/create-assignment"
                             component={ClCreateAssignment}/>

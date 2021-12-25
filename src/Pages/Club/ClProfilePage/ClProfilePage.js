@@ -8,7 +8,7 @@ const ClProfilePage = () => {
     const [myEvents, setMyEvents] = useState([]);
     const [numberOfEvents, setNumberOfEvents] = useState(0);
     const [numberOfMember, setNumberOfMembers] = useState(0);
-    
+    const [photoLink, setPhotoLink] = useState(null);
 
     useEffect(() => {
         console.log("page here")
@@ -33,11 +33,12 @@ const ClProfilePage = () => {
             }
         }).then((r) => r.json()).then((r) => {
             console.log(r);
-            setDescription(r[0].description)
-            setName(r[0].name)
-            setClubId(r[0].id)
-            setNumberOfEvents(r[0].numberOfEvents)
-            setNumberOfMembers(r[0].roles.length)
+            setDescription(r[0].description);
+            setName(r[0].name);
+            setClubId(r[0].id);
+            setNumberOfEvents(r[0].numberOfEvents);
+            setNumberOfMembers(r[0].roles.length);
+            setPhotoLink(r[0].photos);
             
             return (r[0].id)
         }).then((id) => {
@@ -92,7 +93,8 @@ const ClProfilePage = () => {
                     name={name}
                     numberOfEvents= {numberOfEvents}
                     numberOfMember= {numberOfMember}
-                    clubId={clubId}/>
+                    clubId={clubId}
+                    photo={photoLink}/>
 
             </div>
             <div>
