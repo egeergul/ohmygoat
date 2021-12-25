@@ -10,11 +10,12 @@ const EditProfile = (props) =>{
     const[newName, setNewName] = useState(data.state.name);
     const[newGe250, setGe250] = useState(data.state.ge250);
     const[picture, setPicture] = useState(null);
-
+    const studentId = localStorage.getItem('id');
     const history = useHistory();
 
     const handleSubmit = (event) =>{
         event.preventDefault();
+        
         let formData = new FormData();
 
         fetch("http://localhost:8080/auth/updateStudentProfile" , {
@@ -45,15 +46,14 @@ const EditProfile = (props) =>{
         }).catch((e) => {
             console.log(e.message);
         });
-        
+
         console.log(picture);
         formData.append('file', picture);
         console.log(formData);
-        if(picture != null){
-            fetch("http://localhost:8080/uploadStudentProfilePic?id=" + localStorage.getItem('id'), {
+
+            fetch("http://localhost:8080/uploadProfilePic?id=" + studentId, {
             method: "POST",
             headers: {
-                "Content-Type": "multipart/form-data; boundary=abc",
                 "Authorization": `Bearer ${
                     localStorage.token
                 }`,
@@ -69,12 +69,14 @@ const EditProfile = (props) =>{
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
+            console.log(r);
             console.log('uploaded');
+            
         }).catch((e) => {
             console.log(e.message);
         });
         console.log(formData);
-        } 
+        
     };
 
 
