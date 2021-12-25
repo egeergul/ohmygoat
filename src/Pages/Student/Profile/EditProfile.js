@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
+import UploadFiles from "../../../Helper/UploadFiles";
 
 const EditProfile = (props) =>{
     let data = useLocation();
@@ -44,6 +45,7 @@ const EditProfile = (props) =>{
         }).catch((e) => {
             console.log(e.message);
         });
+        
         console.log(picture);
         formData.append('file', picture);
         console.log(formData);
@@ -72,8 +74,7 @@ const EditProfile = (props) =>{
             console.log(e.message);
         });
         console.log(formData);
-        }
-        
+        } 
     };
 
 
@@ -109,7 +110,8 @@ const EditProfile = (props) =>{
                             e => setGe250(e.target.value)
                     }></input>
                 <label forName='file_area'>Submit A profile pic</label>
-                    <input accept="image/*" type='file' name='file_area' onChange={handlePicture} multiple/>
+                    <input type='file' name='file_area' onChange={handlePicture} multiple/>
+                    {/* <UploadFiles></UploadFiles> */}
                 <button className="mt-3 btn btn-primary btn-block" type='submit' >Update Profile</button>
                 
             </form>
