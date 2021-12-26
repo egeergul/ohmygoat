@@ -22,22 +22,23 @@ const AdvNav = () => {
                             <NavLink as={Link}
                                 to="/home">Home</NavLink>
                             <NavDropdown title="My Club" id="navbarScrollingDropdown">
-                                <NavDropdown.Item as={Link} to="/club-members">
+                                <NavDropdown.Item as={Link}
+                                    to="/club-members">
                                     Club Members
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/documents">
+                                <NavDropdown.Item as={Link}
+                                    to="/documents">
                                     Documents
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/view-club">
+                                <NavDropdown.Item as={Link}
+                                    to="/view-club">
                                     View Club
                                 </NavDropdown.Item>
-                            
+
                             </NavDropdown>
 
-                            {/*<NavLink as={Link}
-                                to="/notifications">Notification</NavLink> */}
                             <NavLink as={Link}
                                 to="/"
                                 onClick={

@@ -3,7 +3,7 @@ import "./Forum.css"
 import {Message} from "../"
 
 const Forum = () => {
-    const[message, setMessage] = useState("")
+    const [message, setMessage] = useState("")
     return (
         <div className="forum ">
             <div className="forum-header d-flex flex-row justif-content-between align-items-between">
@@ -18,18 +18,15 @@ const Forum = () => {
                     <Message/>
                     <Message/>
                 </div>
-                <button className="mx-3 btn btn-primary btn-block" >View Full Forum</button>
+                <button className="mx-3 btn btn-primary btn-block">View Full Forum</button>
             </div>
-            
+
             <form className="send">
-                <textarea rows = "3" cols = "60" type="text" className="mt-2 form-control"  
-                    placeholder="Your Message"
+                <textarea rows="3" cols="60" type="text" className="mt-2 form-control" placeholder="Your Message"
                     onChange={
                         e => setMessage(e.target.value)
-                    }>
-                </textarea>
+                }></textarea>
                 <button className="mx-3 btn btn-primary btn-block">Send</button>
-
             </form>
         </div>
     )

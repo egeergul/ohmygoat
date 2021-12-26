@@ -5,7 +5,6 @@ import {useHistory} from "react-router-dom";
 
 const AdmNav = () => {
     let history = useHistory()
-
     return (
         <div>
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">

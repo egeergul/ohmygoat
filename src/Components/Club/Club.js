@@ -1,10 +1,10 @@
-import React  from 'react'
+import React from 'react'
 import "./Club.css"
 import {confirm} from "react-confirm-box";
-import { useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 const Club = (props) => {
-    
-   
+
+
     const clubId = props.id;
     let history = useHistory();
     const joinClub = () => {
@@ -19,7 +19,6 @@ const Club = (props) => {
                 {studentId: localStorage.id, clubId: clubId}
             )
         }).then((r) => {
-            console.log(r);
             if (r.ok) {
                 window.location.reload();
                 return r;
@@ -28,19 +27,15 @@ const Club = (props) => {
                 return Promise.reject(new Error("hata oluştu"));
             }
             return Promise.reject(new Error("bilinmeyen hata"));
-        }).then((r) => r.json()).then((response) => {
-            console.log(response);
-        }).catch((e) => {
-            console.log("here");
-        });
-
+        }).
+        then((r) => r.json())
+        .catch((e) => {console.log(e)  });
     };
 
-    const deleteClub = async () =>{
-        
+    const deleteClub = async () => {
+
         const result = await confirm("Are you sure you want to delete your account?");
         if (result) {
-            console.log(clubId)
             fetch("http://localhost:8080/club/deleteClub", {
                 method: "POST",
                 headers: {
@@ -48,12 +43,12 @@ const Club = (props) => {
                     "Accept": "application/json"
                 },
                 body: JSON.stringify(
-                    { id: clubId}
+                    {id: clubId}
                 )
             }).then((r) => {
-                console.log(r);
+                
                 if (r.ok) {
-                    console.log(r)
+                    
                     window.location.reload();
                     return r;
                 }
@@ -62,30 +57,12 @@ const Club = (props) => {
                 }
                 return Promise.reject(new Error("bilinmeyen hata"));
             }).then((r) => r.json()).then((response) => {
-                console.log(response);
             }).catch((e) => {
-                console.log("here is a problem: " + e);
+                console.log( e);
             });
-
             return;
         }
         console.log("You click No!");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     };
 
     const leaveClub = () => {
@@ -99,7 +76,6 @@ const Club = (props) => {
                 {studentId: localStorage.id, clubId: clubId}
             )
         }).then((r) => {
-            console.log(r);
             if (r.ok) {
                 window.location.reload();
                 return r;
@@ -109,9 +85,9 @@ const Club = (props) => {
             }
             return Promise.reject(new Error("bilinmeyen hata"));
         }).then((r) => r.json()).then((response) => {
-            console.log(response);
+           
         }).catch((e) => {
-            console.log("here is a problem: " + e);
+            console.log( e);
         });
     }
 
@@ -125,12 +101,10 @@ const Club = (props) => {
                 "Authorization": `Bearer ${
                     localStorage.token
                 }`
-            },
-            
+            }
+
         }).then((r) => {
-            console.log(r);
             if (r.ok) {
-               
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -138,39 +112,32 @@ const Club = (props) => {
             }
             return Promise.reject(new Error("bilinmeyen hata"));
         }).then((r) => r.json()).then((r) => {
-            
+
             const clubRoles = r[0].roles;
-            const role = clubRoles.filter(x=> x.studentId == localStorage.id)
+            const role = clubRoles.filter(x => x.studentId == localStorage.id)
             const roleSt = (role[0]["name"])
-            console.log(roleSt)
-            
             return roleSt
         }).catch((e) => {
-            console.log("here is a problem: " + e);
-        }).then(
-            (role)=> {
-                if(JSON.stringify(props.isMember) == "[]" || role.toString() =="MEMBER"){ //is not a member or regular member
-                    console.log("no member or regular")
-                    localStorage.setItem("clubId", clubId)
-                    props.setNav2(2)
-                    history.push("/view-club");
-                    
-                } else { // active member or higher member
-                    console.log("acitve or higher")
-                    localStorage.setItem("onclub", "true");
-                    localStorage.setItem("clubId", clubId);
-                    localStorage.setItem("roleOfStudent", role);
-                    console.log(role)
-                    history.push("/club/home");
-                    window.location.reload();
-                   
-                }
-            }
-        )
+            console.log( e);
+        }).then((role) => {
+            // is not a member or regular member
+            if (JSON.stringify(props.isMember) == "[]" || role.toString() == "MEMBER") { 
+                localStorage.setItem("clubId", clubId)
+                props.setNav2(2)
+                history.push("/view-club");
+                // active member or higher member
+            } else { 
+                localStorage.setItem("onclub", "true");
+                localStorage.setItem("clubId", clubId);
+                localStorage.setItem("roleOfStudent", role);
+                history.push("/club/home");
+                window.location.reload();
 
-       
-       
-    }; 
+            }
+        })
+
+
+    };
     return (
         <div>
             <div className="club-container">
@@ -185,7 +152,11 @@ const Club = (props) => {
                     }</p>
                 </div>
                 <div className="club-body">
-                    <p>{props.total_events} {'\u00A0'} Total Events</p>
+                    <p>{
+                        props.total_events
+                    }
+                        {'\u00A0'}
+                        Total Events</p>
                     <div className="container">
                         <div className="club-body-bottom row">
                             <div className="col-md-8 club-body-left">
@@ -195,25 +166,20 @@ const Club = (props) => {
                             </div>
                             <div className="col-md-2 club-body-right">
                                 {
-                                    props.isAdmin ? <div>
-                                        <button 
-                                    className="btn btn-primary btn-block">Change Advisor</button>
-                                    <button onClick = {deleteClub}
-                                    className="mt-2 btn btn-primary btn-block">Delete Club</button>
-                                </div> :
-                                <div>
-                                    {
-                                JSON.stringify(props.isMember) == "[]" ? <button onClick={joinClub}
-                                    className="btn btn-primary btn-block">Join</button> : <button onClick={leaveClub}
-                                    className="mt-2 btn btn-primary btn-block">Leave</button>
+                                props.isAdmin ? <div>
+                                    <button className="btn btn-primary btn-block">Change Advisor</button>
+                                    <button onClick={deleteClub}
+                                        className="mt-2 btn btn-primary btn-block">Delete Club</button>
+                                </div> : <div> {
+                                    JSON.stringify(props.isMember) == "[]" ? <button onClick={joinClub}
+                                        className="btn btn-primary btn-block">Join</button> : <button onClick={leaveClub}
+                                        className="mt-2 btn btn-primary btn-block">Leave</button>
                                 }
-                                <button onClick={visitClub}
-                                    className="mt-2 btn btn-primary btn-block">Visit Club</button>
+                                    <button onClick={visitClub}
+                                        className="mt-2 btn btn-primary btn-block">Visit Club</button>
 
                                 </div>
-
-                                }
-                            </div>
+                            } </div>
                         </div>
                     </div>
                 </div>

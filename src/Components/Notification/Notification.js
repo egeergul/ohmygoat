@@ -2,8 +2,6 @@ import React from 'react'
 import "./Notification.css"
 
 const Notification = (props) => {
-    
-
     return (
         <div>
             <div className="notification">

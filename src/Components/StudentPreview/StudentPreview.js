@@ -7,18 +7,18 @@ const StudentPreview = (props) => {
     var studentPos;
 
     const [studentId, setStudentId] = useState(null)
-    const editRole = ()=> {
+    const editRole = () => {
         setStudentId(props.id)
     }
-    const cancel = ()=> {
+    const cancel = () => {
         setStudentId(null)
     }
     const remove = () => {
-        if(studentPos == "The President"){
+        if (studentPos == "The President") {
             window.alert("You cannot remove club president directly")
             return;
         }
-        fetch("http://localhost:8080/club/leaveClub" , {  
+        fetch("http://localhost:8080/club/leaveClub", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const StudentPreview = (props) => {
                 }`
             },
             body: JSON.stringify(
-                {studentId , clubId:localStorage.clubId}
+                {studentId, clubId: localStorage.clubId}
             ),
             credentials: "include"
         },).then((r) => {
@@ -46,8 +46,8 @@ const StudentPreview = (props) => {
 
     }
     const promote = () => {
-        console.log("I clicked promote")
-        fetch("http://localhost:8080/clubRole/promote" , {  
+    
+        fetch("http://localhost:8080/clubRole/promote", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const StudentPreview = (props) => {
                 }`
             },
             body: JSON.stringify(
-                {studentId , clubId:localStorage.clubId}
+                {studentId, clubId: localStorage.clubId}
             ),
             credentials: "include"
         },).then((r) => {
@@ -72,9 +72,9 @@ const StudentPreview = (props) => {
             console.log(e.message);
         });
     }
-    const demote = () =>{
-        console.log("I clicked demote")
-        fetch("http://localhost:8080/clubRole/demote" , {  
+    const demote = () => {
+       
+        fetch("http://localhost:8080/clubRole/demote", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const StudentPreview = (props) => {
                 }`
             },
             body: JSON.stringify(
-                {studentId , clubId:localStorage.clubId}
+                {studentId, clubId: localStorage.clubId}
             ),
             credentials: "include"
         },).then((r) => {
@@ -101,45 +101,48 @@ const StudentPreview = (props) => {
 
     }
 
-    if(props.position == "MEMBER")
+    if (props.position == "MEMBER") 
         studentPos = "Regular Member"
-    else if(props.position == "ACTIVE_MEMBER")
+     else if (props.position == "ACTIVE_MEMBER") 
         studentPos = "Active Member"
-    else if(props.position == "BOARD_MEMBER")
+     else if (props.position == "BOARD_MEMBER") 
         studentPos = "Director Board Member"
-    else if(props.position == "PRESIDENT")
+     else if (props.position == "PRESIDENT") 
         studentPos = "The President"
-    else    
+     else 
         studentPos = "Something went wrong!"
 
-    
-        return (
-            <div>
-                {
-                studentId == null ?
-                <div className="st-prev-container">
-                    <p> {props.id} </p>
-                    <p>{props.name} - GE 250/251: {props.department} - {studentPos}</p>
-                    <button onClick={editRole} className="btn btn-primary btn-block">Edit Role</button>
+    return (
+        <div> {
+            studentId == null ? <div className="st-prev-container">
+                <p> {
+                    props.id
+                } </p>
+                <p>{
+                    props.name
+                }
+                    - GE 250/251: {
+                    props.department
+                }
+                    - {studentPos}</p>
+                <button onClick={editRole}
+                    className="btn btn-primary btn-block">Edit Role</button>
+            </div> : <div className="d-flex flex-column justify-content-center align-items-center st-edit-role">
+                <p>Current Role</p>
+                <div className="d-flex flex-row justify-content-around align-items-around">
+                    <button onClick={remove}
+                        className="mx-1 btn btn-primary btn-block">Remove Froum Club</button>
+                    <button onClick={demote}
+                        className="mx-1 btn btn-primary btn-block">Demote</button>
+                    <button onClick={promote}
+                        className="mx-1 btn btn-primary btn-block">Promote</button>
+                    <button onClick={cancel}
+                        className="mx-3 btn btn-primary btn-block cancel">Cancel</button>
                 </div>
-                :
-                <div className="d-flex flex-column justify-content-center align-items-center st-edit-role">
-                    <p>Current Role</p>
-                    <div className="d-flex flex-row justify-content-around align-items-around">
-                        <button onClick={remove} className="mx-1 btn btn-primary btn-block">Remove Froum Club</button>
-                        <button onClick={demote} className="mx-1 btn btn-primary btn-block">Demote</button>
-                        <button onClick={promote} className="mx-1 btn btn-primary btn-block">Promote</button>
-                        <button onClick={cancel} className="mx-3 btn btn-primary btn-block cancel">Cancel</button>
-                    </div>
-                </div>
-            
-            }
-
-
             </div>
+        } </div>
 
 
-        
     )
 }
 

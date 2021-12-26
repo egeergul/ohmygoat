@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import "./ClubProfile.css"
-import {Event, Forum} from "../"
 import {Link} from 'react-router-dom';
 
 const ClubProfile = (props) => {
     const [imageData, setImageData] = React.useState({});
     const [imageUrl, setImageUrl] = useState(null);
-    const [picLink, setPicLink] = useState(null);
-    const [picture, setPicture] = useState(null);
-    console.log('djdsksdkkdkdkddk');
+
     const photoLink = props.photo;
 
     useEffect(() => {
@@ -24,7 +21,7 @@ const ClubProfile = (props) => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
+                
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -33,14 +30,12 @@ const ClubProfile = (props) => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then(r => r.blob()).then((r) => {
-            console.log(r);
+            
             var binaryData = [];
             binaryData.push(r);
             setImageUrl(URL.createObjectURL(new Blob(binaryData, {type: "application/json"})))
             setImageData(r);
 
-            console.log(imageUrl);
-            console.log(imageData);
         }).catch((e) => {
             console.log(e.message);
         });
