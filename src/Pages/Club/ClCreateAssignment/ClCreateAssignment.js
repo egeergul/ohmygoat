@@ -107,6 +107,7 @@ const ClCreateAssignment = () => {
                     clubId: localStorage.getItem("clubId"),
                     assignees: ids
 
+
                 }
             )
         }).then((r) => {
@@ -133,33 +134,33 @@ const ClCreateAssignment = () => {
                 </div>
                 <div className="create-assignment-body">
                     <form onSubmit={handleSubmit}
-                        action="">
+                          action="">
                         <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
                             <h6>
                                 Select Due Date
                             </h6>
                             <DatePicker dateFormat="dd/MM/yyyy" selected ={dueDate}
-                                onChange={
-                                    (date) => {
-                                        setDueDate(date);
-                                    }
-                                }/>
+                                        onChange={
+                                            (date) => {
+                                                setDueDate(date);
+                                            }
+                                        }/>
                             <TimePicker className="mt-3"
-                                onChange={setStartClock}
-                                value={startClock}/>
+                                        onChange={setStartClock}
+                                        value={startClock}/>
                         </div>
 
                         <label>
                             <input type="mt-3 text" className="form-control" placeholder="Assignment Name"
-                                onChange={
-                                    e => setName(e.target.value)
-                                }/>
+                                   onChange={
+                                       e => setName(e.target.value)
+                                   }/>
                         </label>
 
                         <textarea rows="5" cols="60" type="text" className="mt-2 form-control" placeholder="Assignment Description"
-                            onChange={
-                                e => setDescription(e.target.value)
-                        }></textarea>
+                                  onChange={
+                                      e => setDescription(e.target.value)
+                                  }></textarea>
                         <button className="create-button mt-3 btn btn-primary btn-block" type="submit">Create Assignment</button>
                     </form>
                 </div>
