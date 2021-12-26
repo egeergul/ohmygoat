@@ -26,6 +26,7 @@ import "./App.css"
 import EditProfile from './Pages/Student/Profile/EditProfile';
 import EditEvent from "./Components/Event/EditEvent";
 import UploadAssignment from './Pages/Student/StAssignments/UploadAssignment';
+import EditClubProfile from "./Pages/Club/ClProfilePage/EditClubProfile";
 
 function App() { // If there are no logged in users, render this part
 
@@ -125,6 +126,8 @@ function App() { // If there are no logged in users, render this part
                             component={ClCreateAssignment}/>
                         <Route path="/club/profile"
                             component={ClProfilePage}/>
+                        <Route path="/editClubProfile"
+                            component={EditClubProfile}/>
                     </BrowserRouter>
                 </div>
             );
