@@ -17,7 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 import EditProfile from './Pages/Student/Profile/EditProfile';
 import EditEvent from "./Components/Event/EditEvent";
-import EditClubProfile from "./Pages/Club/ClProfilePage/EditClubProfile";
+import UploadAssignment from './Pages/Student/StAssignments/UploadAssignment';
 
 function App() { // If there are no logged in users, render this part
 
@@ -29,120 +29,120 @@ function App() { // If there are no logged in users, render this part
             <div>
                 <BrowserRouter>
                     <Route path="/signup"
-                        component={SignUp}/>
+                           component={SignUp}/>
                     <Route exact path="/"
-                        component={Login}/>
+                           component={Login}/>
                     <Route exact path="/redirecting"
-                        component={Buffer}/>
+                           component={Buffer}/>
                 </BrowserRouter>
             </div>
         )
     }
 
-    // If the logged in user is an admin, render this part else 
+    // If the logged in user is an admin, render this part else
     else if ( localStorage.role == "ROLE_ADMIN") {
         return (
             <div className="">
                 <BrowserRouter>
                     <AdmNav/>
                     <Route path="/home"
-                        component={AdmHome}/>
+                           component={AdmHome}/>
                     <Route path="/create-club"
-                        component={CreateClub}/>
+                           component={CreateClub}/>
                 </BrowserRouter>
             </div>
         )
     }
 
-    // If the logged in user is a student, render this part else 
-    if (localStorage.role == "ROLE_STUDENT") { 
+    // If the logged in user is a student, render this part else
+    if (localStorage.role == "ROLE_STUDENT") {
         // If the student is not visiting the clubs system, render this part
         if (localStorage.onclub == "false") {
             return (
                 <div>
                     <BrowserRouter>
-                        <StNav 
-                        nav2 = {nav2} 
-                        setNav2 = {setNav2}/>
+                        <StNav
+                            nav2 = {nav2}
+                            setNav2 = {setNav2}/>
                         <Route path="/home"
-                            component={StHome}/>
+                               component={StHome}/>
                         <Route path="/myProfile">
                             <Profile pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKLehlQVLtvwtdN6ml4nyhaoZ5PrkdI1fBQ&usqp=CAU"}
-                                name={"can"}
-                                ge250_251={"taken"}
-                                bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
+                                     name={"can"}
+                                     ge250_251={"taken"}
+                                     bio={"Nisi excepteur do cupidatat duis qui sunt."}/>
                         </Route>
                         <Route path='/editStudentProfile'>
                             <EditProfile/>
                         </Route>
                         <Route path="/notifications"
-                            component={StNotifications}/>
+                               component={StNotifications}/>
                         <Route path="/clubs">
-                            <StClubs 
-                                 setNav2 = {setNav2}/>
+                            <StClubs
+                                setNav2 = {setNav2}/>
                         </Route>
                         <Route path="/assignments"
-                            component={StAssignments}/>
+                               component={StAssignments}/>
+                        <Route path="/uploadAssignment">
+                            <UploadAssignment/>
+                        </Route>
                         <Route path="/view-club">
                             <StClubView
-                                nav2 = {nav2} 
-                                setNav2 = {setNav2} />       
+                                nav2 = {nav2}
+                                setNav2 = {setNav2} />
                         </Route>
                     </BrowserRouter>
                 </div>
             );
         }
-        // If the student is  visiting the clubs system, render this part 
+        // If the student is  visiting the clubs system, render this part
         else {
             return (
                 <div>
                     <BrowserRouter>
-                        <ClNav 
-                            nav = {nav} 
+                        <ClNav
+                            nav = {nav}
                             setNav = {setNav}/>
                         <Route path="/club/home"
-                            component={ClHome}/>
+                               component={ClHome}/>
                         <Route path="/club/create-event">
                             <CreateEvent/>
                         </Route>
-                        <Route path='/editEvent'> 
-                        <EditEvent></EditEvent>
+                        <Route path='/editEvent'>
+                            <EditEvent></EditEvent>
                         </Route>
                         <Route path="/club/notifications"
-                            component={ClNotifications}/>
+                               component={ClNotifications}/>
                         <Route path="/club/assignments">
                             <ClAssignments
-                                nav = {nav} 
+                                nav = {nav}
                                 setNav = {setNav}/>
                         </Route>
-                        <Route path='/editClubProfile'>
-                            <EditClubProfile></EditClubProfile>
-                        </Route>
                         <Route path="/club/create-assignment"
-                            component={ClCreateAssignment}/>
+                               component={ClCreateAssignment}/>
                         <Route path="/club/profile"
-                            component={ClProfilePage}/>
+                               component={ClProfilePage}/>
                     </BrowserRouter>
                 </div>
             );
         }
 
     }
-    // If the logged in user is an admin, render this part 
+    // If the logged in user is an admin, render this part
     else if (localStorage.role == "ROLE_ADVISOR") {
         return (
             <div className="">
                 <BrowserRouter>
                     <AdvNav/>
                     <Route path="/home"
-                        component={AdvHome}/>
+                           component={AdvHome}/>
                     <Route path="/notifications"
-                        component={AdvNotifications}/>
+                           component={AdvNotifications}/>
                     <Route path="/club-members"
-                        component={AdvClubMembers}/>
+                           component={AdvClubMembers}/>
                     <Route path="/view-club"
-                        component={AdvClubProfile}/>
-             
+                           component={AdvClubProfile}/>
+
                 </BrowserRouter>
             </div>
         )

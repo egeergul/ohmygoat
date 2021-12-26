@@ -43,9 +43,8 @@ const StAssignments = () => {
 
     return (
         <div>
-            <h3 className="text-center m-3">Assignments</h3>
+
             <div className="st-assignment">
-                <div className="d-flex flex-column-reverse">
                 {
                     assignments.map((assignment) => (
                         <Assignment club={
@@ -59,14 +58,17 @@ const StAssignments = () => {
                                     description={
                                         assignment.description
                                     }
+                                    id = {
+                                        assignment.assignmentId
+                                    }
                                     pp={
                                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxciyGtNprXskRvTxL6sLgglWj5MXb5YQGcw&usqp=CAU"
+                                    }
+                                    file={
+                                        assignment.file
                                     }/>
                     ))
-                } 
-                </div>
-            
-            </div>
+                } </div>
 
 
         </div>
@@ -74,4 +76,3 @@ const StAssignments = () => {
 }
 
 export default StAssignments
-
