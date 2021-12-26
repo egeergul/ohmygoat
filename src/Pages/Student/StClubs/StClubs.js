@@ -26,7 +26,7 @@ const StClubs = (props) => {
             credentials: "include"
         },).then((r) => {
             if (r.ok) {
-                console.log(r)
+           
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -34,7 +34,7 @@ const StClubs = (props) => {
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
+         
             setAllClubs(r)
 
         }).catch((e) => {
@@ -42,7 +42,6 @@ const StClubs = (props) => {
         });
 
 
-        
         fetch("http://localhost:8080/club/getStudentClub?id=" + stId, {
             method: "GET",
             headers: {
@@ -54,32 +53,29 @@ const StClubs = (props) => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
+               
                 return r;
             }
             if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
             } else 
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
-            
-        }).then((r) => r.json()).then((r) => {
-            console.log(r);
-            setMyClubs(r)
 
+        }).then((r) => r.json()).then((r) => {
+            setMyClubs(r)
         }).catch((e) => {
             console.log(e.message);
         });
 
     }, []);
 
-   
     return (
         <div>
             <div>
-                <h4 className="text-center m-2">{onPage} </h4>
+                <h4 className="text-center m-2">
+                    {onPage} </h4>
                 <div className="dflex m-3 d-flex justify-content-center">
-                    <button
-                    className="btn btn-primary btn-block mx-3"
+                    <button className="btn btn-primary btn-block mx-3"
                         onClick={
                             () => {
                                 setOnPage("My Clubs")
@@ -99,8 +95,9 @@ const StClubs = (props) => {
                 <div className="st-clubs">
                     {
                     allClubs && mapped.map((club) => (
-                        <Club 
-                            setNav2 = {props.setNav2}    
+                        <Club setNav2={
+                                props.setNav2
+                            }
                             name={
                                 club.name
                             }
@@ -120,7 +117,7 @@ const StClubs = (props) => {
                                 club.id
                             }
                             isMember={
-                              myClubs.filter(a => a.id == club.id) 
+                                myClubs.filter(a => a.id == club.id)
                             }/>
                     ))
                 } </div>

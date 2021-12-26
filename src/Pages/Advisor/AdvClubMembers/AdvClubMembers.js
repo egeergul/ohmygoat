@@ -8,7 +8,7 @@ const AdvClubMembers = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:8080/club/getMembersOfClub?id=" + localStorage.getItem("clubId"), {  
+        fetch("http://localhost:8080/club/getMembersOfClub?id=" + localStorage.getItem("clubId"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,18 +26,14 @@ const AdvClubMembers = () => {
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log("here: " + r);
             setMembers(r)
-            console.log(r)
-
-
         }).catch((e) => {
             console.log(e.message);
         });
 
     }, []);
 
-    const [check1 , setCheck1] = useState(true);
+    const [check1, setCheck1] = useState(true);
     const [check2, setCheck2] = useState(true);
     const [check3, setCheck3] = useState(true);
     const [check4, setCheck4] = useState(true);
@@ -50,34 +46,42 @@ const AdvClubMembers = () => {
                             <div className="adv-st-filter-head">
                                 <h4>Filter Students</h4>
                             </div>
-                           <div className="adv-st-filter-body">
-                           <form>
-                                <input onChange={()=>setCheck1(!check1)} type="checkbox" checked={check1} />
-                                <label>Regular Members</label><br/><hr/>
-                                <input onChange={()=>setCheck2(!check2)} type="checkbox" checked={check2} />
-                                <label>Active Members</label><br/><hr/>
-                                <input onChange={()=>setCheck3(!check3)} type="checkbox" checked={check3}  />
-                                <label>Director Board Members</label><br/><hr/>
-                                <input onChange={()=>setCheck4(!check4)} type="checkbox" checked={check4} />
-                                <label>The President</label><br/>
-                               
-                            </form>
-                           </div>
+                            <div className="adv-st-filter-body">
+                                <form>
+                                    <input onChange={
+                                            () => setCheck1(!check1)
+                                        }
+                                        type="checkbox"
+                                        checked={check1}/>
+                                    <label>Regular Members</label><br/><hr/>
+                                    <input onChange={
+                                            () => setCheck2(!check2)
+                                        }
+                                        type="checkbox"
+                                        checked={check2}/>
+                                    <label>Active Members</label><br/><hr/>
+                                    <input onChange={
+                                            () => setCheck3(!check3)
+                                        }
+                                        type="checkbox"
+                                        checked={check3}/>
+                                    <label>Director Board Members</label><br/><hr/>
+                                    <input onChange={
+                                            () => setCheck4(!check4)
+                                        }
+                                        type="checkbox"
+                                        checked={check4}/>
+                                    <label>The President</label><br/>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
 
                     <div className="column col-sm col-lg d-flex flex-column justify-content-center align-items-center">
                         {
-                        members.filter(student=>
-                            (student.role == "MEMBER" && check1)
-                            || (student.role == "ACTIVE_MEMBER" && check2)
-                            || (student.role == "BOARD_MEMBER" && check3)
-                            || (student.role == "PRESIDENT" && check4)
-                            )
-
-
-                        .map((student) => (
-                             <StudentPreview name={
+                        members.filter(student => (student.role == "MEMBER" && check1) || (student.role == "ACTIVE_MEMBER" && check2) || (student.role == "BOARD_MEMBER" && check3) || (student.role == "PRESIDENT" && check4)).map((student) => (
+                            <StudentPreview name={
                                     student.name
                                 }
                                 id={
@@ -98,5 +102,4 @@ const AdvClubMembers = () => {
     )
 }
 
-export default AdvClubMembers
-//d-flex flex-column justify-content-center align-items-center
+export default AdvClubMembers// d-flex flex-column justify-content-center align-items-center

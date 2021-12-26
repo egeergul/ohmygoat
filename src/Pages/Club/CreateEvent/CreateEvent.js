@@ -16,19 +16,15 @@ const CreateEvent = () => {
     const [quota, setQuota] = useState(0)
     const [ge250, setGE250] = useState(0)
 
-    const[picLink, setPicLink] = useState(null);
-    const[picture, setPicture] = useState(null);
+    const [picLink, setPicLink] = useState(null);
+    const [picture, setPicture] = useState(null);
 
     let history = useHistory();
 
-
     const handlePicture = (event) => {
-        console.log(event.target.files[0]);
         setPicture(event.target.files[0]);
-        console.log('hdfjsdh');
-        console.log(picture);
     };
-    
+
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -37,36 +33,36 @@ const CreateEvent = () => {
 
         const clubId = localStorage.clubId;
         var m1 = (startDate.getMonth() + 1)
-        if (startDate.getMonth() < 9)
-            m1 = "0" + (startDate.getMonth() +1)
-        var d1 = startDate.getDate()
-        if (startDate.getDate() < 10)
-            d1 = "0" + startDate.getDate()
-        const startDateFormatted = startDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
-
-        var m2 =( startDate.getMonth() +1)
-        if (startDate.getMonth() < 9)
-            m2 = "0" + (startDate.getMonth() +1)
-        var d2 = startDate.getDate()
-        if (startDate.getDate() < 10)
-            d2 = "0" + startDate.getDate()
-        const endDateFormatted = startDate.getFullYear() + "-" + m2 + "-" +d2+ "T" + endClock + ":00"
+        if (startDate.getMonth() < 9) 
+            m1 = "0" + (
+                startDate.getMonth() + 1
+            )
         
-        console.log(startDateFormatted)
-        console.log(endDateFormatted)
+        var d1 = startDate.getDate()
+        if (startDate.getDate() < 10) 
+            d1 = "0" + startDate.getDate()
+        
+        const startDateFormatted = startDate.getFullYear() + "-" + m1 + "-" + d1 + "T" + startClock + ":00"
+
+        var m2 = (startDate.getMonth() + 1)
+        if (startDate.getMonth() < 9) 
+            m2 = "0" + (
+                startDate.getMonth() + 1
+            )
+        
+        var d2 = startDate.getDate()
+        if (startDate.getDate() < 10) 
+            d2 = "0" + startDate.getDate()
+        
+        const endDateFormatted = startDate.getFullYear() + "-" + m2 + "-" + d2 + "T" + endClock + ":00"
 
         if (name == "" || description == "") {
             window.alert("None of the fields can be left empty!")
-           
+
         } else {
             console.log("No bad credentials");
-
-            console.log(picture);
             formData.append('file', picture);
-            console.log(formData);
 
-            
-            
             fetch("http://localhost:8080/event/addEvent", {
                 method: "POST",
                 headers: {
@@ -93,64 +89,43 @@ const CreateEvent = () => {
             }).then((r) => {
                 console.log(r);
                 if (r.ok) {
-                    console.log("I am okay")
-                    
                     return r
-                    
                 } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("hata oluştu"));
                 } else {
                     return Promise.reject(new Error("bilinmeyen hata"));
                 }
-            }).then((r) => r.json()).
-            
-            
-            
-            then((r)=> {
-               const eventId = r.eventId;
-               console.log("ergergergergegergerg")
-               console.log(eventId)
-                fetch("http://localhost:8080/uploadEventPic?id=" + eventId, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${
-                        localStorage.token
-                    }`,
-                },
-                body: formData,
-                credentials: "include"
-            }, ).then((r) => {
-                if (r.ok) {
-                    return r;
-                }
-                if (r.status === 401 || r.status === 403 || r.status === 500) {
-                    return Promise.reject(new Error("Bir hata oluştu " + r.status));
-                }
-                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }).then((r) => r.json()).then((r) => {
-                
-                console.log(r);
-                console.log('uploaded');
-                history.push("/club/home")
+                const eventId = r.eventId;
+      
+                fetch("http://localhost:8080/uploadEventPic?id=" + eventId, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${
+                            localStorage.token
+                        }`
+                    },
+                    body: formData,
+                    credentials: "include"
+                },).then((r) => {
+                    if (r.ok) {
+                        return r;
+                    }
+                    if (r.status === 401 || r.status === 403 || r.status === 500) {
+                        return Promise.reject(new Error("Bir hata oluştu " + r.status));
+                    }
+                    return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+                }).then((r) => r.json()).then((r) => {
+
+                    history.push("/club/home")
 
 
-            }).catch((e) => {
-                console.log(e.message);
-            });
-            console.log(formData);
-
-
-
-
-
-
-
-
+                }).catch((e) => {
+                    console.log(e.message);
+                });
             })
         }
-
     }
-
     return (
         <div className='create-club-container'>
             <div className="crate-event">
@@ -159,7 +134,8 @@ const CreateEvent = () => {
                 </div>
                 <div className="create-event-body ">
                     <form className="d-flex flex-column"
-                    onSubmit= {handleSubmit} enctype = "multipart/form-data" >
+                        onSubmit={handleSubmit}
+                        enctype="multipart/form-data">
                         <label>
                             <input type="mt-3 text" className="form-control" placeholder="Event Name"
                                 onChange={
@@ -227,14 +203,16 @@ const CreateEvent = () => {
                                     variant={'dark'}
                                     size="sm"/>
 
-                                
-                                 <div className='my-3 text-center'>
-                                        <h4>Upload Event Photo</h4>
-                                        <input type='file' name='file_area' onChange={handlePicture} multiple/>
+
+                                <div className='my-3 text-center'>
+                                    <h4>Upload Event Photo</h4>
+                                    <input type='file' name='file_area'
+                                        onChange={handlePicture}
+                                        multiple/>
                                 </div>
                             </div>
                         </div>
-                        <button className="mt-3 btn btn-primary btn-block" type='submit' >Create Event</button>
+                        <button className="mt-3 btn btn-primary btn-block" type='submit'>Create Event</button>
                     </form>
                 </div>
             </div>

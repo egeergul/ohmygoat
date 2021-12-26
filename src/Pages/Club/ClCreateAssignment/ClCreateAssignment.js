@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import DatePicker from "react-datepicker"
 import TimePicker from 'react-time-picker';
-import InputSpinner from 'react-bootstrap-input-spinner'
 import {useHistory} from "react-router-dom";
 import "./ClCreateAssignment.css"
 
@@ -34,11 +33,7 @@ const ClCreateAssignment = () => {
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log("here: " + r);
-            console.log(r)
             setClubName(r)
-
-
         }).catch((e) => {
             console.log(e.message);
         });
@@ -61,9 +56,7 @@ const ClCreateAssignment = () => {
             }
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
-            console.log("here: " + r);
             setIds(r)
-
         }).catch((e) => {
             console.log(e.message);
         });
@@ -74,19 +67,20 @@ const ClCreateAssignment = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         var m1 = (dueDate.getMonth() + 1)
-        if (dueDate.getMonth() < 9)
-            m1 = "0" + (dueDate.getMonth() +1)
+        if (dueDate.getMonth() < 9) 
+            m1 = "0" + (
+                dueDate.getMonth() + 1
+            )
+        
         var d1 = dueDate.getDate()
-        if (dueDate.getDate() < 10)
+        if (dueDate.getDate() < 10) 
             d1 = "0" + dueDate.getDate()
-        const startDateFormatted = dueDate.getFullYear() + "-" + m1 + "-" +d1+ "T" + startClock + ":00"
+        
+        const startDateFormatted = dueDate.getFullYear() + "-" + m1 + "-" + d1 + "T" + startClock + ":00"
         if (description == "") {
             window.alert("None of the fields can be left empty!")
-
         } else {
             console.log("No bad credentials");
-
-
         }
         fetch("http://localhost:8080/assignment/addAssignment", {
 
@@ -111,9 +105,7 @@ const ClCreateAssignment = () => {
                 }
             )
         }).then((r) => {
-            console.log(r);
             if (r.ok) {
-                console.log("I am okay")
                 history.push("/club/assignments")
                 window.location.reload()
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
@@ -134,33 +126,33 @@ const ClCreateAssignment = () => {
                 </div>
                 <div className="create-assignment-body">
                     <form onSubmit={handleSubmit}
-                          action="">
+                        action="">
                         <div className="column col-md d-flex flex-column justify-content-center align-items-center ">
                             <h6>
                                 Select Due Date
                             </h6>
                             <DatePicker dateFormat="dd/MM/yyyy" selected ={dueDate}
-                                        onChange={
-                                            (date) => {
-                                                setDueDate(date);
-                                            }
-                                        }/>
+                                onChange={
+                                    (date) => {
+                                        setDueDate(date);
+                                    }
+                                }/>
                             <TimePicker className="mt-3"
-                                        onChange={setStartClock}
-                                        value={startClock}/>
+                                onChange={setStartClock}
+                                value={startClock}/>
                         </div>
 
                         <label>
                             <input type="mt-3 text" className="form-control" placeholder="Assignment Name"
-                                   onChange={
-                                       e => setName(e.target.value)
-                                   }/>
+                                onChange={
+                                    e => setName(e.target.value)
+                                }/>
                         </label>
 
                         <textarea rows="5" cols="60" type="text" className="mt-2 form-control" placeholder="Assignment Description"
-                                  onChange={
-                                      e => setDescription(e.target.value)
-                                  }></textarea>
+                            onChange={
+                                e => setDescription(e.target.value)
+                        }></textarea>
                         <button className="create-button mt-3 btn btn-primary btn-block" type="submit">Create Assignment</button>
                     </form>
                 </div>

@@ -18,7 +18,6 @@ const AdvHome = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -26,7 +25,6 @@ const AdvHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
             var myClubsEvents = r.filter(event => event.clubId == localStorage.clubId)
             setFeed(myClubsEvents)
 
@@ -36,15 +34,7 @@ const AdvHome = () => {
     }, []);
 
     return (
-        <div> {/*
-            name
-            private int clubId;
-        
-            private String eventDate;
-            private int duration;
-            private String status;
-            private String photos;* */}
-
+        <div>
             <div className="adv-home">
                 <div className="d-flex flex-column-reverse">
                     {

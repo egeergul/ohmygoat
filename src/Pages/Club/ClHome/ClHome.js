@@ -20,7 +20,6 @@ const ClHome = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -28,14 +27,13 @@ const ClHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
             setEvents(r);
 
         }).catch((e) => {
             console.log(e.message);
         });
 
-        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.getItem('clubId')  , {
+        fetch("http://localhost:8080/event/clubEvents?id=" + localStorage.getItem('clubId'), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +45,6 @@ const ClHome = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -55,12 +52,11 @@ const ClHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            for(var i = 0; i < r.length; i++) {
+            for (var i = 0; i < r.length; i++) {
                 var obj = r[i];
-                obj["club"] = localStorage.clubId ;
-                
+                obj["club"] = localStorage.clubId;
+
             }
-            console.log(r);
             setMyEvents(r)
 
         }).catch((e) => {
@@ -88,129 +84,139 @@ const ClHome = () => {
             </div>
             <div className="st-notifications">
                 <div className="d-flex flex-column-reverse">
-                {
-                viewAllEvents ? events.map((event) => (
+                    {
+                    viewAllEvents ? events.map((event) => (
 
-                    <div>
-                        <Event isStudent={false}
-                        endDate={
-                            event.eventFinish
-                        }
-                        isClub={true}
-                        isAdvisor={false}
-                        status={
-                            event.status
-                        }
-                        eventId={
-                            event.eventId
-                        }
-                        club={
-                            event.clubId
-                        }
-                        ge250={
-                            event.ge250
-                        }
-                        eventId={event.eventId} 
-                        club={
-                            event.club
+                        <div>
+                            <Event isStudent={false}
+                                endDate={
+                                    event.eventFinish
+                                }
+                                isClub={true}
+                                isAdvisor={false}
+                                status={
+                                    event.status
+                                }
+                                eventId={
+                                    event.eventId
+                                }
+                                club={
+                                    event.clubId
+                                }
+                                ge250={
+                                    event.ge250
+                                }
+                                eventId={
+                                    event.eventId
+                                }
+                                club={
+                                    event.club
+                                }
+                                name={
+                                    event.name
+                                }
+                                quota={
+                                    event.quota
+                                }
+                                remainingQuota={
+                                    event.remainingQuota
+                                }
+                                date={
+                                    event.eventDate
+                                }
+                                description={
+                                    event.description
+                                }
+                                clubName={
+                                    event.clubName
+                                }
 
-                        }
-                        name={
-                            event.name
-                        }
-                        quota={
-                            event.quota
-                        }
-                        remainingQuota={
-                            event.remainingQuota
-                        }
-                        date={
-                            event.eventDate
-                        }
-                        description={
-                            event.description
-                        }
-                        clubName={
-                            event.clubName
-                        }
+                                startClock={
+                                    event.startClock
+                                }
+                                endClock={
+                                    event.endClock
+                                }
+                                isInEvent={
+                                    !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
+                                }
 
-                         startClock={
-                            event.startClock
-                        }
-                        endClock={
-                            event.endClock
-                        }
-                        isInEvent={
-                            !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
-                        }
+                                img={
+                                    event.img
+                                }
+                                date={
+                                    event.eventDate
+                                }
+                                endClock={
+                                    event.eventFinish
+                                }/>
+                        </div>
 
-                        img={
-                            event.img
-                        }
-                        date={event.eventDate}
-                        endClock={event.eventFinish}/>
-                    </div>
+                    )) : myEvents.map((event) => (
+                        <div>
+                            <Event isStudent={false}
+                                clubName={
+                                    event.clubName
+                                }
+                                endDate={
+                                    event.eventFinish
+                                }
+                                isClub={true}
+                                isAdvisor={false}
+                                eventId={
+                                    event.eventId
+                                }
+                                status={
+                                    event.status
+                                }
+                                eventId={
+                                    event.eventId
+                                }
+                                club={
+                                    event.club
+                                }
+                                ge250={
+                                    event.ge250
+                                }
+                                name={
+                                    event.name
+                                }
+                                quota={
+                                    event.quota
+                                }
+                                remainingQuota={
+                                    event.remainingQuota
+                                }
+                                date={
+                                    event.eventDate
+                                }
+                                description={
+                                    event.description
+                                }
 
-                )) : myEvents.map((event) => (
-                   <div>
-                        <Event isStudent={false}
-                    clubName={
-                        event.clubName
-                    }
-                    endDate={
-                        event.eventFinish
-                    }
-                        isClub={true}
-                        isAdvisor={false}
-                        eventId={event.eventId}
-                        status={
-                            event.status
-                        }
-                        eventId={
-                            event.eventId
-                        }
-                        club={
-                            event.club
-                        }
-                        ge250={
-                            event.ge250
-                        }
-                        name={
-                            event.name
-                        }
-                        quota={
-                            event.quota
-                        }
-                        remainingQuota={
-                            event.remainingQuota
-                        }
-                        date={
-                            event.eventDate
-                        }
-                        description={
-                            event.description
-                        }
+                                startClock={
+                                    event.startClock
+                                }
+                                endClock={
+                                    event.endClock
+                                }
+                                isInEvent={
+                                    !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
+                                }
 
-                        startClock={
-                            event.startClock
-                        }
-                        endClock={
-                            event.endClock
-                        }
-                        isInEvent={
-                            !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
-                        }
+                                img={
+                                    event.img
+                                }
+                                date={
+                                    event.eventDate
+                                }
+                                endClock={
+                                    event.eventFinish
+                                }/>
+                        </div>
 
-                        img={
-                            event.img
-                        }
-                        date={event.eventDate}
-                        endClock={event.eventFinish}/>
-                   </div>
-
-                ))
-            } 
-                </div>
+                    ))
+                } </div>
             </div>
         </div>
     )

@@ -17,7 +17,6 @@ const StHome = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -25,9 +24,7 @@ const StHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
             setEvents(r)
-
         }).catch((e) => {
             console.log(e.message);
         });
@@ -44,8 +41,6 @@ const StHome = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log("My events")
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -53,17 +48,11 @@ const StHome = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log("events knk")
-            console.log(r);
             setMyEvents(r)
-
         }).catch((e) => {
             console.log(e.message);
         });
-
-
     }, []);
-
 
     return (
         <div>

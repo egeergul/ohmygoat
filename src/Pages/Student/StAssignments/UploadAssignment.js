@@ -1,19 +1,19 @@
 import React from "react";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router";
-import { useEffect } from "react";
+import {useState} from "react";
+import {useHistory} from "react-router-dom";
+import {useLocation} from "react-router";
+import {useEffect} from "react";
 
 
-const UploadAssignment = (props) =>{
+const UploadAssignment = (props) => {
     let data = useLocation();
-    const[file, setFile] = useState(null);
-    const[pdfUrl, setPdfUrl] = useState(null);
-    const[submission, setSubmission] = useState(null);
+    const [file, setFile] = useState(null);
+    const [pdfUrl, setPdfUrl] = useState(null);
+    const [submission, setSubmission] = useState(null);
     const history = useHistory();
     const assignmentId = data.state.assignmentId;
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         let formData = new FormData();
@@ -24,15 +24,14 @@ const UploadAssignment = (props) =>{
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${
                     localStorage.token
-                }`,
+                }`
             },
             body: JSON.stringify(
-                {description: submission,
-                    id: assignmentId}
+                {description: submission, id: assignmentId}
             ),
 
             credentials: "include"
-        }, ).then((r) => {
+        },).then((r) => {
 
             if (r.ok) {
                 return r;
@@ -48,18 +47,17 @@ const UploadAssignment = (props) =>{
         });
 
         formData.append('file', file);
-        console.log(formData);
 
         fetch("http://localhost:8080/uploadAssignmentDocument?id=" + assignmentId, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${
                     localStorage.token
-                }`,
+                }`
             },
             body: formData,
             credentials: "include"
-        }, ).then((r) => {
+        },).then((r) => {
             if (r.ok) {
                 return r;
             }
@@ -69,17 +67,15 @@ const UploadAssignment = (props) =>{
             return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
         }).then((r) => r.json()).then((r) => {
 
-            console.log(r);
-            console.log('uploaded');
 
         }).catch((e) => {
             console.log(e.message);
         });
-        console.log(formData);
+     
 
     };
 
-    const handleFile = (event) =>{
+    const handleFile = (event) => {
         setFile(event.target.files[0]);
     };
 
@@ -90,17 +86,21 @@ const UploadAssignment = (props) =>{
             </div>
             <div className="create-event-body ">
                 <form className="d-flex flex-column"
-                      onSubmit= {handleSubmit} enctype = "multipart/form-data">
-                    <label forDescription='description' >Description</label>
-                    <input type="mt-3 text" name='studentName' placeholder={"Describe what you uploaded"} className="form-control"
-                           onChange={
-                               e => setSubmission(e.target.value)
-                           }/>
+                    onSubmit={handleSubmit}
+                    enctype="multipart/form-data">
+                    <label forDescription='description'>Description</label>
+                    <input type="mt-3 text" name='studentName'
+                        placeholder={"Describe what you uploaded"}
+                        className="form-control"
+                        onChange={
+                            e => setSubmission(e.target.value)
+                        }/>
 
                     <label forName='file_area'>Upload your file below</label>
-                    <input type='file' name='file_area' onChange={handleFile} multiple/>
-                    {/* <UploadFiles></UploadFiles> */}
-                    <button className="mt-3 btn btn-primary btn-block" type='submit' >Update Assignment</button>
+                    <input type='file' name='file_area'
+                        onChange={handleFile}
+                        multiple/> {/* <UploadFiles></UploadFiles> */}
+                    <button className="mt-3 btn btn-primary btn-block" type='submit'>Update Assignment</button>
 
                 </form>
             </div>

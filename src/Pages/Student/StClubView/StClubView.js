@@ -13,7 +13,6 @@ const StClubView = () => {
 
 
     useEffect(() => {
-        console.log("page here")
         fetch("http://localhost:8080/club/clubView?id=" + localStorage.clubId, {
             method: "GET",
             headers: {
@@ -25,8 +24,6 @@ const StClubView = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -34,7 +31,6 @@ const StClubView = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
             setDescription(r[0].description)
             setName(r[0].name)
             setClubId(r[0].id)
@@ -57,7 +53,6 @@ const StClubView = () => {
                 credentials: "include"
             }).then((r) => {
                 if (r.ok) {
-                    console.log(r);
                     return r;
                 } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                     return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -65,8 +60,6 @@ const StClubView = () => {
                     return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
                 }
             }).then((r) => r.json()).then((r) => {
-
-                console.log(r);
                 for (var i = 0; i < r.length; i++) {
                     var obj = r[i];
                     obj["club"] = id;
@@ -83,16 +76,13 @@ const StClubView = () => {
             console.log(e.message);
         });
 
-
     }, []);
 
 
     return (
         <div>
-
             <div>
-                <ClubProfile 
-                    isStudent = {true}
+                <ClubProfile isStudent={true}
                     description={description}
                     name={name}
                     numberOfEvents={numberOfEvents}

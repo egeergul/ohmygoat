@@ -4,9 +4,9 @@ import "./ClNotifications.css"
 
 const ClNotifications = () => {
     const [nots, setNots] = useState([]);
-    
+
     useEffect(() => {
-        fetch("http://localhost:8080/notification/getClubNotification?id=" +localStorage.clubId, {
+        fetch("http://localhost:8080/notification/getClubNotification?id=" + localStorage.clubId, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -17,7 +17,6 @@ const ClNotifications = () => {
             credentials: "include"
         }).then((r) => {
             if (r.ok) {
-                console.log(r);
                 return r;
             } else if (r.status === 401 || r.status === 403 || r.status === 500) {
                 return Promise.reject(new Error("Bir hata oluştu " + r.status));
@@ -25,41 +24,39 @@ const ClNotifications = () => {
                 return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
             }
         }).then((r) => r.json()).then((r) => {
-            console.log(r);
             setNots(r);
 
         }).catch((e) => {
             console.log(e.message);
         });
-      },[])
-
-
+    }, [])
 
     return (
-        
-        <div >
+
+        <div>
             <h3 className="text-center m-3">Notifications</h3>
             <div className="st-notifications">
                 <div className="d-flex flex-column-reverse">
-                {
-                nots.map((notification) =>  <Notification club={
-                        notification.club
-                    }
-                    date={
-                        notification.date
-                    }
-                    isReq={
-                        notification.request
-                    }
-                    pending={
-                        notification.pending
-                    }
-                    description = {notification.description }
-                    notification={
-                        notification.notification
-                    }/> )
-            } 
-                </div>
+                    {
+                    nots.map((notification) => <Notification club={
+                            notification.club
+                        }
+                        date={
+                            notification.date
+                        }
+                        isReq={
+                            notification.request
+                        }
+                        pending={
+                            notification.pending
+                        }
+                        description={
+                            notification.description
+                        }
+                        notification={
+                            notification.notification
+                        }/>)
+                } </div>
             </div>
         </div>
     )
