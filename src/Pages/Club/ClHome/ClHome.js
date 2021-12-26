@@ -131,12 +131,7 @@ const ClHome = () => {
                                     event.clubName
                                 }
 
-                                startClock={
-                                    event.startClock
-                                }
-                                endClock={
-                                    event.endClock
-                                }
+                             
                                 isInEvent={
                                     !(myEvents.filter(a => a.eventId == event.eventId).length == 0)
                                 }

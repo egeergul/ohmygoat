@@ -214,6 +214,8 @@ const Event = (props) => {
         return (
             <div></div>
         )
+    } else if (props.isClub && props.club != localStorage.clubId && props.status != "ACCEPTED"){
+        return( <div></div>)
     }
 
     return (
