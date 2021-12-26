@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import "./ClAssignments.css"
-import {Assignment} from "../../../Components"
-import {useHistory} from 'react-router-dom';
+import { Assignment} from "../../../Components"
+import { useHistory } from 'react-router-dom';
+
 
 
 const ClAssignments = (props) => {
@@ -9,6 +10,8 @@ const ClAssignments = (props) => {
     const [assignments, setAssignments] = useState([]);
 
     useEffect(() => {
+
+
         fetch("http://localhost:8080/assignment/getClubAssignment?id=" + localStorage.getItem("clubId"), {
             method: "GET",
             headers: {
@@ -31,40 +34,54 @@ const ClAssignments = (props) => {
         }).catch((e) => {
             console.log(e.message);
         });
+
+
+
     }, []);
     return (
         <div className='d-flex flex-column justify-content align-items-center'>
-            <button onClick={
-                    () => {
-                        props.setNav(2);
-                        history.push("create-assignment")
-                    }
-                }
+            <button
+                onClick={()=>{props.setNav(2); history.push("create-assignment")}}
+
                 className="m-4 btn btn-primary btn-block">Create New Assignment</button>
 
             <div className="cl-assignment">
+
                 <div className="d-flex flex-column-reverse">
                     {
-                    assignments.map((assignment) => (
-                        <Assignment club={
+                        assignments.map((assignment) => (
+                            <Assignment club={
                                 assignment.clubName
                             }
-                            isClub={true}
-                            name
-                            ={assignment.name}
-                            date={
-                                assignment.due_date.substring(0, assignment.due_date.indexOf("T"))
-                            }
+                                        submissionDes = {
+                                            assignment.submissionDes
+                                        }
+                                        name ={assignment.name}
+                                        date={
+                                            assignment.due_date.substring(0, assignment.due_date.indexOf("T"))
+                                        }
 
-                            description={
-                                assignment.description
-                            }
-                            pp={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxciyGtNprXskRvTxL6sLgglWj5MXb5YQGcw&usqp=CAU"}/>
-                    ))
-                } </div>
+                                        description={
+                                            assignment.description
+                                        }
+                                        id = {
+                                            assignment.assignmentId
+                                        }
+                                        pp={
+                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxciyGtNprXskRvTxL6sLgglWj5MXb5YQGcw&usqp=CAU"
+                                        }
+                                        file={
+                                            assignment.file
+                                        }/>
+                        ))
+                    }
+                </div>
             </div>
+
+
         </div>
     )
 }
 
 export default ClAssignments
+
