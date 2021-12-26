@@ -1,111 +1,65 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Notification} from "../../../Components"
 import "./StNotifications.css"
 
 const StNotifications = () => {
-    const notifications = [
-        {
-            club: "ACM",
-            date: "10/10/2021",
-            isReq: true,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        },
-        {
-            club: "YES",
-            date: "3/9/2021",
-            isReq: false,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        },
-        {
-            club: "OR",
-            date: "7/12/2021",
-            isReq: false,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        },
-        {
-            club: "TDP",
-            date: "1/14/2021",
-            isReq: true,
-            pending: "approved",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "Chess",
-            date: "9/7/2021",
-            isReq: false,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "ACM",
-            date: "2/7/2021",
-            isReq: true,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "YES",
-            date: "23/6/2021",
-            isReq: true,
-            pending: "approved",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "Chess",
-            date: "9/7/2021",
-            isReq: false,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "OR",
-            date: "9/7/2021",
-            isReq: false,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }, {
-            club: "ACM",
-            date: "12/11/2021",
-            isReq: true,
-            pending: "pending",
-            notification: "Ea incididunt aute minim minim ipsum aliquip magna dolore enim ut elit occaecat."
-        }
-    ]
+    const [nots, setNots] = useState([]);
+    
+    useEffect(() => {
+        fetch("http://localhost:8080/notification/getStudentNotification?id=" +localStorage.id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${
+                    localStorage.token
+                }`
+            },
+            credentials: "include"
+        }).then((r) => {
+            if (r.ok) {
+                console.log(r);
+                return r;
+            } else if (r.status === 401 || r.status === 403 || r.status === 500) {
+                return Promise.reject(new Error("Bir hata oluştu " + r.status));
+            } else {
+                return Promise.reject(new Error("Bilinmeyen bir hata oluştu."));
+            }
+        }).then((r) => r.json()).then((r) => {
+            console.log(r);
+            setNots(r);
 
-    const [viewReq, setViewReq] = useState(false);
+        }).catch((e) => {
+            console.log(e.message);
+        });
+      }, [])
+
+    
     return (
 
         <div >
-            <div className="dflex m-3 d-flex justify-content-center">
-                <button className="btn btn-primary btn-block mx-3"
-                    onClick={
-                        () => {
-                            setViewReq(false)
-                        }
-                }>Notifications</button>
-                <button className="btn btn-primary btn-block"
-                    onClick={
-                        () => {
-                            setViewReq(true)
-                        }
-                }>Requests</button>
-            </div>
+            <h3 className="text-center m-3">Notifications</h3>
             <div className="st-notifications">
+                <div className="d-flex flex-column-reverse">
                 {
-                notifications.map((notification) => (notification.isReq == viewReq ? <Notification club={
+                nots.map((notification) =>  <Notification club={
                         notification.club
                     }
                     date={
                         notification.date
                     }
                     isReq={
-                        notification.isReq
+                        notification.request
                     }
                     pending={
                         notification.pending
                     }
+                    description = {notification.description }
                     notification={
                         notification.notification
-                    }/> : <></>))
-            } </div>
+                    }/> )
+            } 
+                </div>
+            </div>
         </div>
     )
 }

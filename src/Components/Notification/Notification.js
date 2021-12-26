@@ -2,6 +2,8 @@ import React from 'react'
 import "./Notification.css"
 
 const Notification = (props) => {
+    
+
     return (
         <div>
             <div className="notification">
@@ -15,7 +17,7 @@ const Notification = (props) => {
                 </div>
                 <div className="notification-body">
                     <p>{
-                        props.notification
+                        props.description
                     }</p>
                     {
                     props.isReq ? <p>{

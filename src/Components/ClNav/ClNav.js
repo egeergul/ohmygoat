@@ -23,8 +23,8 @@ const ClNav = (props) => {
                                     to="/club/create-event">Create Events</NavLink>
                                 <NavLink as={Link}
                                     to="/club/documents">Documents</NavLink>
-                                {/*<NavLink as={Link}
-                                    to="/club/notifications">Notification</NavLink> */}
+                                <NavLink as={Link}
+                                    to="/club/notifications">Notification</NavLink> 
                                 <NavLink as={Link}
                                     to="/club/profile">Club Profile</NavLink>
                                 <NavLink as={Link}
